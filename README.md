@@ -12,8 +12,6 @@ This repository intentionally contains one file: this README. The previous
 website implementation has been retired so a future version can begin from a
 clear brief instead of inheriting unwanted technical or design decisions.
 
-There is currently no application to install, build, test, or deploy.
-
 ## Contents
 
 - [About Juwan's Place](#about-juwans-place)
