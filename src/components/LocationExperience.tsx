@@ -290,6 +290,31 @@ export function LocationExperience() {
         });
 
         const spread = desktop.matches ? 108 : 0;
+
+        // The stack rises while the panel is still scrolling in, and lands as
+        // it locks to the top. Running this inside the pinned timeline instead
+        // meant a viewport of scrolling before the cards even started moving
+        // and another half viewport before they arrived.
+        gsap.fromTo(
+          postcards,
+          { y: "115vh", rotate: (index) => [-11, 8, -5][index] },
+          {
+            y: (index) => [-70, 10, 90][index],
+            rotate: (index) => [-4, 5, -2][index],
+            duration: 1,
+            stagger: 0.18,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: postcardSection.current,
+              start: "top 88%",
+              end: "top top",
+              // Short catch-up so the cards track the wheel closely on the way
+              // in; the fan and exit below can afford to lag more.
+              scrub: 0.3,
+            },
+          },
+        );
+
         const postcardTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: postcardSection.current,
@@ -300,17 +325,6 @@ export function LocationExperience() {
         });
 
         postcardTimeline
-          .fromTo(
-            postcards,
-            { y: "115vh", rotate: (index) => [-11, 8, -5][index] },
-            {
-              y: (index) => [-70, 10, 90][index],
-              rotate: (index) => [-4, 5, -2][index],
-              duration: 1,
-              stagger: 0.18,
-              ease: "power2.out",
-            },
-          )
           // Fan the stack apart, centred on the panel, so every postcard is
           // readable at once instead of burying the two underneath.
           .to(
