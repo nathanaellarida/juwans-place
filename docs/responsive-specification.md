@@ -30,6 +30,10 @@ Tailwind `sm` and `lg` breakpoints only when content density requires them.
 - Bedroom cards remain visually large (`60vh` minimum character) rather than
   collapsing into small thumbnails.
 - Property-space and destination grids become one column.
+- The location feature reel becomes a deliberate, snap-aligned horizontal card
+  row; all other location content remains vertically stacked.
+- Location postcards preserve the desktop stack, while flying perk cards become
+  normal full-width cards inside the black panel.
 - Amenity and footer link grids become two columns where legible.
 - Footer statement uses viewport-relative type without a hard minimum that
   would clip on phones.
@@ -54,7 +58,8 @@ Tailwind `sm` and `lg` breakpoints only when content density requires them.
 
 - Global horizontal overflow is clipped only for decorative curves; content
   widths are independently constrained.
-- No page depends on sideways scrolling.
+- No page depends on accidental sideways overflow. The mobile location feature
+  reel is the sole intentional horizontal, snap-aligned interaction.
 - Essential controls are at least `44px`.
 - Hover treatments have visible non-hover defaults.
 - Safe outer padding is retained around fixed controls.

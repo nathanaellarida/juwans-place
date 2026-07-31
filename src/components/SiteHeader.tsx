@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu } from "lucide-react";
 import { BookingLink } from "@/components/BookingLink";
 import { MenuOverlay } from "@/components/MenuOverlay";
 import { Wordmark } from "@/components/Wordmark";
@@ -16,15 +15,12 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
-          className="button-roll pointer-events-auto flex min-h-11 items-center gap-2 overflow-hidden rounded-[0.6rem] bg-black px-5 py-3 text-sm font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d5a82e] max-md:size-12 max-md:justify-center max-md:px-0"
+          className="button-roll pointer-events-auto flex min-h-11 items-center gap-2 overflow-hidden rounded-[0.6rem] bg-black px-5 py-3 text-sm font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d5a82e] max-md:h-12 max-md:min-h-12 max-md:px-4 max-md:text-xs"
           aria-label="Open menu"
           aria-expanded={menuOpen}
         >
-          <Menu className="hidden max-md:block" aria-hidden="true" size={22} />
-          <span className="max-md:hidden">Menu</span>
-          <span className="max-md:hidden" aria-hidden="true">
-            Menu
-          </span>
+          <span>Menu</span>
+          <span aria-hidden="true">Menu</span>
         </button>
 
         <Link

@@ -122,9 +122,45 @@ try {
   });
 
   await desktop.locator("footer").scrollIntoViewIfNeeded();
-  await desktop.waitForTimeout(600);
+  await desktop.waitForTimeout(1_300);
+  const interactiveFooterLetter = desktop
+    .locator("footer [data-pop-letter]")
+    .nth(5);
+  await interactiveFooterLetter.hover();
+  await desktop.waitForTimeout(200);
+  const footerPopOpacity = await interactiveFooterLetter
+    .locator(".location-pop-clone-two")
+    .evaluate((element) => Number.parseFloat(getComputedStyle(element).opacity));
+  if (footerPopOpacity < 0.2) {
+    throw new Error("Footer letter-pop interaction did not activate");
+  }
   await desktop.screenshot({
     path: path.join(captureDirectory, "footer-desktop.png"),
+  });
+
+  await desktop.goto(`${baseUrl}/location`, { waitUntil: "networkidle" });
+  await desktop
+    .getByRole("status", { name: /Loading Juwan’s Place/i })
+    .waitFor({ state: "hidden", timeout: 8_000 })
+    .catch(() => undefined);
+  await desktop.waitForTimeout(900);
+  await desktop.screenshot({
+    path: path.join(captureDirectory, "location-hero-desktop.png"),
+  });
+  await desktop.locator("#location-features").scrollIntoViewIfNeeded();
+  await desktop.waitForTimeout(1_300);
+  await desktop.screenshot({
+    path: path.join(captureDirectory, "location-features-desktop.png"),
+  });
+  await desktop.locator("#places").scrollIntoViewIfNeeded();
+  await desktop.waitForTimeout(1_300);
+  await desktop.screenshot({
+    path: path.join(captureDirectory, "location-places-desktop.png"),
+  });
+  await desktop.locator("#location-perks").scrollIntoViewIfNeeded();
+  await desktop.waitForTimeout(1_300);
+  await desktop.screenshot({
+    path: path.join(captureDirectory, "location-perks-desktop.png"),
   });
 
   for (const viewport of viewports) {
@@ -139,7 +175,32 @@ try {
       );
     }
 
+    await desktop.goto(`${baseUrl}/location`, { waitUntil: "networkidle" });
+    const locationOverflow = await desktop.evaluate(
+      () => document.documentElement.scrollWidth - window.innerWidth,
+    );
+    if (locationOverflow > 1) {
+      throw new Error(
+        `Location horizontal overflow of ${locationOverflow}px at ${viewport.width}×${viewport.height}`,
+      );
+    }
+
     if (viewport.width === 390) {
+      await desktop.screenshot({
+        path: path.join(captureDirectory, "location-hero-mobile.png"),
+      });
+      await desktop.locator("#location-features").scrollIntoViewIfNeeded();
+      await desktop.waitForTimeout(600);
+      await desktop.screenshot({
+        path: path.join(captureDirectory, "location-features-mobile.png"),
+      });
+      await desktop.locator("#places").scrollIntoViewIfNeeded();
+      await desktop.waitForTimeout(600);
+      await desktop.screenshot({
+        path: path.join(captureDirectory, "location-places-mobile.png"),
+      });
+
+      await desktop.goto(baseUrl, { waitUntil: "networkidle" });
       await desktop.screenshot({
         path: path.join(captureDirectory, "hero-mobile.png"),
       });

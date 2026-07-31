@@ -76,6 +76,26 @@ The extended Juwan’s Place homepage uses this rhythm:
 Property content occupies the clear majority of the flow. Destination content
 is contained to one supporting section and one dedicated route.
 
+## Location route scene system
+
+The dedicated route uses an editorial sequence built around Juwan’s Place
+content:
+
+1. `100svh` rounded image hero;
+2. `500vh` pinned horizontal feature reel;
+3. `300vh` stacked Lapu-Lapu/Mactan/Cebu postcards;
+4. `180vh` orange image collage;
+5. three equal local-place cards;
+6. polygon-clipped full-height banner;
+7. camera and instant-photo composition;
+8. `340vh` black perk-card scene;
+9. blue host/rating/location proof section; and
+10. oversized FAQ section.
+
+The desktop scroll ranges deliberately create long pinned scenes. Mobile
+preserves the editorial scale but converts the reel into a horizontal snap row
+and the perk scene into normal stacked cards.
+
 ## Menu
 
 - Desktop: `min(32rem, 38vw)`, positioned `2.5vw` from top and left

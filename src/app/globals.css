@@ -365,6 +365,960 @@ a {
   line-height: 1.7;
 }
 
+.location-experience {
+  --location-orange: #ff431e;
+  --location-blue: #1384c5;
+  --location-green: #307c5f;
+  --location-paper: #f6f6f6;
+  position: relative;
+  overflow: clip;
+  background: var(--location-paper);
+  color: #090909;
+}
+
+.location-hero {
+  height: 100svh;
+  min-height: 42rem;
+  padding: clamp(0.55rem, 2vw, 2rem);
+}
+
+.location-hero-panel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: clamp(0.85rem, 1.5vw, 1.35rem);
+  background: #102f3e;
+}
+
+.location-hero-media {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.location-hero-copy {
+  position: absolute;
+  z-index: 3;
+  inset: 50% auto auto 50%;
+  width: min(92%, 76rem);
+  translate: -50% -46%;
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 850;
+  letter-spacing: -0.075em;
+  line-height: 0.72;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.location-hero-copy > span:nth-child(1),
+.location-hero-copy > span:nth-child(3) {
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+
+.location-sticky-panel {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 42rem;
+  overflow: hidden;
+}
+
+.location-feature-scroll {
+  position: relative;
+  height: 500vh;
+  background: var(--location-paper);
+}
+
+.location-ghost-title {
+  position: absolute;
+  top: 12%;
+  left: 4%;
+  right: 4%;
+  color: #e9e9e9;
+  font-family: var(--font-body);
+  font-size: clamp(5.6rem, 11.4vw, 12rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.72;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.location-feature-intro {
+  position: absolute;
+  z-index: 2;
+  top: 9%;
+  left: 18%;
+  right: 17%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  color: #34120c;
+  font-size: clamp(1.25rem, 2.35vw, 2.55rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  word-spacing: 0.08em;
+}
+
+.location-feature-intro p:last-child {
+  margin-top: 6.5rem;
+  text-align: right;
+}
+
+.location-feature-intro em {
+  font-style: italic;
+  font-weight: 900;
+}
+
+.location-feature-track {
+  position: absolute;
+  z-index: 3;
+  bottom: 6.5vh;
+  left: 29vw;
+  display: flex;
+  width: max-content;
+  align-items: flex-end;
+  gap: clamp(1.25rem, 2vw, 2.5rem);
+  padding-right: 20vw;
+  will-change: transform;
+}
+
+.location-feature-card {
+  --card-color: var(--location-blue);
+  position: relative;
+  flex: 0 0 clamp(20rem, 32vw, 34rem);
+  width: clamp(20rem, 32vw, 34rem);
+  height: clamp(25rem, 29vw, 31rem);
+  overflow: hidden;
+  border-radius: clamp(0.8rem, 1.2vw, 1.1rem);
+  background: var(--card-color);
+  color: white;
+}
+
+.location-feature-card:nth-child(even) {
+  translate: 0 2.2rem;
+}
+
+.location-feature-image {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 70%;
+  height: 69%;
+  clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.location-feature-card:nth-child(3n + 2) .location-feature-image {
+  left: -1px;
+  right: auto;
+  clip-path: polygon(0 0, 100% 0, 73% 100%, 0 100%);
+}
+
+.location-feature-number {
+  position: absolute;
+  bottom: 7.8rem;
+  left: 1.45rem;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.location-feature-card > p {
+  position: absolute;
+  right: 1.45rem;
+  bottom: 4.15rem;
+  left: 1.45rem;
+  max-width: 82%;
+  font-size: clamp(1.55rem, 2.2vw, 2.35rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.84;
+  text-transform: uppercase;
+}
+
+.location-feature-card > small {
+  position: absolute;
+  right: 1.45rem;
+  bottom: 1.35rem;
+  left: 1.45rem;
+  max-width: 84%;
+  color: rgb(255 255 255 / 75%);
+  font-size: 0.76rem;
+  line-height: 1.18;
+}
+
+.location-postcard-scroll {
+  position: relative;
+  height: 300vh;
+  background: var(--location-paper);
+}
+
+.location-postcard-title {
+  top: 26%;
+  color: white;
+  font-size: clamp(5rem, 10.5vw, 11rem);
+  line-height: 0.78;
+  text-shadow: 0 0 0.4px rgb(0 0 0 / 8%);
+}
+
+.location-postcard-side {
+  position: absolute;
+  z-index: 3;
+  top: 48%;
+  font-size: clamp(1.8rem, 3.7vw, 4rem);
+  font-weight: 850;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.location-postcard-side-left {
+  left: 6.5%;
+}
+
+.location-postcard-side-right {
+  right: 8%;
+  text-align: right;
+}
+
+.location-postcard-stack {
+  position: absolute;
+  z-index: 4;
+  top: 43%;
+  left: 50%;
+  width: clamp(17rem, 23vw, 24rem);
+  aspect-ratio: 0.78;
+  translate: -50% 0;
+}
+
+.location-postcard {
+  --postcard-color: var(--location-green);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  border: 0.55rem solid white;
+  border-radius: 0.6rem;
+  background: var(--postcard-color);
+  box-shadow: 0 0.5rem 0 rgb(0 0 0 / 12%);
+  color: white;
+  padding: 1.1rem;
+  will-change: transform;
+}
+
+.location-postcard > span {
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.location-postcard > strong {
+  grid-column: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  color: transparent;
+  font-size: clamp(7rem, 11vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.12em;
+  line-height: 0.7;
+  -webkit-text-stroke: 0.16rem white;
+}
+
+.location-postcard > p {
+  align-self: end;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.location-postcard > svg {
+  align-self: end;
+}
+
+.location-collage-scroll {
+  position: relative;
+  height: 180vh;
+  background: var(--location-orange);
+}
+
+.location-collage-panel {
+  background: var(--location-orange);
+  color: white;
+}
+
+.location-collage-words {
+  position: absolute;
+  inset: 25% -5% auto;
+  overflow: hidden;
+  color: rgb(255 255 255 / 10%);
+  font-size: 11vw;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.72;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.location-collage-card {
+  position: absolute;
+  z-index: 2;
+  width: clamp(11rem, 23vw, 23rem);
+  aspect-ratio: 0.82;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  box-shadow: 0 1rem 3rem rgb(65 17 10 / 18%);
+  will-change: transform;
+}
+
+.location-collage-one {
+  top: 12%;
+  left: 8%;
+  rotate: -8deg;
+}
+
+.location-collage-two {
+  top: 6%;
+  right: 10%;
+  rotate: 7deg;
+}
+
+.location-collage-three {
+  right: 13%;
+  bottom: 4%;
+  rotate: -5deg;
+}
+
+.location-collage-copy {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(50rem, 60%);
+  translate: -50% -42%;
+  text-align: center;
+}
+
+.location-collage-copy h2 {
+  margin-top: 1.2rem;
+  font-size: clamp(4.5rem, 8.2vw, 8.5rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.085em;
+  line-height: 0.72;
+  text-transform: uppercase;
+}
+
+.location-collage-copy > p:not(.eyebrow) {
+  margin: 1.75rem auto 0;
+  max-width: 35rem;
+  font-size: clamp(1rem, 1.45vw, 1.3rem);
+  line-height: 1.4;
+}
+
+.location-places-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(7rem, 13vw, 13rem) clamp(1.25rem, 3.5vw, 4rem);
+  background: var(--location-paper);
+}
+
+.location-places-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: clamp(4.4rem, 10vw, 10.5rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.095em;
+  line-height: 0.7;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.location-places-heading > span:last-child {
+  translate: 7% 0;
+}
+
+.location-places-kicker {
+  margin: 3rem auto 0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.location-pop-line {
+  display: flex;
+  justify-content: center;
+  min-height: 0.78em;
+}
+
+.location-pop-letter {
+  --pop: 0;
+  --pop-direction: 1;
+  position: relative;
+  display: inline-grid;
+  isolation: isolate;
+  min-width: 0.48em;
+  place-items: center;
+}
+
+.location-pop-space {
+  width: 0.25em;
+}
+
+.location-pop-base,
+.location-pop-clone {
+  grid-area: 1 / 1;
+  display: block;
+  will-change: transform;
+}
+
+.location-pop-base {
+  position: relative;
+  z-index: 3;
+  transform: translateY(calc(var(--pop) * -0.025em))
+    scale(calc(1 + var(--pop) * 0.05));
+}
+
+.location-pop-clone {
+  pointer-events: none;
+  opacity: var(--pop);
+}
+
+.location-pop-clone-one {
+  z-index: 1;
+  color: white;
+  transform: translate(
+      calc(var(--pop-direction) * var(--pop) * 0.085em),
+      calc(var(--pop) * -0.055em)
+    )
+    rotate(calc(var(--pop-direction) * var(--pop) * -2deg))
+    scale(calc(1 + var(--pop) * 0.12));
+  -webkit-text-stroke: 0.015em black;
+}
+
+.location-pop-clone-two {
+  z-index: 0;
+  color: var(--location-green, #307c5f);
+  transform: translate(
+      calc(var(--pop-direction) * var(--pop) * -0.07em),
+      calc(var(--pop) * -0.085em)
+    )
+    rotate(calc(var(--pop-direction) * var(--pop) * 4deg))
+    scale(calc(1 + var(--pop) * 0.15));
+}
+
+.location-place-grid {
+  display: grid;
+  max-width: 96rem;
+  margin: clamp(5rem, 8vw, 8rem) auto 0;
+  gap: clamp(1.25rem, 3vw, 2.8rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.location-place-card {
+  min-width: 0;
+}
+
+.location-place-image {
+  aspect-ratio: 1 / 1.02;
+  border-radius: 0.85rem;
+}
+
+.location-place-card > div:last-child {
+  padding: 1.6rem 0.15rem 0;
+}
+
+.location-place-card h3 {
+  font-size: clamp(2rem, 3.1vw, 3.4rem);
+  font-weight: 850;
+  letter-spacing: -0.06em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.location-place-card p {
+  min-height: 4.3em;
+  margin-top: 0.9rem;
+  color: rgb(0 0 0 / 58%);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.location-place-card a {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  border: 1px solid var(--location-orange);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  color: var(--location-orange);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition:
+    background-color 250ms ease,
+    color 250ms ease,
+    transform 250ms ease;
+}
+
+.location-place-card a:hover {
+  transform: rotate(-1deg);
+  background: var(--location-orange);
+  color: white;
+}
+
+.location-masked-banner {
+  position: relative;
+  height: 100svh;
+  min-height: 42rem;
+  overflow: hidden;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: var(--location-paper);
+}
+
+.location-masked-media {
+  position: absolute;
+  inset: clamp(1rem, 3vw, 3rem);
+  overflow: hidden;
+  clip-path: polygon(11% 0, 100% 0, 100% 75%, 88% 100%, 4% 100%, 0 37%);
+}
+
+.location-masked-banner > p {
+  position: absolute;
+  z-index: 3;
+  top: 54%;
+  left: 50%;
+  width: 100%;
+  translate: -50% -50%;
+  color: var(--location-orange);
+  font-size: clamp(5rem, 11.5vw, 12rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.095em;
+  line-height: 0.72;
+  text-align: center;
+  text-transform: uppercase;
+  mix-blend-mode: normal;
+}
+
+.location-camera-section {
+  position: relative;
+  min-height: 170vh;
+  overflow: hidden;
+  padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 4vw, 4rem);
+  background: var(--location-paper);
+}
+
+.location-camera-heading {
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.7;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.location-camera-heading span {
+  display: block;
+  color: var(--location-orange);
+  font-size: clamp(5rem, 11vw, 11rem);
+}
+
+.location-camera-heading strong {
+  display: block;
+  font-size: clamp(5rem, 10vw, 10rem);
+}
+
+.location-camera {
+  position: relative;
+  display: grid;
+  width: clamp(17rem, 31vw, 30rem);
+  aspect-ratio: 1.35;
+  place-items: center;
+  margin: clamp(4rem, 7vw, 7rem) auto 0;
+  border: 0.35rem solid #111;
+  border-radius: 2rem;
+  background: white;
+  box-shadow:
+    0 1.2rem 2.8rem rgb(0 0 0 / 12%),
+    inset 0 -1.5rem 0 #ececec;
+}
+
+.location-camera > svg {
+  width: 38%;
+  height: 38%;
+  stroke-width: 1.1;
+}
+
+.location-camera > span {
+  position: absolute;
+  bottom: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.location-camera > i {
+  position: absolute;
+  top: 12%;
+  right: 11%;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 0.25rem solid white;
+  border-radius: 999px;
+  background: var(--location-orange);
+  box-shadow: 0 0 0 1px black;
+}
+
+.location-instant-grid {
+  display: grid;
+  max-width: 82rem;
+  margin: clamp(5rem, 8vw, 8rem) auto 0;
+  align-items: start;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.location-instant-grid article {
+  rotate: var(--instant-rotate);
+  border: 0.8rem solid white;
+  border-bottom-width: 1.6rem;
+  border-radius: 0.45rem;
+  background: white;
+  box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 10%);
+}
+
+.location-instant-grid article:nth-child(2) {
+  margin-top: 3rem;
+}
+
+.location-instant-grid article > p {
+  margin: 1rem 0.25rem 0;
+  font-size: clamp(1.4rem, 2.3vw, 2.3rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.location-instant-grid article > span {
+  display: block;
+  margin: 0.6rem 0.25rem 0;
+  color: rgb(0 0 0 / 55%);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.location-perks-scroll {
+  position: relative;
+  height: 340vh;
+  padding: 1.8vw;
+  background: var(--location-paper);
+}
+
+.location-perks-panel {
+  border-radius: clamp(1.2rem, 3vw, 3rem);
+  background: black;
+  color: white;
+}
+
+.location-perks-copy {
+  position: absolute;
+  z-index: 2;
+  top: 6%;
+  left: 50%;
+  width: min(50rem, 84%);
+  translate: -50% 0;
+  text-align: center;
+}
+
+.location-perks-copy h2 {
+  position: relative;
+  height: clamp(4rem, 7vw, 7.2rem);
+  font-size: clamp(4.6rem, 8.7vw, 9rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.72;
+  text-transform: uppercase;
+}
+
+.location-perks-copy h2 span {
+  position: absolute;
+  inset: 0;
+}
+
+.location-perks-copy h2 span:nth-child(2) {
+  color: var(--location-orange);
+  translate: -0.045em 0.045em;
+  opacity: 0.85;
+}
+
+.location-perks-copy h2 span:nth-child(3) {
+  color: var(--location-blue);
+  translate: 0.045em 0.075em;
+  opacity: 0.75;
+}
+
+.location-perks-copy h2 span:first-child {
+  z-index: 2;
+}
+
+.location-perks-copy > p {
+  position: relative;
+  z-index: 3;
+  margin-top: 0.65rem;
+  font-size: clamp(2rem, 3.7vw, 3.8rem);
+  font-weight: 850;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.location-perks-copy > small {
+  position: relative;
+  z-index: 3;
+  display: block;
+  max-width: 31rem;
+  margin: 1rem auto 0;
+  color: rgb(255 255 255 / 64%);
+  line-height: 1.4;
+}
+
+.location-perk-cards {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.location-perk-card {
+  --perk-color: var(--location-orange);
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  display: grid;
+  width: min(62vw, 58rem);
+  height: min(61vh, 38rem);
+  translate: -50% 0;
+  overflow: hidden;
+  grid-template-rows: auto 1fr;
+  border-radius: 1.1rem;
+  background: var(--perk-color);
+  color: white;
+  will-change: transform;
+}
+
+.location-perk-card-copy {
+  display: grid;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  grid-template-columns: 4.5rem 1fr;
+}
+
+.location-perk-card-copy > span {
+  grid-row: 1 / 4;
+  font-size: 1.1rem;
+  font-weight: 850;
+}
+
+.location-perk-card-copy > small {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.location-perk-card-copy h3 {
+  margin-top: 0.45rem;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.location-perk-card-copy p {
+  max-width: 34rem;
+  margin-top: 0.8rem;
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.location-perk-image {
+  min-height: 17rem;
+  margin: 0 1.2rem 1.2rem;
+  border-radius: 0.85rem;
+}
+
+.location-proof-section {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: clamp(7rem, 12vw, 12rem) clamp(1.25rem, 4vw, 4rem);
+  background: var(--location-blue);
+  color: white;
+  text-align: center;
+}
+
+.location-proof-section > div:first-child {
+  color: rgb(255 255 255 / 14%);
+  font-size: clamp(5.5rem, 12vw, 12rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.095em;
+  line-height: 0.68;
+  text-transform: uppercase;
+}
+
+.location-proof-cards {
+  display: grid;
+  max-width: 76rem;
+  margin: clamp(4rem, 8vw, 7rem) auto 0;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.location-proof-cards article {
+  min-height: 18rem;
+  rotate: var(--proof-rotate);
+  border: 0.8rem solid white;
+  border-bottom-width: 2.2rem;
+  border-radius: 0.7rem;
+  background: white;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 14%);
+  color: black;
+  padding: 2.6rem 1.5rem 1.5rem;
+  text-align: left;
+}
+
+.location-proof-cards svg {
+  width: 2.3rem;
+  height: 2.3rem;
+  color: var(--location-orange);
+  stroke-width: 1.5;
+}
+
+.location-proof-cards h3 {
+  margin-top: 2.6rem;
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.location-proof-cards p {
+  margin-top: 0.8rem;
+  color: rgb(0 0 0 / 58%);
+  font-size: 0.86rem;
+}
+
+.location-faq-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(7rem, 12vw, 12rem) clamp(1.25rem, 17vw, 17rem);
+  background: white;
+}
+
+.location-faq-heading {
+  margin-bottom: clamp(4rem, 7vw, 7rem);
+  text-align: center;
+}
+
+.location-faq-heading h2 {
+  font-size: clamp(5.5rem, 10vw, 10rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.7;
+}
+
+.location-faq-heading p {
+  margin-top: 1.3rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.location-faq-loop {
+  position: absolute;
+  pointer-events: none;
+  width: 30rem;
+  height: 62rem;
+  border: 2.5rem solid currentColor;
+  border-radius: 50%;
+}
+
+.location-faq-loop-left {
+  top: 17%;
+  left: -27rem;
+  color: var(--location-orange);
+  rotate: -16deg;
+}
+
+.location-faq-loop-right {
+  right: -27rem;
+  bottom: -9%;
+  color: var(--location-blue);
+  rotate: 18deg;
+}
+
+.location-privacy-note {
+  max-width: 48rem;
+  margin: 3rem auto 0;
+  color: rgb(0 0 0 / 55%);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 1023px) {
+  .location-feature-intro {
+    left: 10%;
+    right: 10%;
+  }
+
+  .location-feature-track {
+    left: 18vw;
+  }
+
+  .location-postcard-side {
+    font-size: 2.4rem;
+  }
+
+  .location-collage-copy {
+    width: 72%;
+  }
+
+  .location-perk-card {
+    width: 72vw;
+  }
+}
+
 @media (max-width: 767px) {
   .section-pad {
     padding-block: 5.5rem;
@@ -378,6 +1332,266 @@ a {
   .floating-control {
     width: 3rem;
     height: 3rem;
+  }
+
+  .location-hero {
+    min-height: 39rem;
+    padding: 0.55rem;
+  }
+
+  .location-hero-copy {
+    width: 95%;
+    translate: -50% -42%;
+    line-height: 0.78;
+  }
+
+  .location-sticky-panel {
+    min-height: 39rem;
+  }
+
+  .location-feature-scroll {
+    height: auto;
+    padding: 7rem 0 6rem;
+  }
+
+  .location-feature-scroll .location-sticky-panel {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .location-ghost-title {
+    position: relative;
+    inset: auto;
+    padding: 0 1rem;
+    font-size: 4.3rem;
+    line-height: 0.78;
+  }
+
+  .location-feature-intro {
+    position: relative;
+    inset: auto;
+    display: grid;
+    margin-top: -1rem;
+    padding: 0 1.25rem;
+    gap: 1.25rem;
+    font-size: 1.35rem;
+  }
+
+  .location-feature-intro p:last-child {
+    margin: 0;
+    text-align: right;
+  }
+
+  .location-feature-track {
+    position: relative;
+    inset: auto;
+    overflow-x: auto;
+    margin-top: 3.5rem;
+    padding: 0 1.25rem 1.4rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .location-feature-card {
+    flex-basis: 79vw;
+    width: 79vw;
+    height: 29rem;
+    scroll-snap-align: center;
+  }
+
+  .location-feature-card:nth-child(even) {
+    translate: 0;
+  }
+
+  .location-postcard-scroll {
+    height: 260vh;
+  }
+
+  .location-postcard-title {
+    position: absolute;
+    top: 25%;
+    font-size: 4.5rem;
+  }
+
+  .location-postcard-side {
+    top: 61%;
+    font-size: 1.45rem;
+  }
+
+  .location-postcard-side-left {
+    left: 1.25rem;
+  }
+
+  .location-postcard-side-right {
+    right: 1.25rem;
+  }
+
+  .location-postcard-stack {
+    top: 41%;
+    width: min(68vw, 19rem);
+  }
+
+  .location-collage-scroll {
+    height: 150vh;
+  }
+
+  .location-collage-card {
+    width: 40vw;
+  }
+
+  .location-collage-one {
+    top: 8%;
+    left: -4%;
+  }
+
+  .location-collage-two {
+    top: 12%;
+    right: -5%;
+  }
+
+  .location-collage-three {
+    right: -4%;
+    bottom: 4%;
+  }
+
+  .location-collage-copy {
+    width: 92%;
+  }
+
+  .location-collage-copy h2 {
+    font-size: 4.25rem;
+  }
+
+  .location-collage-copy > p:not(.eyebrow) {
+    max-width: 19rem;
+  }
+
+  .location-places-heading {
+    align-items: stretch;
+    font-size: 4.2rem;
+    line-height: 0.75;
+  }
+
+  .location-places-heading > span:last-child {
+    translate: 0;
+  }
+
+  .location-place-grid,
+  .location-instant-grid,
+  .location-proof-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .location-place-card p {
+    min-height: auto;
+  }
+
+  .location-masked-banner {
+    min-height: 39rem;
+    padding: 0.65rem;
+  }
+
+  .location-masked-media {
+    inset: 0.65rem;
+    clip-path: polygon(12% 0, 100% 0, 100% 86%, 82% 100%, 4% 100%, 0 24%);
+  }
+
+  .location-masked-banner > p {
+    font-size: 4.6rem;
+    line-height: 0.75;
+  }
+
+  .location-camera-section {
+    min-height: auto;
+  }
+
+  .location-camera-heading span,
+  .location-camera-heading strong {
+    font-size: 4.5rem;
+  }
+
+  .location-instant-grid {
+    max-width: 22rem;
+  }
+
+  .location-instant-grid article:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .location-perks-scroll {
+    height: auto;
+    padding: 0.65rem;
+    background: var(--location-paper);
+  }
+
+  .location-perks-panel {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    padding: 6rem 1rem 1rem;
+  }
+
+  .location-perks-copy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    translate: 0;
+  }
+
+  .location-perks-copy h2 {
+    height: 4.1rem;
+    font-size: 4.7rem;
+  }
+
+  .location-perk-cards {
+    position: relative;
+    inset: auto;
+    display: grid;
+    margin-top: 4rem;
+    gap: 1rem;
+    overflow: visible;
+  }
+
+  .location-perk-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: 34rem;
+    translate: 0;
+  }
+
+  .location-perk-card-copy {
+    grid-template-columns: 3rem 1fr;
+  }
+
+  .location-perk-image {
+    min-height: 18rem;
+  }
+
+  .location-proof-section > div:first-child {
+    font-size: 5rem;
+  }
+
+  .location-proof-cards {
+    max-width: 21rem;
+  }
+
+  .location-proof-cards article {
+    min-height: 16rem;
+  }
+
+  .location-faq-section {
+    padding-inline: 1.25rem;
+  }
+
+  .location-faq-heading h2 {
+    font-size: 5.8rem;
+  }
+
+  .location-faq-loop {
+    opacity: 0.42;
   }
 }
 
@@ -393,5 +1607,19 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .location-feature-scroll,
+  .location-postcard-scroll,
+  .location-collage-scroll,
+  .location-perks-scroll {
+    height: auto;
+  }
+
+  .location-feature-scroll .location-sticky-panel,
+  .location-postcard-scroll .location-sticky-panel,
+  .location-collage-scroll .location-sticky-panel,
+  .location-perks-scroll .location-sticky-panel {
+    position: relative;
   }
 }

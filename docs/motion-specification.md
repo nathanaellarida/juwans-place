@@ -17,6 +17,11 @@ All project timing values are centralized in `src/lib/motion.ts`.
 | Section reveals | section reaches `top 84%` | `0.95s`, `0.09s` stagger | `power3.out` | visible |
 | Media parallax | media crosses viewport | `-9%` to `9%`, scrub `.75` | linear | disabled |
 | Bedroom hover | pointer hover | `0.7s` image scale | smooth CSS easing | no essential information depends on it |
+| Location feature reel | vertical scroll across `500vh` | scrub `.8` | linear | horizontal touch row / static cards |
+| Location postcards | vertical scroll across `300vh` | scrub `.75` | `power2` entrance/exit | static card stack |
+| Location collage | section crosses viewport | scrub `.8` | linear | static collage |
+| Location perk cards | vertical scroll across `340vh` | scrub `.8` | `power2` entrance/exit | normal stacked cards |
+| Letter pop | pointer within `150px` of a glyph | proximity mapped | direct interpolation | colored duplicates remain hidden |
 | Menu open | menu activation | `0.8s` | `circ.inOut` | immediate |
 | Menu links | panel opens | `0.32s`, `0.07s` stagger | `power3.out` | immediate |
 | Menu close | close/Escape/backdrop/link | `0.48s` | `circ.inOut` | immediate |
@@ -64,3 +69,22 @@ Three original Juwan’s Place color layers use paired half-screen curtains.
 Normal internal navigation is delayed until the close sequence finishes.
 External links, modified clicks, downloads, new-tab links, and same-page hashes
 are not intercepted.
+
+## Location scene choreography
+
+The `/location` route uses this scroll grammar:
+
+- desktop feature cards are translated across a sticky viewport according to
+  their measured track width;
+- three postcard cards enter from `115vh`, settle with separate rotations, and
+  exit through `-115vh`;
+- collage images receive independent vertical and rotational parallax;
+- three perk cards enter from alternating horizontal sides, overlap inside a
+  rounded black viewport, and leave upward; and
+- mobile replaces the most expensive pinned sequences with touch-scrollable or
+  normally stacked content.
+
+The oversized location heading and footer wordmark split into accessible
+per-letter wrappers. Pointer distance controls the opacity, scale, offset, and
+rotation of green and white duplicate glyphs. The semantic label remains one
+unsplit phrase for assistive technology.

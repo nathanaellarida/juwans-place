@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookingLink } from "@/components/BookingLink";
+import { InteractiveLetters } from "@/components/InteractiveLetters";
 import { Reveal } from "@/components/Reveal";
 import { Wordmark } from "@/components/Wordmark";
 import { siteConfig } from "@/config/site";
@@ -83,12 +84,12 @@ export function Footer() {
       </Reveal>
 
       <Reveal className="mx-auto mt-[clamp(5rem,8vw,9rem)] max-w-[96rem]">
-        <p
-          data-reveal-item
-          className="whitespace-nowrap text-center font-display text-[10.5vw] uppercase leading-[0.72] tracking-[-0.06em] text-[#d8d0c7] md:text-[12.1vw]"
-        >
-          Come.Stay.Here.
-        </p>
+        <div data-reveal-item>
+          <InteractiveLetters
+            text="Come.Stay.Here."
+            className="whitespace-nowrap text-center font-display text-[10.5vw] uppercase leading-[0.72] tracking-[-0.06em] text-[#d8d0c7] md:text-[12.1vw]"
+          />
+        </div>
         <div
           data-reveal-item
           className="mx-auto mt-[clamp(3rem,5vw,5rem)] grid max-w-4xl gap-4 md:grid-cols-3"
