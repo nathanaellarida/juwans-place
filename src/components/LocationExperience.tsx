@@ -721,20 +721,18 @@ function PostcardSection({
         <DrawnLine
           className="location-edge-line location-edge-line-left location-edge-green"
           width={260}
-          height={1780}
-          strokeWidth={52}
-          shape="edge"
-          preserveAspectRatio="xMinYMid slice"
+          height={1100}
+          strokeWidth={46}
+          shape="edgeWave"
           start="top 92%"
           end="bottom 25%"
         />
         <DrawnLine
           className="location-edge-line location-edge-line-right location-edge-orange"
           width={260}
-          height={1780}
-          strokeWidth={52}
-          shape="edge"
-          preserveAspectRatio="xMinYMid slice"
+          height={1100}
+          strokeWidth={46}
+          shape="edgeArc"
           start="top 92%"
           end="bottom 25%"
         />
@@ -919,20 +917,18 @@ function MaskedBanner({
       <DrawnLine
         className="location-edge-line location-edge-line-left location-edge-orange"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeHook"
         start="top 92%"
         end="bottom 25%"
       />
       <DrawnLine
         className="location-edge-line location-edge-line-right location-edge-blue"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeReturn"
         start="top 92%"
         end="bottom 25%"
       />
@@ -1037,20 +1033,18 @@ function PerksSection({
         <DrawnLine
           className="location-edge-line location-edge-line-left location-edge-blue"
           width={260}
-          height={1780}
-          strokeWidth={52}
-          shape="edge"
-          preserveAspectRatio="xMinYMid slice"
+          height={1100}
+          strokeWidth={46}
+          shape="edgeCross"
           start="top 92%"
           end="bottom 25%"
         />
         <DrawnLine
           className="location-edge-line location-edge-line-right location-edge-orange"
           width={260}
-          height={1780}
-          strokeWidth={52}
-          shape="edge"
-          preserveAspectRatio="xMinYMid slice"
+          height={1100}
+          strokeWidth={46}
+          shape="edgeLoop"
           start="top 92%"
           end="bottom 25%"
         />
@@ -1108,20 +1102,18 @@ function GuestProof() {
       <DrawnLine
         className="location-edge-line location-edge-line-left location-edge-white"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeCurl"
         start="top 92%"
         end="bottom 25%"
       />
       <DrawnLine
         className="location-edge-line location-edge-line-right location-edge-white"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeSweep"
         start="top 92%"
         end="bottom 25%"
       />
@@ -1164,20 +1156,18 @@ function LocationFaq() {
       <DrawnLine
         className="location-edge-line location-edge-line-left location-edge-orange"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeDrift"
         start="top 92%"
         end="bottom 25%"
       />
       <DrawnLine
         className="location-edge-line location-edge-line-right location-edge-blue"
         width={260}
-        height={1780}
-        strokeWidth={52}
-        shape="edge"
-        preserveAspectRatio="xMinYMid slice"
+        height={1100}
+        strokeWidth={46}
+        shape="edgeZag"
         start="top 92%"
         end="bottom 25%"
       />

@@ -1102,11 +1102,12 @@ a {
    cropped with `slice`, so only the crossing and a couple of strands stay on
    screen and the rest reads as a much larger drawing running past the page. */
 
+/* The box matches the artwork's aspect ratio, so the stroke is never sliced
+   off mid-curve in open space — only where it runs past the page edge. */
 .location-edge-line {
   z-index: 1;
-  top: -12%;
-  width: clamp(6rem, 11vw, 15rem);
-  height: 124%;
+  width: clamp(8rem, 13vw, 17rem);
+  aspect-ratio: 26 / 110;
   overflow: hidden;
 }
 
@@ -1115,12 +1116,13 @@ a {
 }
 
 .location-edge-line-left {
+  top: 4%;
   left: 0;
 }
 
 .location-edge-line-right {
   right: 0;
-  scale: -1 1;
+  bottom: 4%;
 }
 
 .location-edge-orange {
@@ -1918,7 +1920,7 @@ a {
   }
 
   .location-edge-line {
-    width: 4.5rem;
+    width: 5rem;
   }
 
   .location-camera-heading > span,
