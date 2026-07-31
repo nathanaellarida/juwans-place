@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { EdgeLines } from "@/components/EdgeLines";
 import { PageHero } from "@/components/PageHero";
 
 export function InformationPage({
@@ -22,8 +23,16 @@ export function InformationPage({
         preferredFileName="home-detail.jpg"
         label="Juwan’s Place home detail"
       />
-      <section className="section-pad bg-[#f7f3ea]">
-        <div className="prose-juwans mx-auto max-w-4xl">{children}</div>
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeCurl"
+          right="edgeArc"
+          leftInk="edge-ink-teal"
+          rightInk="edge-ink-coral"
+        />
+        <div className="prose-juwans relative z-10 mx-auto max-w-4xl">
+          {children}
+        </div>
       </section>
     </>
   );

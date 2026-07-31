@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BookingLink } from "@/components/BookingLink";
+import { EdgeLines } from "@/components/EdgeLines";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -29,8 +30,14 @@ export default function FaqPage() {
         label="Open-plan living area at Juwan’s Place"
       />
 
-      <section className="section-pad bg-[#f7f3ea]">
-        <Reveal className="mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.55fr_1.45fr]">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeHook"
+          right="edgeSweep"
+          leftInk="edge-ink-teal"
+          rightInk="edge-ink-coral"
+        />
+        <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.55fr_1.45fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#145c5b]">The essentials</p>
             <h2 className="font-display text-[clamp(4.4rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
@@ -52,8 +59,14 @@ export default function FaqPage() {
         </Reveal>
       </section>
 
-      <section className="section-pad bg-[#d5a82e] text-center">
-        <Reveal className="mx-auto max-w-5xl">
+      <section className="section-pad relative overflow-hidden bg-[#d5a82e] text-center">
+        <EdgeLines
+          left="edgeCross"
+          right="edgeLoop"
+          leftInk="edge-ink-deep"
+          rightInk="edge-ink-plum"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-5xl">
           <p data-reveal-item className="eyebrow mb-7">
             Ready for current details?
           </p>

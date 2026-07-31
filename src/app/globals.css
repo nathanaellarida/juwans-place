@@ -1102,42 +1102,84 @@ a {
    cropped with `slice`, so only the crossing and a couple of strands stay on
    screen and the rest reads as a much larger drawing running past the page. */
 
-/* The box matches the artwork's aspect ratio, so the stroke is never sliced
-   off mid-curve in open space — only where it runs past the page edge. */
-.location-edge-line {
+/* Decorative edge strokes -------------------------------------------------
+
+   The box matches the artwork's aspect ratio, so the stroke is never sliced
+   off mid-curve in open space — only where it runs past the page edge.
+
+   Sizing is led by height rather than width: a section shorter than the
+   artwork would otherwise crop it across the top or bottom, which reads as a
+   flat cut in the middle of the page. Height first, width from the ratio, and
+   the drawing always fits whatever section it is dropped into.
+
+   Anything hosting these needs `relative overflow-hidden`, and its content
+   needs to sit above z-index 1. */
+.edge-line {
   z-index: 1;
-  width: clamp(8rem, 13vw, 17rem);
+  height: min(92%, 50rem);
   aspect-ratio: 26 / 110;
   overflow: hidden;
 }
 
-.location-edge-line svg {
+.edge-line svg {
   overflow: hidden;
 }
 
-.location-edge-line-left {
+.edge-line-left {
   top: 4%;
   left: 0;
 }
 
-.location-edge-line-right {
+.edge-line-right {
   right: 0;
   bottom: 4%;
 }
 
-.location-edge-orange {
+.edge-ink-coral {
+  color: #e45d3a;
+}
+
+.edge-ink-teal {
+  color: #145c5b;
+}
+
+.edge-ink-gold {
+  color: #d5a82e;
+}
+
+.edge-ink-deep {
+  color: #102f3e;
+}
+
+.edge-ink-plum {
+  color: #8e1e55;
+}
+
+.edge-ink-mint {
+  color: #9cc6b2;
+}
+
+.edge-ink-lemon {
+  color: #f3c75d;
+}
+
+.edge-ink-paper {
+  color: #f7f3ea;
+}
+
+.edge-ink-orange {
   color: var(--location-orange);
 }
 
-.location-edge-blue {
+.edge-ink-blue {
   color: var(--location-blue);
 }
 
-.location-edge-green {
+.edge-ink-green {
   color: var(--location-green);
 }
 
-.location-edge-white {
+.edge-ink-white {
   color: white;
 }
 
@@ -1482,6 +1524,12 @@ a {
   text-align: center;
 }
 
+/* Everything but the ghost heading, which the strokes are meant to cross. */
+.location-proof-section > :not(.drawn-line):not(div:first-of-type) {
+  position: relative;
+  z-index: 2;
+}
+
 .location-proof-section > div:first-of-type {
   color: rgb(255 255 255 / 14%);
   font-size: clamp(5.5rem, 12vw, 12rem);
@@ -1664,6 +1712,13 @@ a {
   overflow: hidden;
   padding: clamp(7rem, 12vw, 12rem) clamp(1.25rem, 17vw, 17rem);
   background: white;
+}
+
+/* The section's horizontal padding collapses on small screens, where the edge
+   strokes would otherwise reach across the questions and paint over them. */
+.location-faq-section > :not(.drawn-line) {
+  position: relative;
+  z-index: 2;
 }
 
 .location-faq-heading {
@@ -1927,8 +1982,8 @@ a {
     display: none;
   }
 
-  .location-edge-line {
-    width: 5rem;
+  .edge-line {
+    height: min(92%, 22rem);
   }
 
   .location-camera-heading > span,

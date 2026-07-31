@@ -26,19 +26,33 @@ type DrawnLineProps = {
   scrub?: number | boolean;
 };
 
-type ShapeName =
-  | "ring"
-  | "star"
+/** Strokes that run out through the left-hand page edge. */
+export type LeftShape =
   | "edgeCross"
   | "edgeHook"
   | "edgeWave"
   | "edgeCurl"
   | "edgeDrift"
+  | "edgeBloom"
+  | "edgeKnot"
+  | "edgeRibbon"
+  | "edgeStep"
+  | "edgeTail";
+
+/** Strokes that run out through the right-hand page edge. */
+export type RightShape =
   | "edgeLoop"
   | "edgeSweep"
   | "edgeArc"
   | "edgeZag"
-  | "edgeReturn";
+  | "edgeReturn"
+  | "edgeSpiral"
+  | "edgeCascade"
+  | "edgeLasso"
+  | "edgeSlope"
+  | "edgeFold";
+
+type ShapeName = "ring" | "star" | LeftShape | RightShape;
 
 /**
  * Every edge stroke shares this box.
@@ -79,6 +93,26 @@ const shapes: Record<Exclude<ShapeName, "ring">, { d: string; box: string }> = {
     box: EDGE_BOX,
     d: "M -70 180 C 110 210 210 330 190 470 C 172 596 60 640 70 760 C 78 862 180 900 210 960 C 226 992 180 1010 -70 1000",
   },
+  edgeBloom: {
+    box: EDGE_BOX,
+    d: "M -70 880 C 90 900 200 820 190 680 C 180 560 60 540 62 660 C 64 764 190 760 206 620 C 226 440 110 300 -70 250",
+  },
+  edgeKnot: {
+    box: EDGE_BOX,
+    d: "M -70 180 C 80 190 170 260 156 350 C 142 434 56 430 60 356 C 64 292 160 300 172 420 C 186 556 60 580 66 700 C 72 812 190 840 196 920 C 200 976 120 1000 -70 950",
+  },
+  edgeRibbon: {
+    box: EDGE_BOX,
+    d: "M -70 210 C 120 240 206 380 150 480 C 96 576 26 610 54 706 C 84 808 206 806 198 902 C 192 976 92 1004 -70 928",
+  },
+  edgeStep: {
+    box: EDGE_BOX,
+    d: "M -70 210 C 90 200 190 300 178 430 C 168 540 40 560 50 660 C 58 744 160 736 166 660 C 172 590 70 594 62 700 C 52 840 130 950 -70 1000",
+  },
+  edgeTail: {
+    box: EDGE_BOX,
+    d: "M -70 420 C 100 400 214 470 204 600 C 195 712 74 726 78 630 C 82 548 186 552 190 660 C 196 810 120 940 -70 1010",
+  },
 
   // Right-hand strokes: both ends run out past x=260.
   edgeLoop: {
@@ -100,6 +134,26 @@ const shapes: Record<Exclude<ShapeName, "ring">, { d: string; box: string }> = {
   edgeReturn: {
     box: EDGE_BOX,
     d: "M 330 320 C 170 300 40 400 60 540 C 78 664 200 690 208 580 C 216 486 110 470 96 590 C 80 730 190 850 330 880",
+  },
+  edgeSpiral: {
+    box: EDGE_BOX,
+    d: "M 330 250 C 152 244 42 372 62 512 C 80 638 208 654 198 534 C 189 430 88 438 94 556 C 102 698 206 812 330 852",
+  },
+  edgeCascade: {
+    box: EDGE_BOX,
+    d: "M 330 190 C 218 206 128 262 118 352 C 109 430 182 452 192 372 C 200 306 108 298 88 400 C 64 522 178 562 194 662 C 208 750 98 782 82 882 C 68 968 178 1002 330 968",
+  },
+  edgeLasso: {
+    box: EDGE_BOX,
+    d: "M 330 300 C 202 288 98 358 86 470 C 74 582 192 602 202 700 C 212 792 92 808 72 700 C 52 590 162 538 240 618 C 296 676 302 858 330 918",
+  },
+  edgeSlope: {
+    box: EDGE_BOX,
+    d: "M 330 160 C 232 202 122 242 102 362 C 84 468 202 502 216 612 C 230 722 92 732 68 832 C 48 916 152 992 330 996",
+  },
+  edgeFold: {
+    box: EDGE_BOX,
+    d: "M 330 220 C 190 240 60 330 74 470 C 88 592 208 600 202 500 C 196 420 104 428 100 530 C 94 690 214 780 200 880 C 190 956 90 990 330 986",
   },
   // Five points, deliberately uneven.
   star: {

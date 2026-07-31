@@ -15,7 +15,7 @@ import {
   Wifi,
 } from "lucide-react";
 import { BookingLink } from "@/components/BookingLink";
-import { DrawnLine } from "@/components/DrawnLine";
+import { EdgeLines } from "@/components/EdgeLines";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { Parallax, Reveal } from "@/components/Reveal";
@@ -60,7 +60,13 @@ export function HomeSections() {
 function PropertyStory() {
   return (
     <section className="relative overflow-hidden bg-[#102f3e] text-white">
-      <div className="section-pad mx-auto grid max-w-[100rem] gap-14 md:grid-cols-[0.72fr_1.28fr] md:items-center">
+      <EdgeLines
+        left="edgeHook"
+        right="edgeSweep"
+        leftInk="edge-ink-mint"
+        rightInk="edge-ink-coral"
+      />
+      <div className="section-pad relative z-10 mx-auto grid max-w-[100rem] gap-14 md:grid-cols-[0.72fr_1.28fr] md:items-center">
         <Reveal>
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#9cc6b2]">Living together</p>
@@ -106,7 +112,7 @@ function PropertyStory() {
         </div>
       </div>
 
-      <Reveal className="grid border-t border-white/20 md:grid-cols-4">
+      <Reveal className="relative z-10 grid border-t border-white/20 md:grid-cols-4">
         {property.spaces.map((space) => (
           <article
             data-reveal-item
@@ -138,15 +144,11 @@ function PropertyStory() {
 function AmenitiesSection() {
   return (
     <section className="section-pad relative overflow-hidden bg-black text-white">
-      <DrawnLine
-        className="-right-[35rem] -top-[28rem] size-[60rem] text-[#145c5b]"
-        width={600}
-        height={600}
-      />
-      <DrawnLine
-        className="-bottom-[34rem] -left-[36rem] size-[62rem] text-[#e45d3a]"
-        width={620}
-        height={620}
+      <EdgeLines
+        left="edgeWave"
+        right="edgeArc"
+        leftInk="edge-ink-coral"
+        rightInk="edge-ink-gold"
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <p data-reveal-item className="eyebrow mb-7 text-[#d5a82e]">
@@ -195,8 +197,17 @@ function AmenitiesSection() {
 
 function ServicesSection() {
   return (
-    <section id="services" className="section-pad bg-[#f7f3ea]">
-      <Reveal className="mx-auto max-w-[92rem]">
+    <section
+      id="services"
+      className="section-pad relative overflow-hidden bg-[#f7f3ea]"
+    >
+      <EdgeLines
+        left="edgeCurl"
+        right="edgeZag"
+        leftInk="edge-ink-teal"
+        rightInk="edge-ink-plum"
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <div className="grid gap-5 md:grid-cols-2">
           <article
             data-reveal-item
@@ -258,7 +269,13 @@ function DestinationSection() {
 
   return (
     <section className="relative overflow-hidden bg-[#d5a82e] px-[clamp(1.25rem,4vw,4rem)] py-[clamp(6rem,11vw,11rem)]">
-      <Reveal className="mx-auto max-w-[92rem]">
+      <EdgeLines
+        left="edgeDrift"
+        right="edgeReturn"
+        leftInk="edge-ink-deep"
+        rightInk="edge-ink-plum"
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <div className="grid gap-10 md:grid-cols-[1.25fr_0.6fr] md:items-end">
           <div>
             <p data-reveal-item className="eyebrow mb-7">
@@ -328,8 +345,14 @@ function ReviewsSection() {
   ];
 
   return (
-    <section className="section-pad bg-[#f7f3ea]">
-      <Reveal className="mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+    <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+      <EdgeLines
+        left="edgeBloom"
+        right="edgeSpiral"
+        leftInk="edge-ink-plum"
+        rightInk="edge-ink-coral"
+      />
+      <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <div data-reveal-item>
           <p className="eyebrow mb-7 text-[#8e1e55]">Verified on Airbnb</p>
           <div className="flex items-baseline gap-4">
@@ -387,8 +410,14 @@ function ReviewsSection() {
 
 function RulesSection() {
   return (
-    <section className="section-pad bg-[#8e1e55] text-white">
-      <Reveal className="mx-auto max-w-[92rem]">
+    <section className="section-pad relative overflow-hidden bg-[#8e1e55] text-white">
+      <EdgeLines
+        left="edgeRibbon"
+        right="edgeLasso"
+        leftInk="edge-ink-lemon"
+        rightInk="edge-ink-mint"
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <div className="grid gap-12 md:grid-cols-[0.72fr_1.28fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#f3c75d]">Stay with confidence</p>
@@ -437,8 +466,14 @@ function RulesSection() {
 
 function FaqSection() {
   return (
-    <section className="section-pad bg-[#f7f3ea]">
-      <Reveal className="mx-auto max-w-[92rem]">
+    <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+      <EdgeLines
+        left="edgeStep"
+        right="edgeSlope"
+        leftInk="edge-ink-coral"
+        rightInk="edge-ink-teal"
+      />
+      <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <div className="grid gap-10 md:grid-cols-[0.55fr_1.45fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#145c5b]">Before you book</p>
@@ -467,15 +502,11 @@ function FinalBookingSection() {
   return (
     <section id="book" className="bg-[#f7f3ea] p-2.5 md:p-4">
       <div className="relative flex min-h-[74vh] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#145c5b] px-6 py-24 text-center text-white">
-        <DrawnLine
-          className="-left-[26rem] -top-[27rem] size-[54rem] text-[#e45d3a]"
-          width={540}
-          height={540}
-        />
-        <DrawnLine
-          className="-bottom-[34rem] -right-[28rem] size-[60rem] text-[#d5a82e]"
-          width={600}
-          height={600}
+        <EdgeLines
+          left="edgeTail"
+          right="edgeFold"
+          leftInk="edge-ink-coral"
+          rightInk="edge-ink-gold"
         />
         <Reveal className="relative z-10 max-w-5xl">
           <p data-reveal-item className="eyebrow mb-8 text-[#9cc6b2]">

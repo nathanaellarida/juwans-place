@@ -17,6 +17,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookingLink } from "@/components/BookingLink";
 import { DrawnLine } from "@/components/DrawnLine";
+import { EdgeLines } from "@/components/EdgeLines";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
@@ -732,23 +733,11 @@ function PostcardSection({
       className="location-postcard-scroll"
     >
       <div className="location-sticky-panel">
-        <DrawnLine
-          className="location-edge-line location-edge-line-left location-edge-green"
-          width={260}
-          height={1100}
-          strokeWidth={46}
-          shape="edgeWave"
-          start="top 92%"
-          end="bottom 25%"
-        />
-        <DrawnLine
-          className="location-edge-line location-edge-line-right location-edge-orange"
-          width={260}
-          height={1100}
-          strokeWidth={46}
-          shape="edgeArc"
-          start="top 92%"
-          end="bottom 25%"
+        <EdgeLines
+          left="edgeWave"
+          right="edgeArc"
+          leftInk="edge-ink-green"
+          rightInk="edge-ink-orange"
         />
         <div className="location-ghost-title location-postcard-title">
           <span className="location-line-mask">
@@ -928,23 +917,11 @@ function MaskedBanner({
           />
         </div>
       </div>
-      <DrawnLine
-        className="location-edge-line location-edge-line-left location-edge-orange"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeHook"
-        start="top 92%"
-        end="bottom 25%"
-      />
-      <DrawnLine
-        className="location-edge-line location-edge-line-right location-edge-blue"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeReturn"
-        start="top 92%"
-        end="bottom 25%"
+      <EdgeLines
+        left="edgeHook"
+        right="edgeReturn"
+        leftInk="edge-ink-orange"
+        rightInk="edge-ink-blue"
       />
       <p data-banner-word>This is Mactan</p>
       <div className="location-sticker-field" aria-hidden="true">
@@ -990,7 +967,9 @@ function CameraSection({
         height={1100}
         strokeWidth={70}
         opacity={0.16}
-        d="M40 20C200 200 -20 430 180 610C380 790 70 900 120 1080"
+        // Deliberately not the mirror of the stroke above — a flipped copy of
+        // the same path reads as one drawing repeated rather than two.
+        d="M40 20C230 170 -10 380 150 560C300 730 60 840 130 1080"
       />
       <div className="location-camera-heading">
         <span className="location-line-mask">
@@ -1044,23 +1023,11 @@ function PerksSection({
       className="location-perks-scroll"
     >
       <div className="location-sticky-panel location-perks-panel">
-        <DrawnLine
-          className="location-edge-line location-edge-line-left location-edge-blue"
-          width={260}
-          height={1100}
-          strokeWidth={46}
-          shape="edgeCross"
-          start="top 92%"
-          end="bottom 25%"
-        />
-        <DrawnLine
-          className="location-edge-line location-edge-line-right location-edge-orange"
-          width={260}
-          height={1100}
-          strokeWidth={46}
-          shape="edgeLoop"
-          start="top 92%"
-          end="bottom 25%"
+        <EdgeLines
+          left="edgeCross"
+          right="edgeLoop"
+          leftInk="edge-ink-blue"
+          rightInk="edge-ink-orange"
         />
         <div className="location-perks-copy">
           {/* Not wrapped in an overflow mask: the layered colour offsets sit
@@ -1113,23 +1080,11 @@ function PerksSection({
 function GuestProof() {
   return (
     <section className="location-proof-section">
-      <DrawnLine
-        className="location-edge-line location-edge-line-left location-edge-white"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeCurl"
-        start="top 92%"
-        end="bottom 25%"
-      />
-      <DrawnLine
-        className="location-edge-line location-edge-line-right location-edge-white"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeSweep"
-        start="top 92%"
-        end="bottom 25%"
+      <EdgeLines
+        left="edgeCurl"
+        right="edgeSweep"
+        leftInk="edge-ink-white"
+        rightInk="edge-ink-white"
       />
       <DrawnLine
         className="location-proof-star"
@@ -1169,23 +1124,11 @@ function LocationFaq() {
     <section id="area-note" className="location-faq-section">
       {/* Drawn while the section is on screen rather than on approach, so the
           stroke is visibly still being laid down when the reader arrives. */}
-      <DrawnLine
-        className="location-edge-line location-edge-line-left location-edge-orange"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeDrift"
-        start="top 92%"
-        end="bottom 25%"
-      />
-      <DrawnLine
-        className="location-edge-line location-edge-line-right location-edge-blue"
-        width={260}
-        height={1100}
-        strokeWidth={46}
-        shape="edgeZag"
-        start="top 92%"
-        end="bottom 25%"
+      <EdgeLines
+        left="edgeDrift"
+        right="edgeZag"
+        leftInk="edge-ink-orange"
+        rightInk="edge-ink-blue"
       />
       <div className="location-faq-heading">
         <h2>FAQs</h2>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, Orbit } from "lucide-react";
+import { EdgeLines } from "@/components/EdgeLines";
 import { siteConfig } from "@/config/site";
 
 export function VirtualTour() {
@@ -29,10 +30,16 @@ export function VirtualTour() {
     <section
       ref={root}
       id="tour"
-      className="section-pad bg-[#f7f3ea]"
+      className="section-pad relative overflow-hidden bg-[#f7f3ea]"
       aria-labelledby="tour-title"
     >
-      <div className="mx-auto max-w-[92rem]">
+      <EdgeLines
+        left="edgeKnot"
+        right="edgeCascade"
+        leftInk="edge-ink-teal"
+        rightInk="edge-ink-gold"
+      />
+      <div className="relative z-10 mx-auto max-w-[92rem]">
         <p className="eyebrow mb-6 text-[#145c5b]">Explore before you arrive</p>
         <h2 id="tour-title" className="sr-only">
           3D tour of Juwan’s Place

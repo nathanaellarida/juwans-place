@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bath, BedDouble, House, Users } from "lucide-react";
 import { BookingLink } from "@/components/BookingLink";
+import { EdgeLines } from "@/components/EdgeLines";
 import { ImagePanel } from "@/components/ImagePanel";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -38,8 +39,14 @@ export default function TheHomePage() {
         label="Juwan’s Place exterior"
       />
 
-      <section className="section-pad bg-[#f7f3ea]">
-        <Reveal className="mx-auto max-w-[92rem]">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeWave"
+          right="edgeSpiral"
+          leftInk="edge-ink-coral"
+          rightInk="edge-ink-teal"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-[92rem]">
           <div className="grid gap-px overflow-hidden rounded-[1rem] bg-black md:grid-cols-4">
             {facts.map(({ label, value, Icon }) => (
               <div
@@ -60,8 +67,14 @@ export default function TheHomePage() {
         </Reveal>
       </section>
 
-      <section className="section-pad bg-[#102f3e] text-white">
-        <Reveal className="mx-auto max-w-[92rem]">
+      <section className="section-pad relative overflow-hidden bg-[#102f3e] text-white">
+        <EdgeLines
+          left="edgeBloom"
+          right="edgeLasso"
+          leftInk="edge-ink-mint"
+          rightInk="edge-ink-gold"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-[92rem]">
           <p data-reveal-item className="eyebrow mb-7 text-[#9cc6b2]">
             The three bedrooms
           </p>
@@ -108,8 +121,14 @@ export default function TheHomePage() {
         </Reveal>
       </section>
 
-      <section className="section-pad bg-[#f7f3ea]">
-        <Reveal className="mx-auto max-w-[92rem]">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeTail"
+          right="edgeZag"
+          leftInk="edge-ink-teal"
+          rightInk="edge-ink-coral"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-[92rem]">
           <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p data-reveal-item className="eyebrow mb-7 text-[#e45d3a]">
@@ -146,8 +165,17 @@ export default function TheHomePage() {
         </Reveal>
       </section>
 
-      <section id="services" className="section-pad bg-[#d5a82e]">
-        <Reveal className="mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.7fr_1.3fr]">
+      <section
+        id="services"
+        className="section-pad relative overflow-hidden bg-[#d5a82e]"
+      >
+        <EdgeLines
+          left="edgeKnot"
+          right="edgeReturn"
+          leftInk="edge-ink-deep"
+          rightInk="edge-ink-plum"
+        />
+        <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.7fr_1.3fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7">Amenities & services</p>
             <h2 className="font-display text-[clamp(4.5rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
@@ -174,8 +202,14 @@ export default function TheHomePage() {
         </Reveal>
       </section>
 
-      <section className="section-pad bg-[#f7f3ea] text-center">
-        <Reveal className="mx-auto max-w-5xl">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea] text-center">
+        <EdgeLines
+          left="edgeCurl"
+          right="edgeCascade"
+          leftInk="edge-ink-plum"
+          rightInk="edge-ink-teal"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-5xl">
           <p data-reveal-item className="eyebrow mb-7 text-[#145c5b]">
             Continue on Airbnb
           </p>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BookingLink } from "@/components/BookingLink";
+import { EdgeLines } from "@/components/EdgeLines";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { houseRules } from "@/data/house-rules";
@@ -28,8 +29,14 @@ export default function HouseRulesPage() {
         label="Juwan’s Place entrance"
       />
 
-      <section className="section-pad bg-[#f7f3ea]">
-        <Reveal className="mx-auto max-w-[92rem]">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeStep"
+          right="edgeSlope"
+          leftInk="edge-ink-plum"
+          rightInk="edge-ink-teal"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-[92rem]">
           <div className="grid gap-12 md:grid-cols-[0.62fr_1.38fr]">
             <div data-reveal-item>
               <p className="eyebrow mb-7 text-[#8e1e55]">Before arrival</p>
@@ -71,8 +78,14 @@ export default function HouseRulesPage() {
         </Reveal>
       </section>
 
-      <section className="section-pad bg-[#e45d3a] text-center text-white">
-        <Reveal className="mx-auto max-w-5xl">
+      <section className="section-pad relative overflow-hidden bg-[#e45d3a] text-center text-white">
+        <EdgeLines
+          left="edgeDrift"
+          right="edgeArc"
+          leftInk="edge-ink-white"
+          rightInk="edge-ink-lemon"
+        />
+        <Reveal className="relative z-10 mx-auto max-w-5xl">
           <p data-reveal-item className="eyebrow mb-7">
             Airbnb is the source of truth
           </p>

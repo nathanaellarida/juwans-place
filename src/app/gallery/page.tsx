@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EdgeLines } from "@/components/EdgeLines";
 import { GalleryClient } from "@/components/GalleryClient";
 import { PageHero } from "@/components/PageHero";
 
@@ -25,8 +26,14 @@ export default function GalleryPage() {
         preferredFileName="home-detail.jpg"
         label="Juwan’s Place interior detail"
       />
-      <section className="section-pad bg-[#f7f3ea]">
-        <div className="mx-auto max-w-[92rem]">
+      <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+        <EdgeLines
+          left="edgeRibbon"
+          right="edgeFold"
+          leftInk="edge-ink-coral"
+          rightInk="edge-ink-teal"
+        />
+        <div className="relative z-10 mx-auto max-w-[92rem]">
           <GalleryClient />
         </div>
       </section>
