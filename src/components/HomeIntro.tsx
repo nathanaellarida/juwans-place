@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EdgeLines } from "@/components/EdgeLines";
 import { ImagePanel } from "@/components/ImagePanel";
+import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { property } from "@/data/property";
 
@@ -101,26 +102,9 @@ function RotatingBadge() {
           </textPath>
         </text>
       </svg>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 72 72"
-        className="size-16"
-        fill="none"
-      >
-        <path
-          d="M9 34.5L36 12L63 34.5V61H9V34.5Z"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinejoin="round"
-        />
-        <path d="M28 61V42H44V61" stroke="currentColor" strokeWidth="3" />
-        <path
-          d="M18 26C24 31 30 31 36 26C42 31 48 31 54 26"
-          stroke="#E45D3A"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-      </svg>
+      {/* Matches the box the house outline occupied. The monogram is a solid
+          shape rather than a thin stroke, so it reads heavier at equal size. */}
+      <Logo size={64} className="size-16" />
     </div>
   );
 }

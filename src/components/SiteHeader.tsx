@@ -28,7 +28,9 @@ export function SiteHeader() {
           aria-label="Juwan’s Place home"
           className="pointer-events-auto absolute left-1/2 top-[clamp(0.8rem,1.5vw,1.5rem)] -translate-x-1/2 text-white mix-blend-difference focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
         >
-          <Wordmark compact inverted />
+          {/* mono: the link difference-blends against whatever section is
+              underneath, which needs a single flat colour to invert cleanly. */}
+          <Wordmark compact inverted mono />
         </Link>
 
         <BookingLink
