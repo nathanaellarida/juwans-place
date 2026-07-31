@@ -15,7 +15,11 @@ type DrawnLineProps = {
   height: number;
   strokeWidth?: number;
   opacity?: number;
-  /** Custom geometry. Defaults to an ellipse that fills the box. */
+  /** Built-in geometry. Ignored when `d` is supplied. */
+  shape?: "ring" | "spiral";
+  /** Turns drawn by the spiral shape. */
+  turns?: number;
+  /** Custom geometry. Overrides `shape`. */
   d?: string;
   start?: string;
   end?: string;
@@ -36,6 +40,37 @@ const ellipse = (width: number, height: number, strokeWidth: number) => {
 };
 
 /**
+ * Archimedean spiral sampled outwards from the centre, so scrubbing the dash
+ * offset reads as a line coiling out across the section.
+ */
+const spiral = (
+  width: number,
+  height: number,
+  strokeWidth: number,
+  turns: number,
+) => {
+  const cx = width / 2;
+  const cy = height / 2;
+  const rx = Math.max(0, (width - strokeWidth) / 2);
+  const ry = Math.max(0, (height - strokeWidth) / 2);
+  const steps = Math.round(turns * 44);
+  const points: string[] = [];
+
+  for (let step = 0; step <= steps; step += 1) {
+    const progress = step / steps;
+    const angle = progress * turns * Math.PI * 2;
+    points.push(
+      `${(cx + rx * progress * Math.cos(angle)).toFixed(1)} ${(
+        cy +
+        ry * progress * Math.sin(angle)
+      ).toFixed(1)}`,
+    );
+  }
+
+  return `M ${points.join(" L ")}`;
+};
+
+/**
  * Decorative stroke that draws itself as the surrounding section scrolls.
  * The path length is measured at runtime, converted into a dash pattern, and
  * the offset is scrubbed back to zero so the line reads as hand drawn.
@@ -46,6 +81,8 @@ export function DrawnLine({
   height,
   strokeWidth = 34,
   opacity = 1,
+  shape = "ring",
+  turns = 3,
   d,
   start = motion.drawn.start,
   end = motion.drawn.end,
@@ -87,11 +124,18 @@ export function DrawnLine({
       <svg viewBox={`0 0 ${width} ${height}`} fill="none" focusable="false">
         <path
           ref={path}
-          d={d ?? ellipse(width, height, strokeWidth)}
+          d={
+            d ??
+            (shape === "spiral"
+              ? spiral(width, height, strokeWidth, turns)
+              : ellipse(width, height, strokeWidth))
+          }
           stroke="currentColor"
           strokeWidth={strokeWidth}
           strokeOpacity={opacity}
           strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
         />
       </svg>
     </span>

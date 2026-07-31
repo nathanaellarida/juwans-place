@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
-import { ArrowUpRight, Camera, MapPin, Plane, ShieldCheck } from "lucide-react";
+import {
+  ArrowUpRight,
+  Camera,
+  Compass,
+  Landmark,
+  MapPin,
+  Plane,
+  ShieldCheck,
+  UtensilsCrossed,
+  Waves,
+} from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookingLink } from "@/components/BookingLink";
@@ -126,6 +136,62 @@ const perkCards = [
     image: "lapu-lapu-city.jpg",
     color: GREEN,
   },
+  {
+    number: "04",
+    eyebrow: "Room to rest",
+    title: "An entire home",
+    copy: "Come back from the island to bedrooms, shared living space, and the privacy of a whole house rather than a single room.",
+    category: "property/exterior",
+    image: "home-exterior.jpg",
+    color: ORANGE,
+  },
+] as const;
+
+/** Die-cut style badges that pop in across the banner. Labels stay at the
+ *  area level and reuse the place names already published in the data. */
+const bannerStickers = [
+  {
+    label: "Mactan Shrine",
+    icon: <Landmark aria-hidden="true" />,
+    color: ORANGE,
+    spot: "location-sticker-one",
+    rotate: "-9deg",
+  },
+  {
+    label: "Mactan Coast",
+    icon: <Waves aria-hidden="true" />,
+    color: BLUE,
+    spot: "location-sticker-two",
+    rotate: "7deg",
+  },
+  {
+    label: "Lapu-Lapu Monument",
+    icon: <MapPin aria-hidden="true" />,
+    color: GREEN,
+    spot: "location-sticker-three",
+    rotate: "-12deg",
+  },
+  {
+    label: "Local Food",
+    icon: <UtensilsCrossed aria-hidden="true" />,
+    color: BLUE,
+    spot: "location-sticker-four",
+    rotate: "10deg",
+  },
+  {
+    label: "Airport Routes",
+    icon: <Plane aria-hidden="true" />,
+    color: GREEN,
+    spot: "location-sticker-five",
+    rotate: "-6deg",
+  },
+  {
+    label: "Cebu Adventures",
+    icon: <Compass aria-hidden="true" />,
+    color: ORANGE,
+    spot: "location-sticker-six",
+    rotate: "8deg",
+  },
 ] as const;
 
 export function LocationExperience() {
@@ -189,6 +255,9 @@ export function LocationExperience() {
       if (postcardSection.current) {
         const postcards =
           postcardSection.current.querySelectorAll("[data-postcard]");
+        const sideWraps = postcardSection.current.querySelectorAll(
+          "[data-postcard-side-wrap]",
+        );
         const sideCopy =
           postcardSection.current.querySelectorAll("[data-postcard-side]");
 
@@ -204,7 +273,7 @@ export function LocationExperience() {
           },
         });
 
-        gsap.from(sideCopy, {
+        gsap.from(sideWraps, {
           y: 64,
           autoAlpha: 0,
           duration: 0.95,
@@ -232,22 +301,23 @@ export function LocationExperience() {
             postcards,
             { y: "115vh", rotate: (index) => [-11, 8, -5][index] },
             {
-              y: (index) => [40, 125, 210][index],
+              y: (index) => [-70, 10, 90][index],
               rotate: (index) => [-4, 5, -2][index],
               duration: 1,
               stagger: 0.18,
               ease: "power2.out",
             },
           )
-          // Fan the stack apart so every postcard is readable at once.
+          // Fan the stack apart, centred on the panel, so every postcard is
+          // readable at once instead of burying the two underneath.
           .to(
             postcards,
             {
               xPercent: (index) => [-spread, 0, spread][index],
               y: (index) =>
-                desktop.matches ? [56, 178, 56][index] : [40, 150, 260][index],
+                desktop.matches ? [-48, 52, -48][index] : [-165, 5, 175][index],
               rotate: (index) => [-7, 1, 7][index],
-              scale: desktop.matches ? 0.92 : 1,
+              scale: desktop.matches ? 0.92 : 0.86,
               duration: 1.1,
               ease: "power3.inOut",
             },
@@ -311,6 +381,37 @@ export function LocationExperience() {
             once: true,
           },
         });
+
+        // Stickers pop rather than fade. Rotation is left to CSS so GSAP's
+        // transform does not overwrite each sticker's resting tilt.
+        gsap.from("[data-sticker]", {
+          scale: 0.2,
+          y: 26,
+          autoAlpha: 0,
+          duration: 0.62,
+          stagger: { each: 0.09, from: "random" },
+          ease: "back.out(2.4)",
+          scrollTrigger: {
+            trigger: bannerSection.current,
+            start: "top 58%",
+            once: true,
+          },
+        });
+
+        gsap.fromTo(
+          "[data-sticker]",
+          { yPercent: 16 },
+          {
+            yPercent: -16,
+            ease: "none",
+            scrollTrigger: {
+              trigger: bannerSection.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.9,
+            },
+          },
+        );
 
         gsap.fromTo(
           "[data-banner-media]",
@@ -422,6 +523,21 @@ export function LocationExperience() {
         );
       }
 
+      if (perksSection.current) {
+        gsap.from("[data-perks-line]", {
+          y: 70,
+          autoAlpha: 0,
+          duration: 1.05,
+          stagger: 0.13,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: perksSection.current,
+            start: "top 68%",
+            once: true,
+          },
+        });
+      }
+
       if (desktop.matches && perksSection.current && perkTrack.current) {
         const cards = perksSection.current.querySelectorAll("[data-perk-card]");
         // Travel far enough for the last card to clear the right edge.
@@ -447,7 +563,7 @@ export function LocationExperience() {
 
         gsap.from(cards, {
           yPercent: 26,
-          rotate: (index) => [-6, 5, -4][index],
+          rotate: (index) => [-6, 5, -4, 7][index % 4],
           autoAlpha: 0,
           duration: 0.9,
           stagger: 0.12,
@@ -598,6 +714,24 @@ function PostcardSection({
       className="location-postcard-scroll"
     >
       <div className="location-sticky-panel">
+        <DrawnLine
+          className="location-postcard-spiral location-postcard-spiral-left"
+          width={620}
+          height={620}
+          strokeWidth={16}
+          shape="spiral"
+          turns={3.5}
+          opacity={0.5}
+        />
+        <DrawnLine
+          className="location-postcard-spiral location-postcard-spiral-right"
+          width={620}
+          height={620}
+          strokeWidth={16}
+          shape="spiral"
+          turns={3}
+          opacity={0.45}
+        />
         <div className="location-ghost-title location-postcard-title">
           <span className="location-line-mask">
             <span data-postcard-line>Where to</span>
@@ -606,22 +740,28 @@ function PostcardSection({
             <span data-postcard-line>catch Cebu</span>
           </span>
         </div>
-        <p
-          data-postcard-side
+        {/* The wrapper carries the entrance and the inner line carries the
+            scrubbed drift, so the two never fight over the same property. */}
+        <span
+          data-postcard-side-wrap
           className="location-postcard-side location-postcard-side-left"
         >
-          More island
-          <br />
-          stories...
-        </p>
-        <p
-          data-postcard-side
+          <p data-postcard-side>
+            More island
+            <br />
+            stories...
+          </p>
+        </span>
+        <span
+          data-postcard-side-wrap
           className="location-postcard-side location-postcard-side-right"
         >
-          Stay
-          <br />
-          curious
-        </p>
+          <p data-postcard-side>
+            Stay
+            <br />
+            curious
+          </p>
+        </span>
         <div className="location-postcard-stack">
           {postcardPlaces.map((place) => (
             <article
@@ -770,7 +910,43 @@ function MaskedBanner({
           />
         </div>
       </div>
+      <DrawnLine
+        className="location-banner-spiral location-banner-spiral-left"
+        width={660}
+        height={660}
+        strokeWidth={22}
+        shape="spiral"
+        turns={3.5}
+        opacity={0.9}
+      />
+      <DrawnLine
+        className="location-banner-spiral location-banner-spiral-right"
+        width={600}
+        height={600}
+        strokeWidth={22}
+        shape="spiral"
+        turns={4}
+        opacity={0.85}
+      />
       <p data-banner-word>This is Mactan</p>
+      <div className="location-sticker-field" aria-hidden="true">
+        {bannerStickers.map((sticker) => (
+          <span
+            data-sticker
+            key={sticker.label}
+            className={`location-sticker ${sticker.spot}`}
+            style={
+              {
+                "--sticker-color": sticker.color,
+                "--sticker-rotate": sticker.rotate,
+              } as CSSProperties
+            }
+          >
+            {sticker.icon}
+            <strong>{sticker.label}</strong>
+          </span>
+        ))}
+      </div>
     </section>
   );
 }
@@ -850,18 +1026,38 @@ function PerksSection({
       className="location-perks-scroll"
     >
       <div className="location-sticky-panel location-perks-panel">
+        <DrawnLine
+          className="location-perks-spiral location-perks-spiral-left"
+          width={640}
+          height={640}
+          strokeWidth={18}
+          shape="spiral"
+          turns={3.5}
+          opacity={0.75}
+        />
+        <DrawnLine
+          className="location-perks-spiral location-perks-spiral-right"
+          width={640}
+          height={640}
+          strokeWidth={18}
+          shape="spiral"
+          turns={4}
+          opacity={0.7}
+        />
         <div className="location-perks-copy">
-          <h2>
+          {/* Not wrapped in an overflow mask: the layered colour offsets sit
+              outside the heading box and would be clipped. */}
+          <h2 data-perks-line>
             <span>Perks?</span>
             <span aria-hidden="true">Perks?</span>
             <span aria-hidden="true">Perks?</span>
           </h2>
-          <p>
+          <p data-perks-line>
             We got
             <br />
             you covered.
           </p>
-          <small>
+          <small data-perks-line>
             A useful base, an entire home, and support for the Cebu plans you
             want to make.
           </small>
@@ -917,6 +1113,24 @@ function GuestProof() {
 
   return (
     <section className="location-proof-section">
+      <DrawnLine
+        className="location-proof-spiral location-proof-spiral-left"
+        width={620}
+        height={620}
+        strokeWidth={20}
+        shape="spiral"
+        turns={3.5}
+        opacity={0.8}
+      />
+      <DrawnLine
+        className="location-proof-spiral location-proof-spiral-right"
+        width={560}
+        height={560}
+        strokeWidth={20}
+        shape="spiral"
+        turns={3}
+        opacity={0.7}
+      />
       <div>
         <p>Real stay.</p>
         <p>Real place.</p>

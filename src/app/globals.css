@@ -704,6 +704,11 @@ a {
   text-transform: uppercase;
 }
 
+.location-postcard-side > p {
+  margin: 0;
+  will-change: transform;
+}
+
 .location-postcard-side-left {
   left: 6.5%;
 }
@@ -716,11 +721,11 @@ a {
 .location-postcard-stack {
   position: absolute;
   z-index: 4;
-  top: 43%;
+  top: 50%;
   left: 50%;
   width: clamp(17rem, 23vw, 24rem);
   aspect-ratio: 0.78;
-  translate: -50% 0;
+  translate: -50% -50%;
 }
 
 .location-postcard {
@@ -1092,6 +1097,141 @@ a {
   color: var(--location-blue);
 }
 
+/* Spiral decorations -------------------------------------------------- */
+
+.location-banner-spiral,
+.location-perks-spiral,
+.location-postcard-spiral,
+.location-proof-spiral {
+  width: clamp(15rem, 29vw, 34rem);
+  height: clamp(15rem, 29vw, 34rem);
+}
+
+.location-banner-spiral {
+  z-index: 2;
+}
+
+.location-banner-spiral-left {
+  top: -7%;
+  left: -8%;
+  color: var(--location-orange);
+}
+
+.location-banner-spiral-right {
+  right: -7%;
+  bottom: -9%;
+  color: var(--location-blue);
+}
+
+.location-perks-spiral {
+  z-index: 1;
+}
+
+.location-perks-spiral-left {
+  top: -13%;
+  left: -9%;
+  color: var(--location-blue);
+}
+
+.location-perks-spiral-right {
+  right: -10%;
+  bottom: -15%;
+  color: var(--location-orange);
+}
+
+.location-postcard-spiral {
+  z-index: 1;
+}
+
+.location-postcard-spiral-left {
+  top: -11%;
+  left: -8%;
+  color: var(--location-green);
+}
+
+.location-postcard-spiral-right {
+  right: -9%;
+  bottom: -12%;
+  color: var(--location-orange);
+}
+
+.location-proof-spiral-left {
+  top: -9%;
+  left: -8%;
+  color: white;
+}
+
+.location-proof-spiral-right {
+  right: -9%;
+  bottom: -11%;
+  color: var(--location-orange);
+}
+
+/* Banner stickers ------------------------------------------------------ */
+
+.location-sticker-field {
+  position: absolute;
+  z-index: 4;
+  inset: clamp(1rem, 3vw, 3rem);
+  pointer-events: none;
+}
+
+.location-sticker {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0.26rem solid white;
+  border-radius: 999px;
+  background: var(--sticker-color);
+  padding: 0.6rem 1.05rem;
+  box-shadow: 0 0.7rem 1.7rem rgb(0 0 0 / 24%);
+  color: white;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  rotate: var(--sticker-rotate);
+  will-change: transform;
+}
+
+.location-sticker svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  stroke-width: 2.2;
+}
+
+.location-sticker-one {
+  top: 8%;
+  left: 7%;
+}
+
+.location-sticker-two {
+  top: 13%;
+  right: 8%;
+}
+
+.location-sticker-three {
+  top: 30%;
+  left: 2%;
+}
+
+.location-sticker-four {
+  top: 34%;
+  right: 3%;
+}
+
+.location-sticker-five {
+  bottom: 13%;
+  left: 12%;
+}
+
+.location-sticker-six {
+  bottom: 17%;
+  right: 11%;
+}
+
 .location-camera {
   position: relative;
   display: grid;
@@ -1276,7 +1416,7 @@ a {
 .location-perk-cards {
   position: absolute;
   z-index: 2;
-  bottom: 7vh;
+  bottom: 4vh;
   left: 9vw;
   display: flex;
   width: max-content;
@@ -1290,8 +1430,8 @@ a {
   --perk-color: var(--location-orange);
   position: relative;
   display: grid;
-  width: clamp(21rem, 36vw, 38rem);
-  height: min(54vh, 33rem);
+  width: clamp(20rem, 33vw, 35rem);
+  height: min(47vh, 30rem);
   flex: 0 0 auto;
   overflow: hidden;
   grid-template-rows: auto 1fr;
@@ -1302,7 +1442,7 @@ a {
 }
 
 .location-perk-card:nth-child(even) {
-  margin-bottom: 3.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .location-perk-card-copy {
@@ -1357,7 +1497,7 @@ a {
   text-align: center;
 }
 
-.location-proof-section > div:first-child {
+.location-proof-section > div:first-of-type {
   color: rgb(255 255 255 / 14%);
   font-size: clamp(5.5rem, 12vw, 12rem);
   font-style: italic;
@@ -1680,6 +1820,32 @@ a {
     min-height: auto;
   }
 
+  .location-sticker {
+    gap: 0.3rem;
+    border-width: 0.18rem;
+    padding: 0.42rem 0.7rem;
+    font-size: 0.56rem;
+  }
+
+  .location-sticker svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  /* The middle pair would land on top of the headline at phone widths. */
+  .location-sticker-three,
+  .location-sticker-four {
+    display: none;
+  }
+
+  .location-banner-spiral,
+  .location-perks-spiral,
+  .location-postcard-spiral,
+  .location-proof-spiral {
+    width: 15rem;
+    height: 15rem;
+  }
+
   .location-camera-heading > span,
   .location-camera-heading > strong {
     font-size: 4.5rem;
@@ -1750,7 +1916,7 @@ a {
     min-height: 18rem;
   }
 
-  .location-proof-section > div:first-child {
+  .location-proof-section > div:first-of-type {
     font-size: 5rem;
   }
 
