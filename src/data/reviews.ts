@@ -21,4 +21,8 @@ export const reviews: Review[] = [
   { quote: "", author: "", context: "" },
   { quote: "", author: "", context: "" },
   { quote: "", author: "", context: "" },
+  { quote: "", author: "", context: "" },
+  { quote: "", author: "", context: "" },
+  { quote: "", author: "", context: "" },
+  { quote: "", author: "", context: "" },
 ];

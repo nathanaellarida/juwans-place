@@ -57,7 +57,11 @@ export function ReviewCarousel({ items }: { items: Review[] }) {
             )}
             style={
               {
-                "--review-rotate": `${[-2.5, 1.8, -1.4, 2.2][index % 4]}deg`,
+                // Eight tilts rather than four, so a long row does not fall
+                // into a visibly repeating pattern.
+                "--review-rotate": `${
+                  [-2.5, 1.8, -1.4, 2.2, -1.9, 1.2, -2.8, 1.6][index % 8]
+                }deg`,
               } as React.CSSProperties
             }
           >
