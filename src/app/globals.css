@@ -47,9 +47,16 @@ button {
   font: inherit;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Layered on purpose. An unlayered rule beats every cascade layer whatever its
+   specificity, so an unlayered `color` here silently overrode the text colour
+   utility on any link that set one — which rendered several buttons as white
+   text on a white fill. Inside a layer, a link's own utility wins and links
+   without one still inherit. */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 ::selection {

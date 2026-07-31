@@ -345,7 +345,9 @@ function ReviewsSection() {
   ];
 
   return (
-    <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">
+    // Short section: a full section-pad at both ends stacks with the next
+    // section's padding into a band of empty paper, so the tail is trimmed.
+    <section className="relative overflow-hidden bg-[#f7f3ea] px-[clamp(1.25rem,4vw,4rem)] pb-[clamp(2rem,3.5vw,3.5rem)] pt-[clamp(5rem,10vw,10rem)]">
       <EdgeLines
         left="edgeBloom"
         right="edgeSpiral"
@@ -410,7 +412,7 @@ function ReviewsSection() {
 
 function RulesSection() {
   return (
-    <section className="section-pad relative overflow-hidden bg-[#8e1e55] text-white">
+    <section className="relative overflow-hidden bg-[#8e1e55] px-[clamp(1.25rem,4vw,4rem)] py-[clamp(5rem,10vw,10rem)] text-white">
       <EdgeLines
         left="edgeRibbon"
         right="edgeLasso"
@@ -418,7 +420,9 @@ function RulesSection() {
         rightInk="edge-ink-mint"
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
-        <div className="grid gap-12 md:grid-cols-[0.72fr_1.28fr]">
+        {/* items-start, or the list stretches to match the column beside it and
+            leaves its closing rule floating below the last house rule. */}
+        <div className="grid gap-12 md:grid-cols-[0.72fr_1.28fr] md:items-start">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#f3c75d]">Stay with confidence</p>
             <h2 className="font-display text-[clamp(4.7rem,8.5vw,8.5rem)] uppercase leading-[0.78] tracking-[-0.055em]">
@@ -441,7 +445,7 @@ function RulesSection() {
             data-reveal-item
             className="divide-y divide-white/25 border-y border-white/25"
           >
-            {houseRules.slice(0, 5).map((rule, index) => (
+            {houseRules.slice(0, 7).map((rule, index) => (
               <li
                 key={rule.id}
                 className="grid gap-4 py-6 sm:grid-cols-[3rem_0.72fr_1.28fr]"
