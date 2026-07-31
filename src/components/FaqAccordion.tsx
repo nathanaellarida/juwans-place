@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { motion, prefersReducedMotion } from "@/lib/motion";
+import { cn } from "@/lib/styles";
 import type { Faq } from "@/data/faqs";
 
 export function FaqAccordion({
@@ -12,44 +14,69 @@ export function FaqAccordion({
   initialOpen?: number | null;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(initialOpen);
+  const panels = useRef<Array<HTMLDivElement | null>>([]);
+  const firstRun = useRef(true);
+
+  useEffect(() => {
+    const instant = firstRun.current || prefersReducedMotion();
+    firstRun.current = false;
+
+    const tweens = panels.current.map((panel, index) => {
+      if (!panel) return null;
+      const open = index === openIndex;
+
+      return gsap.to(panel, {
+        height: open ? "auto" : 0,
+        autoAlpha: open ? 1 : 0,
+        duration: instant ? 0 : motion.accordion.duration,
+        ease: motion.accordion.ease,
+        overwrite: true,
+      });
+    });
+
+    return () => {
+      tweens.forEach((tween) => tween?.kill());
+    };
+  }, [openIndex]);
 
   return (
-    <div className="divide-y divide-black/20 border-y border-black/20">
+    <div className="faq-accordion">
       {items.map((item, index) => {
         const open = openIndex === index;
         const answerId = `faq-answer-${index}`;
         const buttonId = `faq-button-${index}`;
 
         return (
-          <div key={item.question}>
-            <h3>
+          <div
+            key={item.question}
+            className={cn("faq-item", open && "is-open")}
+          >
+            <h3 className="faq-item-heading">
               <button
                 id={buttonId}
                 type="button"
-                className="flex min-h-16 w-full items-center justify-between gap-5 py-5 text-left font-display text-[clamp(1.75rem,3vw,2.8rem)] uppercase leading-none"
+                className="faq-trigger"
                 aria-expanded={open}
                 aria-controls={answerId}
                 onClick={() => setOpenIndex(open ? null : index)}
               >
-                <span>{item.question}</span>
-                <Plus
-                  aria-hidden="true"
-                  className={`shrink-0 transition-transform duration-300 ${
-                    open ? "rotate-45" : ""
-                  }`}
-                />
+                <span className="faq-question">{item.question}</span>
+                <span className="faq-toggle" aria-hidden="true">
+                  <i />
+                  <i />
+                </span>
               </button>
             </h3>
             <div
               id={answerId}
               role="region"
               aria-labelledby={buttonId}
-              hidden={!open}
-              className="pb-6"
+              className="faq-panel"
+              ref={(node) => {
+                panels.current[index] = node;
+              }}
             >
-              <p className="max-w-3xl text-base leading-relaxed text-black/65 md:text-lg">
-                {item.answer}
-              </p>
+              <p className="faq-answer">{item.answer}</p>
             </div>
           </div>
         );

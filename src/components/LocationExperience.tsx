@@ -6,6 +6,7 @@ import { ArrowUpRight, Camera, MapPin, Plane, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookingLink } from "@/components/BookingLink";
+import { DrawnLine } from "@/components/DrawnLine";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
@@ -133,8 +134,10 @@ export function LocationExperience() {
   const featureTrack = useRef<HTMLDivElement>(null);
   const postcardSection = useRef<HTMLElement>(null);
   const collageSection = useRef<HTMLElement>(null);
+  const bannerSection = useRef<HTMLElement>(null);
   const cameraSection = useRef<HTMLElement>(null);
   const perksSection = useRef<HTMLElement>(null);
+  const perkTrack = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!root.current || prefersReducedMotion()) return;
@@ -186,6 +189,35 @@ export function LocationExperience() {
       if (postcardSection.current) {
         const postcards =
           postcardSection.current.querySelectorAll("[data-postcard]");
+        const sideCopy =
+          postcardSection.current.querySelectorAll("[data-postcard-side]");
+
+        gsap.from("[data-postcard-line]", {
+          yPercent: 118,
+          duration: 1.15,
+          stagger: 0.11,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: postcardSection.current,
+            start: "top 72%",
+            once: true,
+          },
+        });
+
+        gsap.from(sideCopy, {
+          y: 64,
+          autoAlpha: 0,
+          duration: 0.95,
+          stagger: 0.14,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: postcardSection.current,
+            start: "top 45%",
+            once: true,
+          },
+        });
+
+        const spread = desktop.matches ? 108 : 0;
         const postcardTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: postcardSection.current,
@@ -194,6 +226,7 @@ export function LocationExperience() {
             scrub: 0.75,
           },
         });
+
         postcardTimeline
           .fromTo(
             postcards,
@@ -206,6 +239,30 @@ export function LocationExperience() {
               ease: "power2.out",
             },
           )
+          // Fan the stack apart so every postcard is readable at once.
+          .to(
+            postcards,
+            {
+              xPercent: (index) => [-spread, 0, spread][index],
+              y: (index) =>
+                desktop.matches ? [56, 178, 56][index] : [40, 150, 260][index],
+              rotate: (index) => [-7, 1, 7][index],
+              scale: desktop.matches ? 0.92 : 1,
+              duration: 1.1,
+              ease: "power3.inOut",
+            },
+            "+=0.2",
+          )
+          .to(
+            sideCopy,
+            {
+              x: (index) => [-70, 70][index],
+              autoAlpha: 0.22,
+              duration: 1.1,
+              ease: "power3.inOut",
+            },
+            "<",
+          )
           .to(
             postcards,
             {
@@ -215,7 +272,7 @@ export function LocationExperience() {
               stagger: 0.09,
               ease: "power2.in",
             },
-            "+=0.35",
+            "+=0.45",
           );
       }
 
@@ -242,62 +299,165 @@ export function LocationExperience() {
         );
       }
 
+      if (bannerSection.current) {
+        gsap.from("[data-banner-word]", {
+          autoAlpha: 0,
+          scale: 0.84,
+          duration: 1.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: bannerSection.current,
+            start: "top 62%",
+            once: true,
+          },
+        });
+
+        gsap.fromTo(
+          "[data-banner-media]",
+          { scale: 1.22, yPercent: -5 },
+          {
+            scale: 1,
+            yPercent: 5,
+            ease: "none",
+            scrollTrigger: {
+              trigger: bannerSection.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.8,
+            },
+          },
+        );
+
+        // Kept small: the headline nearly fills its box, so a wide drift
+        // would push the wordmark past the banner's clipped edge.
+        if (desktop.matches) {
+          gsap.fromTo(
+            "[data-banner-word]",
+            { xPercent: 3.5 },
+            {
+              xPercent: -3.5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: bannerSection.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.6,
+              },
+            },
+          );
+        }
+      }
+
       if (cameraSection.current) {
         const instantCards =
           cameraSection.current.querySelectorAll("[data-instant-card]");
-        gsap.from(instantCards, {
-          y: 190,
-          opacity: 0,
-          rotate: (index) => [-10, 7, -4][index],
+
+        gsap.from("[data-camera-line]", {
+          yPercent: 122,
+          duration: 1.1,
           stagger: 0.12,
-          ease: "power3.out",
+          ease: "power4.out",
           scrollTrigger: {
             trigger: cameraSection.current,
-            start: "top 62%",
+            start: "top 74%",
+            once: true,
           },
         });
+
+        const shutter = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".location-camera",
+            start: "top 76%",
+            once: true,
+          },
+        });
+
+        shutter
+          .from(".location-camera", {
+            scale: 0.72,
+            rotate: -7,
+            autoAlpha: 0,
+            duration: 0.85,
+            ease: "back.out(1.7)",
+          })
+          // Fire the flash, then let the prints drop out of the camera.
+          .to(
+            ".location-camera-flash",
+            { opacity: 0.85, duration: 0.12, ease: "power1.out" },
+            "-=0.15",
+          )
+          .to(".location-camera-flash", {
+            opacity: 0,
+            duration: 0.45,
+            ease: "power2.out",
+          })
+          .from(
+            instantCards,
+            {
+              y: -230,
+              scale: 0.42,
+              rotate: (index) => [16, -13, 10][index],
+              autoAlpha: 0,
+              duration: 0.9,
+              stagger: 0.14,
+              ease: "power3.out",
+            },
+            "-=0.3",
+          );
+
+        // Drift uses yPercent so it composes with the entrance tween on y.
+        gsap.fromTo(
+          instantCards,
+          { yPercent: (index) => [6, -5, 4][index] },
+          {
+            yPercent: (index) => [-8, 6, -5][index],
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".location-instant-grid",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.85,
+            },
+          },
+        );
       }
 
-      if (desktop.matches && perksSection.current) {
+      if (desktop.matches && perksSection.current && perkTrack.current) {
         const cards = perksSection.current.querySelectorAll("[data-perk-card]");
-        const perksTimeline = gsap.timeline({
+        // Travel far enough for the last card to clear the right edge.
+        const distance = () =>
+          Math.max(
+            0,
+            perkTrack.current!.scrollWidth -
+              perksSection.current!.clientWidth +
+              window.innerWidth * 0.12,
+          );
+
+        gsap.to(perkTrack.current, {
+          x: () => -distance(),
+          ease: "none",
           scrollTrigger: {
             trigger: perksSection.current,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
+            invalidateOnRefresh: true,
           },
         });
 
-        perksTimeline
-          .fromTo(
-            cards[0],
-            { xPercent: -135, rotate: -8 },
-            { xPercent: -35, rotate: 0, duration: 1 },
-          )
-          .fromTo(
-            cards[1],
-            { xPercent: 150, yPercent: -18, rotate: 10 },
-            { xPercent: 34, yPercent: 7, rotate: 5, duration: 1 },
-            0.35,
-          )
-          .fromTo(
-            cards[2],
-            { xPercent: -155, yPercent: 18, rotate: -12 },
-            { xPercent: -2, yPercent: 31, rotate: -4, duration: 1 },
-            0.8,
-          )
-          .to(
-            cards,
-            {
-              yPercent: (index) => [-112, -126, -118][index],
-              rotate: (index) => [-5, 7, -8][index],
-              duration: 1.15,
-              stagger: 0.08,
-              ease: "power2.in",
-            },
-            "+=0.65",
-          );
+        gsap.from(cards, {
+          yPercent: 26,
+          rotate: (index) => [-6, 5, -4][index],
+          autoAlpha: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: perksSection.current,
+            start: "top 62%",
+            once: true,
+          },
+        });
       }
     }, root);
 
@@ -311,9 +471,9 @@ export function LocationExperience() {
       <PostcardSection sectionRef={postcardSection} />
       <CommunityCollage sectionRef={collageSection} />
       <PlacesSection />
-      <MaskedBanner />
+      <MaskedBanner sectionRef={bannerSection} />
       <CameraSection sectionRef={cameraSection} />
-      <PerksSection sectionRef={perksSection} />
+      <PerksSection sectionRef={perksSection} trackRef={perkTrack} />
       <GuestProof />
       <LocationFaq />
     </div>
@@ -439,16 +599,25 @@ function PostcardSection({
     >
       <div className="location-sticky-panel">
         <div className="location-ghost-title location-postcard-title">
-          Where to
-          <br />
-          catch Cebu
+          <span className="location-line-mask">
+            <span data-postcard-line>Where to</span>
+          </span>
+          <span className="location-line-mask">
+            <span data-postcard-line>catch Cebu</span>
+          </span>
         </div>
-        <p className="location-postcard-side location-postcard-side-left">
+        <p
+          data-postcard-side
+          className="location-postcard-side location-postcard-side-left"
+        >
           More island
           <br />
           stories...
         </p>
-        <p className="location-postcard-side location-postcard-side-right">
+        <p
+          data-postcard-side
+          className="location-postcard-side location-postcard-side-right"
+        >
           Stay
           <br />
           curious
@@ -582,20 +751,26 @@ function PlacesSection() {
   );
 }
 
-function MaskedBanner() {
+function MaskedBanner({
+  sectionRef,
+}: {
+  sectionRef: React.RefObject<HTMLElement | null>;
+}) {
   return (
-    <section className="location-masked-banner">
+    <section ref={sectionRef} className="location-masked-banner">
       <div className="location-masked-media">
-        <ImagePanel
-          category="lapu-lapu/city"
-          preferredFileName="lapu-lapu-city.jpg"
-          alt="A day out in Lapu-Lapu City"
-          label="Add a wide Lapu-Lapu City photograph"
-          className="absolute inset-0"
-          sizes="100vw"
-        />
+        <div data-banner-media className="absolute inset-0">
+          <ImagePanel
+            category="lapu-lapu/city"
+            preferredFileName="lapu-lapu-city.jpg"
+            alt="A day out in Lapu-Lapu City"
+            label="Add a wide Lapu-Lapu City photograph"
+            className="absolute inset-0"
+            sizes="100vw"
+          />
+        </div>
       </div>
-      <p>This is Mactan</p>
+      <p data-banner-word>This is Mactan</p>
     </section>
   );
 }
@@ -607,14 +782,35 @@ function CameraSection({
 }) {
   return (
     <section ref={sectionRef} className="location-camera-section">
+      <DrawnLine
+        className="location-camera-line-left"
+        width={320}
+        height={1100}
+        strokeWidth={70}
+        opacity={0.18}
+        d="M280 20C120 200 340 430 140 610C-60 790 250 900 200 1080"
+      />
+      <DrawnLine
+        className="location-camera-line-right"
+        width={320}
+        height={1100}
+        strokeWidth={70}
+        opacity={0.16}
+        d="M40 20C200 200 -20 430 180 610C380 790 70 900 120 1080"
+      />
       <div className="location-camera-heading">
-        <span>Caught in</span>
-        <strong>Mactan</strong>
+        <span className="location-line-mask">
+          <span data-camera-line>Caught in</span>
+        </span>
+        <strong className="location-line-mask">
+          <span data-camera-line>Mactan</span>
+        </strong>
       </div>
       <div className="location-camera">
         <Camera aria-hidden="true" />
         <span>JUWAN CAM</span>
         <i aria-hidden="true" />
+        <div className="location-camera-flash" aria-hidden="true" />
       </div>
       <div className="location-instant-grid">
         {places.slice(3, 6).map((place, index) => (
@@ -642,8 +838,10 @@ function CameraSection({
 
 function PerksSection({
   sectionRef,
+  trackRef,
 }: {
   sectionRef: React.RefObject<HTMLElement | null>;
+  trackRef: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <section
@@ -668,7 +866,7 @@ function PerksSection({
             want to make.
           </small>
         </div>
-        <div className="location-perk-cards">
+        <div ref={trackRef} className="location-perk-cards">
           {perkCards.map((perk) => (
             <article
               data-perk-card
@@ -746,8 +944,18 @@ function GuestProof() {
 function LocationFaq() {
   return (
     <section id="area-note" className="location-faq-section">
-      <span className="location-faq-loop location-faq-loop-left" />
-      <span className="location-faq-loop location-faq-loop-right" />
+      <DrawnLine
+        className="location-faq-loop location-faq-loop-left"
+        width={300}
+        height={620}
+        strokeWidth={25}
+      />
+      <DrawnLine
+        className="location-faq-loop location-faq-loop-right"
+        width={300}
+        height={620}
+        strokeWidth={25}
+      />
       <div className="location-faq-heading">
         <h2>FAQs</h2>
         <p>Location questions? Here is the honest version.</p>

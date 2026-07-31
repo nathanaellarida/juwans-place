@@ -37,6 +37,15 @@ export const motion = {
     travelPercent: 9,
     scrub: 0.75,
   },
+  drawn: {
+    start: "top bottom",
+    end: "center top",
+    scrub: 0.9,
+  },
+  accordion: {
+    duration: 0.52,
+    ease: "power3.out",
+  },
   lenis: {
     duration: 1.15,
   },

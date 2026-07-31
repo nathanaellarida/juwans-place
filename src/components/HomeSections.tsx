@@ -15,6 +15,7 @@ import {
   Wifi,
 } from "lucide-react";
 import { BookingLink } from "@/components/BookingLink";
+import { DrawnLine } from "@/components/DrawnLine";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { Parallax, Reveal } from "@/components/Reveal";
@@ -137,13 +138,15 @@ function PropertyStory() {
 function AmenitiesSection() {
   return (
     <section className="section-pad relative overflow-hidden bg-black text-white">
-      <span
-        aria-hidden="true"
-        className="curve-line -right-[35rem] -top-[28rem] size-[60rem] text-[#145c5b]"
+      <DrawnLine
+        className="-right-[35rem] -top-[28rem] size-[60rem] text-[#145c5b]"
+        width={600}
+        height={600}
       />
-      <span
-        aria-hidden="true"
-        className="curve-line -bottom-[34rem] -left-[36rem] size-[62rem] text-[#e45d3a]"
+      <DrawnLine
+        className="-bottom-[34rem] -left-[36rem] size-[62rem] text-[#e45d3a]"
+        width={620}
+        height={620}
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
         <p data-reveal-item className="eyebrow mb-7 text-[#d5a82e]">
@@ -464,13 +467,15 @@ function FinalBookingSection() {
   return (
     <section id="book" className="bg-[#f7f3ea] p-2.5 md:p-4">
       <div className="relative flex min-h-[74vh] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#145c5b] px-6 py-24 text-center text-white">
-        <span
-          className="curve-line -left-[26rem] -top-[27rem] size-[54rem] text-[#e45d3a]"
-          aria-hidden="true"
+        <DrawnLine
+          className="-left-[26rem] -top-[27rem] size-[54rem] text-[#e45d3a]"
+          width={540}
+          height={540}
         />
-        <span
-          className="curve-line -bottom-[34rem] -right-[28rem] size-[60rem] text-[#d5a82e]"
-          aria-hidden="true"
+        <DrawnLine
+          className="-bottom-[34rem] -right-[28rem] size-[60rem] text-[#d5a82e]"
+          width={600}
+          height={600}
         />
         <Reveal className="relative z-10 max-w-5xl">
           <p data-reveal-item className="eyebrow mb-8 text-[#9cc6b2]">

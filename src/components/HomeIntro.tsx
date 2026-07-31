@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DrawnLine } from "@/components/DrawnLine";
 import { ImagePanel } from "@/components/ImagePanel";
 import { Reveal } from "@/components/Reveal";
 import { property } from "@/data/property";
@@ -9,13 +10,15 @@ export function HomeIntro() {
       id="home-intro"
       className="relative overflow-hidden bg-[#f7f3ea] px-[clamp(1.25rem,4vw,4rem)] pb-[clamp(5rem,10vw,10rem)] pt-[clamp(7rem,12vw,12rem)]"
     >
-      <span
-        className="curve-line -left-[24vw] top-[22rem] h-[42rem] w-[56rem] rotate-[18deg] text-[#d5a82e]"
-        aria-hidden="true"
+      <DrawnLine
+        className="-left-[24vw] top-[22rem] h-[42rem] w-[56rem] rotate-[18deg] text-[#d5a82e]"
+        width={560}
+        height={420}
       />
-      <span
-        className="curve-line -right-[30vw] -top-[20rem] h-[45rem] w-[58rem] rotate-[-10deg] text-[#145c5b]"
-        aria-hidden="true"
+      <DrawnLine
+        className="-right-[30vw] -top-[20rem] h-[45rem] w-[58rem] rotate-[-10deg] text-[#145c5b]"
+        width={580}
+        height={450}
       />
 
       <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-14 md:grid-cols-[1.15fr_0.65fr] md:gap-20">

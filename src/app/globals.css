@@ -335,11 +335,121 @@ a {
   opacity: 0.26;
 }
 
-.curve-line {
+.drawn-line {
   position: absolute;
+  display: block;
   pointer-events: none;
-  border: clamp(1.7rem, 4vw, 4rem) solid currentColor;
-  border-radius: 50%;
+}
+
+.drawn-line svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.faq-accordion {
+  --faq-accent: #e45d3a;
+  --faq-radius: 0.9rem;
+}
+
+.faq-item {
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid rgb(0 0 0 / 45%);
+  border-radius: var(--faq-radius);
+  transition:
+    background-color 450ms ease,
+    border-color 450ms ease;
+}
+
+.faq-item.is-open {
+  border-bottom-color: transparent;
+  background: var(--faq-accent);
+}
+
+.faq-item-heading {
+  margin: 0;
+}
+
+.faq-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: 1.3rem clamp(1rem, 2vw, 1.75rem);
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-question {
+  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.25;
+  transition: color 450ms ease;
+}
+
+.faq-item.is-open .faq-question {
+  color: white;
+}
+
+.faq-toggle {
+  position: relative;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--faq-accent);
+  transition:
+    background-color 450ms ease,
+    rotate 450ms ease;
+}
+
+.faq-item.is-open .faq-toggle {
+  background: white;
+  rotate: 180deg;
+}
+
+.faq-toggle i {
+  position: absolute;
+  width: 1.05rem;
+  height: 0.17rem;
+  border-radius: 999px;
+  background: white;
+  transition:
+    background-color 450ms ease,
+    transform 450ms ease,
+    opacity 300ms ease;
+}
+
+.faq-toggle i:last-child {
+  transform: rotate(90deg);
+}
+
+.faq-item.is-open .faq-toggle i {
+  background: var(--faq-accent);
+}
+
+.faq-item.is-open .faq-toggle i:last-child {
+  transform: rotate(90deg) scaleX(0);
+  opacity: 0;
+}
+
+.faq-panel {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.faq-answer {
+  max-width: 60rem;
+  padding: 0 clamp(1rem, 2vw, 1.75rem) 1.6rem;
+  color: white;
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  line-height: 1.6;
 }
 
 .text-balance {
@@ -570,6 +680,17 @@ a {
   font-size: clamp(5rem, 10.5vw, 11rem);
   line-height: 0.78;
   text-shadow: 0 0 0.4px rgb(0 0 0 / 8%);
+}
+
+.location-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.location-line-mask > span {
+  display: block;
+  will-change: transform;
 }
 
 .location-postcard-side {
@@ -910,9 +1031,12 @@ a {
   position: absolute;
   z-index: 3;
   top: 54%;
-  left: 50%;
+  left: 0;
   width: 100%;
-  translate: -50% -50%;
+  /* Horizontal centring stays with text-align so the scroll drift can own the
+     x axis. GSAP folds `translate` into its own transform and would otherwise
+     overwrite a -50% centring offset. */
+  translate: 0 -50%;
   color: var(--location-orange);
   font-size: clamp(5rem, 11.5vw, 12rem);
   font-style: italic;
@@ -941,15 +1065,31 @@ a {
   text-transform: uppercase;
 }
 
-.location-camera-heading span {
+.location-camera-heading > span {
   display: block;
   color: var(--location-orange);
   font-size: clamp(5rem, 11vw, 11rem);
 }
 
-.location-camera-heading strong {
+.location-camera-heading > strong {
   display: block;
   font-size: clamp(5rem, 10vw, 10rem);
+}
+
+.location-camera-line-left {
+  top: 6%;
+  left: -4vw;
+  width: clamp(9rem, 13vw, 16rem);
+  height: 78%;
+  color: var(--location-orange);
+}
+
+.location-camera-line-right {
+  top: 14%;
+  right: -4vw;
+  width: clamp(9rem, 13vw, 16rem);
+  height: 78%;
+  color: var(--location-blue);
 }
 
 .location-camera {
@@ -991,6 +1131,30 @@ a {
   border-radius: 999px;
   background: var(--location-orange);
   box-shadow: 0 0 0 1px black;
+  animation: camera-record 1.8s ease-in-out infinite;
+}
+
+@keyframes camera-record {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+    scale: 0.82;
+  }
+}
+
+.location-camera-flash {
+  position: absolute;
+  z-index: 2;
+  border-radius: 2rem;
+  background: white;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .location-instant-grid {
@@ -1009,6 +1173,7 @@ a {
   border-radius: 0.45rem;
   background: white;
   box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 10%);
+  will-change: transform;
 }
 
 .location-instant-grid article:nth-child(2) {
@@ -1110,25 +1275,34 @@ a {
 
 .location-perk-cards {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
+  z-index: 2;
+  bottom: 7vh;
+  left: 9vw;
+  display: flex;
+  width: max-content;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 3vw, 3.25rem);
+  padding-right: 24vw;
+  will-change: transform;
 }
 
 .location-perk-card {
   --perk-color: var(--location-orange);
-  position: absolute;
-  top: 36%;
-  left: 50%;
+  position: relative;
   display: grid;
-  width: min(62vw, 58rem);
-  height: min(61vh, 38rem);
-  translate: -50% 0;
+  width: clamp(21rem, 36vw, 38rem);
+  height: min(54vh, 33rem);
+  flex: 0 0 auto;
   overflow: hidden;
   grid-template-rows: auto 1fr;
   border-radius: 1.1rem;
   background: var(--perk-color);
   color: white;
   will-change: transform;
+}
+
+.location-perk-card:nth-child(even) {
+  margin-bottom: 3.25rem;
 }
 
 .location-perk-card-copy {
@@ -1265,12 +1439,12 @@ a {
 }
 
 .location-faq-loop {
-  position: absolute;
-  pointer-events: none;
   width: 30rem;
   height: 62rem;
-  border: 2.5rem solid currentColor;
-  border-radius: 50%;
+}
+
+.location-faq-section .faq-accordion {
+  --faq-accent: var(--location-orange);
 }
 
 .location-faq-loop-left {
@@ -1506,8 +1680,8 @@ a {
     min-height: auto;
   }
 
-  .location-camera-heading span,
-  .location-camera-heading strong {
+  .location-camera-heading > span,
+  .location-camera-heading > strong {
     font-size: 4.5rem;
   }
 
@@ -1548,7 +1722,9 @@ a {
     position: relative;
     inset: auto;
     display: grid;
+    width: 100%;
     margin-top: 4rem;
+    padding-right: 0;
     gap: 1rem;
     overflow: visible;
   }
@@ -1560,6 +1736,10 @@ a {
     height: auto;
     min-height: 34rem;
     translate: 0;
+  }
+
+  .location-perk-card:nth-child(even) {
+    margin-bottom: 0;
   }
 
   .location-perk-card-copy {
@@ -1621,5 +1801,62 @@ a {
   .location-collage-scroll .location-sticky-panel,
   .location-perks-scroll .location-sticky-panel {
     position: relative;
+  }
+
+  /* Without the scroll tweens the perk track and the postcard stack would keep
+     their off-screen and fully overlapped layouts, so lay both out statically. */
+  .location-perks-scroll .location-sticky-panel,
+  .location-postcard-scroll .location-sticky-panel {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 3vw, 3rem);
+  }
+
+  .location-perks-copy,
+  .location-postcard-title,
+  .location-postcard-side {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    translate: 0;
+  }
+
+  .location-perk-cards {
+    position: relative;
+    inset: auto;
+    display: grid;
+    width: 100%;
+    padding-right: 0;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  }
+
+  .location-perk-card {
+    width: 100%;
+    height: auto;
+    min-height: 30rem;
+  }
+
+  .location-perk-card:nth-child(even) {
+    margin-bottom: 0;
+  }
+
+  .location-postcard-stack {
+    position: relative;
+    display: grid;
+    width: 100%;
+    aspect-ratio: auto;
+    margin-top: 3rem;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    translate: 0;
+  }
+
+  .location-postcard {
+    position: relative;
+    aspect-ratio: 0.78;
+    inset: auto;
+    rotate: 0deg;
   }
 }
