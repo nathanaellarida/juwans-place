@@ -20,8 +20,11 @@ import { DrawnLine } from "@/components/DrawnLine";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
+import { ReviewCarousel } from "@/components/ReviewCarousel";
 import { faqs } from "@/data/faqs";
 import { places } from "@/data/places";
+import { property } from "@/data/property";
+import { reviews } from "@/data/reviews";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const ORANGE = "#ff431e";
@@ -385,15 +388,14 @@ export function LocationExperience() {
         // Stickers pop rather than fade. Rotation is left to CSS so GSAP's
         // transform does not overwrite each sticker's resting tilt.
         gsap.from("[data-sticker]", {
-          scale: 0.2,
-          y: 26,
+          scale: 0,
           autoAlpha: 0,
-          duration: 0.62,
-          stagger: { each: 0.09, from: "random" },
-          ease: "back.out(2.4)",
+          duration: 0.78,
+          stagger: { each: 0.11, from: "random" },
+          ease: "back.out(3.2)",
           scrollTrigger: {
             trigger: bannerSection.current,
-            start: "top 58%",
+            start: "top 72%",
             once: true,
           },
         });
@@ -540,13 +542,15 @@ export function LocationExperience() {
 
       if (desktop.matches && perksSection.current && perkTrack.current) {
         const cards = perksSection.current.querySelectorAll("[data-perk-card]");
-        // Travel far enough for the last card to clear the right edge.
+        // Stop once the last card sits the same distance from the right edge
+        // as the first one starts from the left, so the track does not run on
+        // into empty panel.
         const distance = () =>
           Math.max(
             0,
-            perkTrack.current!.scrollWidth -
-              perksSection.current!.clientWidth +
-              window.innerWidth * 0.12,
+            perkTrack.current!.scrollWidth +
+              perksSection.current!.clientWidth * 0.09 -
+              perksSection.current!.clientWidth,
           );
 
         gsap.to(perkTrack.current, {
@@ -715,22 +719,24 @@ function PostcardSection({
     >
       <div className="location-sticky-panel">
         <DrawnLine
-          className="location-postcard-spiral location-postcard-spiral-left"
-          width={620}
-          height={620}
-          strokeWidth={16}
-          shape="spiral"
-          turns={3.5}
-          opacity={0.5}
+          className="location-edge-line location-edge-line-left location-edge-green"
+          width={260}
+          height={1780}
+          strokeWidth={52}
+          shape="edge"
+          preserveAspectRatio="xMinYMid slice"
+          start="top 92%"
+          end="bottom 25%"
         />
         <DrawnLine
-          className="location-postcard-spiral location-postcard-spiral-right"
-          width={620}
-          height={620}
-          strokeWidth={16}
-          shape="spiral"
-          turns={3}
-          opacity={0.45}
+          className="location-edge-line location-edge-line-right location-edge-orange"
+          width={260}
+          height={1780}
+          strokeWidth={52}
+          shape="edge"
+          preserveAspectRatio="xMinYMid slice"
+          start="top 92%"
+          end="bottom 25%"
         />
         <div className="location-ghost-title location-postcard-title">
           <span className="location-line-mask">
@@ -911,22 +917,24 @@ function MaskedBanner({
         </div>
       </div>
       <DrawnLine
-        className="location-banner-spiral location-banner-spiral-left"
-        width={660}
-        height={660}
-        strokeWidth={22}
-        shape="spiral"
-        turns={3.5}
-        opacity={0.9}
+        className="location-edge-line location-edge-line-left location-edge-orange"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
       />
       <DrawnLine
-        className="location-banner-spiral location-banner-spiral-right"
-        width={600}
-        height={600}
-        strokeWidth={22}
-        shape="spiral"
-        turns={4}
-        opacity={0.85}
+        className="location-edge-line location-edge-line-right location-edge-blue"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
       />
       <p data-banner-word>This is Mactan</p>
       <div className="location-sticker-field" aria-hidden="true">
@@ -1027,22 +1035,24 @@ function PerksSection({
     >
       <div className="location-sticky-panel location-perks-panel">
         <DrawnLine
-          className="location-perks-spiral location-perks-spiral-left"
-          width={640}
-          height={640}
-          strokeWidth={18}
-          shape="spiral"
-          turns={3.5}
-          opacity={0.75}
+          className="location-edge-line location-edge-line-left location-edge-blue"
+          width={260}
+          height={1780}
+          strokeWidth={52}
+          shape="edge"
+          preserveAspectRatio="xMinYMid slice"
+          start="top 92%"
+          end="bottom 25%"
         />
         <DrawnLine
-          className="location-perks-spiral location-perks-spiral-right"
-          width={640}
-          height={640}
-          strokeWidth={18}
-          shape="spiral"
-          turns={4}
-          opacity={0.7}
+          className="location-edge-line location-edge-line-right location-edge-orange"
+          width={260}
+          height={1780}
+          strokeWidth={52}
+          shape="edge"
+          preserveAspectRatio="xMinYMid slice"
+          start="top 92%"
+          end="bottom 25%"
         />
         <div className="location-perks-copy">
           {/* Not wrapped in an overflow mask: the layered colour offsets sit
@@ -1093,60 +1103,51 @@ function PerksSection({
 }
 
 function GuestProof() {
-  const proofCards = [
-    {
-      icon: <ShieldCheck aria-hidden="true" />,
-      title: "Superhost",
-      copy: "Hosted by Estrella Duran",
-    },
-    {
-      icon: <Plane aria-hidden="true" />,
-      title: "4.75 rating",
-      copy: "Across 40 Airbnb reviews",
-    },
-    {
-      icon: <MapPin aria-hidden="true" />,
-      title: "Area context",
-      copy: "Exact address stays private until booking",
-    },
-  ];
-
   return (
     <section className="location-proof-section">
       <DrawnLine
-        className="location-proof-spiral location-proof-spiral-left"
-        width={620}
-        height={620}
-        strokeWidth={20}
-        shape="spiral"
-        turns={3.5}
-        opacity={0.8}
+        className="location-edge-line location-edge-line-left location-edge-white"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
       />
       <DrawnLine
-        className="location-proof-spiral location-proof-spiral-right"
-        width={560}
-        height={560}
-        strokeWidth={20}
-        shape="spiral"
-        turns={3}
-        opacity={0.7}
+        className="location-edge-line location-edge-line-right location-edge-white"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
+      />
+      <DrawnLine
+        className="location-proof-star"
+        width={400}
+        height={400}
+        strokeWidth={16}
+        shape="star"
+        start="top 76%"
+        end="center 40%"
       />
       <div>
         <p>Real stay.</p>
         <p>Real place.</p>
       </div>
-      <div className="location-proof-cards">
-        {proofCards.map((proof, index) => (
-          <article
-            key={proof.title}
-            style={{ "--proof-rotate": `${[-4, 3, -2][index]}deg` } as CSSProperties}
-          >
-            {proof.icon}
-            <h3>{proof.title}</h3>
-            <p>{proof.copy}</p>
-          </article>
-        ))}
-      </div>
+      <p className="location-proof-meta">
+        <ShieldCheck aria-hidden="true" />
+        Hosted by {property.host} · {property.hostStatus} · {property.rating}{" "}
+        across {property.reviewCount} Airbnb reviews
+      </p>
+      <ReviewCarousel items={reviews} />
+      <p className="location-proof-note">
+        Reviews are reproduced from the official Airbnb listing. Airbnb remains
+        the source for the current rating and the full review history.
+      </p>
       <BookingLink
         className="mt-10 border border-black bg-white text-black"
         label="View verified details on Airbnb"
@@ -1158,17 +1159,27 @@ function GuestProof() {
 function LocationFaq() {
   return (
     <section id="area-note" className="location-faq-section">
+      {/* Drawn while the section is on screen rather than on approach, so the
+          stroke is visibly still being laid down when the reader arrives. */}
       <DrawnLine
-        className="location-faq-loop location-faq-loop-left"
-        width={300}
-        height={620}
-        strokeWidth={25}
+        className="location-edge-line location-edge-line-left location-edge-orange"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
       />
       <DrawnLine
-        className="location-faq-loop location-faq-loop-right"
-        width={300}
-        height={620}
-        strokeWidth={25}
+        className="location-edge-line location-edge-line-right location-edge-blue"
+        width={260}
+        height={1780}
+        strokeWidth={52}
+        shape="edge"
+        preserveAspectRatio="xMinYMid slice"
+        start="top 92%"
+        end="bottom 25%"
       />
       <div className="location-faq-heading">
         <h2>FAQs</h2>

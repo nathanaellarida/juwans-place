@@ -1097,74 +1097,55 @@ a {
   color: var(--location-blue);
 }
 
-/* Spiral decorations -------------------------------------------------- */
+/* Hand-drawn edge strokes ---------------------------------------------
+   One thick, very tall stroke pinned to a section edge. The viewBox is
+   cropped with `slice`, so only the crossing and a couple of strands stay on
+   screen and the rest reads as a much larger drawing running past the page. */
 
-.location-banner-spiral,
-.location-perks-spiral,
-.location-postcard-spiral,
-.location-proof-spiral {
-  width: clamp(15rem, 29vw, 34rem);
-  height: clamp(15rem, 29vw, 34rem);
+.location-edge-line {
+  z-index: 1;
+  top: -12%;
+  width: clamp(6rem, 11vw, 15rem);
+  height: 124%;
+  overflow: hidden;
 }
 
-.location-banner-spiral {
-  z-index: 2;
+.location-edge-line svg {
+  overflow: hidden;
 }
 
-.location-banner-spiral-left {
-  top: -7%;
-  left: -8%;
+.location-edge-line-left {
+  left: 0;
+}
+
+.location-edge-line-right {
+  right: 0;
+  scale: -1 1;
+}
+
+.location-edge-orange {
   color: var(--location-orange);
 }
 
-.location-banner-spiral-right {
-  right: -7%;
-  bottom: -9%;
+.location-edge-blue {
   color: var(--location-blue);
 }
 
-.location-perks-spiral {
-  z-index: 1;
-}
-
-.location-perks-spiral-left {
-  top: -13%;
-  left: -9%;
-  color: var(--location-blue);
-}
-
-.location-perks-spiral-right {
-  right: -10%;
-  bottom: -15%;
-  color: var(--location-orange);
-}
-
-.location-postcard-spiral {
-  z-index: 1;
-}
-
-.location-postcard-spiral-left {
-  top: -11%;
-  left: -8%;
+.location-edge-green {
   color: var(--location-green);
 }
 
-.location-postcard-spiral-right {
-  right: -9%;
-  bottom: -12%;
-  color: var(--location-orange);
-}
-
-.location-proof-spiral-left {
-  top: -9%;
-  left: -8%;
+.location-edge-white {
   color: white;
 }
 
-.location-proof-spiral-right {
-  right: -9%;
-  bottom: -11%;
-  color: var(--location-orange);
+.location-proof-star {
+  z-index: 1;
+  top: 13%;
+  right: 12%;
+  width: clamp(5rem, 9vw, 10rem);
+  height: clamp(5rem, 9vw, 10rem);
+  color: white;
 }
 
 /* Banner stickers ------------------------------------------------------ */
@@ -1422,7 +1403,9 @@ a {
   width: max-content;
   align-items: flex-end;
   gap: clamp(1.5rem, 3vw, 3.25rem);
-  padding-right: 24vw;
+  /* Mirrors the 9vw left inset. The scroll distance is derived from it, so
+     the two must stay in step or the track runs on into empty panel. */
+  padding-right: 9vw;
   will-change: transform;
 }
 
@@ -1507,47 +1490,163 @@ a {
   text-transform: uppercase;
 }
 
-.location-proof-cards {
-  display: grid;
-  max-width: 76rem;
-  margin: clamp(4rem, 8vw, 7rem) auto 0;
-  gap: clamp(1.25rem, 3vw, 3rem);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.location-proof-cards article {
-  min-height: 18rem;
-  rotate: var(--proof-rotate);
-  border: 0.8rem solid white;
-  border-bottom-width: 2.2rem;
-  border-radius: 0.7rem;
-  background: white;
-  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 14%);
-  color: black;
-  padding: 2.6rem 1.5rem 1.5rem;
-  text-align: left;
-}
-
-.location-proof-cards svg {
-  width: 2.3rem;
-  height: 2.3rem;
-  color: var(--location-orange);
-  stroke-width: 1.5;
-}
-
-.location-proof-cards h3 {
-  margin-top: 2.6rem;
-  font-size: clamp(2rem, 3.4vw, 3.5rem);
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  line-height: 0.85;
+.location-proof-meta {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.2rem;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.location-proof-cards p {
-  margin-top: 0.8rem;
-  color: rgb(0 0 0 / 58%);
-  font-size: 0.86rem;
+.location-proof-meta svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 2;
+}
+
+.location-review-carousel {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.location-review-track {
+  display: flex;
+  margin: 0;
+  padding: 1.5rem clamp(0.5rem, 4vw, 4rem) 2.5rem;
+  gap: 1.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.location-review-track::-webkit-scrollbar {
+  display: none;
+}
+
+.location-review-card {
+  display: flex;
+  width: clamp(17rem, 27vw, 24rem);
+  min-height: 17rem;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  rotate: var(--review-rotate);
+  border-radius: 1rem;
+  background: white;
+  padding: clamp(1.5rem, 2.4vw, 2.2rem);
+  box-shadow: 0 1.4rem 3rem rgb(0 0 0 / 18%);
+  color: black;
+  scroll-snap-align: center;
+  text-align: left;
+}
+
+.location-review-card blockquote {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.location-review-card blockquote::before {
+  content: "“";
+}
+
+.location-review-card blockquote::after {
+  content: "”";
+}
+
+.location-review-card cite {
+  display: block;
+  margin-top: 1.6rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.location-review-card cite span {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgb(0 0 0 / 55%);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.location-review-card.is-placeholder {
+  border: 0.14rem dashed rgb(0 0 0 / 28%);
+  background: rgb(255 255 255 / 82%);
+}
+
+.location-review-empty {
+  margin: 0;
+  color: rgb(0 0 0 / 55%);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.location-review-empty code {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.location-review-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.location-review-controls button {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 999px;
+  background: white;
+  color: var(--location-orange);
+  cursor: pointer;
+  transition:
+    background-color 250ms ease,
+    color 250ms ease,
+    opacity 250ms ease,
+    scale 250ms ease;
+}
+
+.location-review-controls button:last-child {
+  background: var(--location-orange);
+  color: white;
+}
+
+.location-review-controls button:hover:not(:disabled) {
+  scale: 1.07;
+}
+
+.location-review-controls button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.location-review-controls svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  stroke-width: 2.4;
+}
+
+.location-proof-note {
+  position: relative;
+  z-index: 2;
+  max-width: 44rem;
+  margin: 2.4rem auto 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 .location-faq-section {
@@ -1578,27 +1677,8 @@ a {
   text-transform: uppercase;
 }
 
-.location-faq-loop {
-  width: 30rem;
-  height: 62rem;
-}
-
 .location-faq-section .faq-accordion {
   --faq-accent: var(--location-orange);
-}
-
-.location-faq-loop-left {
-  top: 17%;
-  left: -27rem;
-  color: var(--location-orange);
-  rotate: -16deg;
-}
-
-.location-faq-loop-right {
-  right: -27rem;
-  bottom: -9%;
-  color: var(--location-blue);
-  rotate: 18deg;
 }
 
 .location-privacy-note {
@@ -1792,8 +1872,7 @@ a {
   }
 
   .location-place-grid,
-  .location-instant-grid,
-  .location-proof-cards {
+  .location-instant-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1838,12 +1917,8 @@ a {
     display: none;
   }
 
-  .location-banner-spiral,
-  .location-perks-spiral,
-  .location-postcard-spiral,
-  .location-proof-spiral {
-    width: 15rem;
-    height: 15rem;
+  .location-edge-line {
+    width: 4.5rem;
   }
 
   .location-camera-heading > span,
@@ -1920,14 +1995,6 @@ a {
     font-size: 5rem;
   }
 
-  .location-proof-cards {
-    max-width: 21rem;
-  }
-
-  .location-proof-cards article {
-    min-height: 16rem;
-  }
-
   .location-faq-section {
     padding-inline: 1.25rem;
   }
@@ -1936,9 +2003,6 @@ a {
     font-size: 5.8rem;
   }
 
-  .location-faq-loop {
-    opacity: 0.42;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

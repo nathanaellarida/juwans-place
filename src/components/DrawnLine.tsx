@@ -16,14 +16,39 @@ type DrawnLineProps = {
   strokeWidth?: number;
   opacity?: number;
   /** Built-in geometry. Ignored when `d` is supplied. */
-  shape?: "ring" | "spiral";
-  /** Turns drawn by the spiral shape. */
-  turns?: number;
+  shape?: ShapeName;
   /** Custom geometry. Overrides `shape`. */
   d?: string;
+  /** Use "slice" variants to make an edge stroke fill and bleed past its box. */
+  preserveAspectRatio?: string;
   start?: string;
   end?: string;
   scrub?: number | boolean;
+};
+
+type ShapeName = "ring" | "edge" | "star";
+
+/**
+ * Loose, hand-drawn geometry. Each preset carries its own viewBox so the
+ * curves keep their proportions regardless of the box they are placed in.
+ * Nothing here is meant to be geometrically exact — the wobble is the point.
+ */
+const shapes: Record<Exclude<ShapeName, "ring">, { d: string; box: string }> = {
+  /**
+   * A single sweeping stroke that wanders far outside its own viewBox and
+   * crosses itself once inside it. Anchored to a section edge and cropped,
+   * only the crossing and a couple of strands stay on screen — the rest reads
+   * as a much larger drawing continuing past the page.
+   */
+  edge: {
+    box: "0 0 260 1780",
+    d: "M 315 -80 C 228 200 95 460 -47 740 C -220 1080 -79 1380 118 1400 C 260 1414 339 1200 276 1000 C 221 826 71 660 76 400 C 79 190 181 60 339 96",
+  },
+  // Five points, deliberately uneven.
+  star: {
+    box: "0 0 400 400",
+    d: "M 198 26 Q 216 92 250 148 Q 314 148 372 156 Q 316 200 264 232 Q 286 294 310 354 Q 250 316 200 274 Q 146 314 88 350 Q 112 288 132 228 Q 78 190 24 146 Q 92 148 152 148 Z",
+  },
 };
 
 const ellipse = (width: number, height: number, strokeWidth: number) => {
@@ -39,36 +64,6 @@ const ellipse = (width: number, height: number, strokeWidth: number) => {
   ].join(" ");
 };
 
-/**
- * Archimedean spiral sampled outwards from the centre, so scrubbing the dash
- * offset reads as a line coiling out across the section.
- */
-const spiral = (
-  width: number,
-  height: number,
-  strokeWidth: number,
-  turns: number,
-) => {
-  const cx = width / 2;
-  const cy = height / 2;
-  const rx = Math.max(0, (width - strokeWidth) / 2);
-  const ry = Math.max(0, (height - strokeWidth) / 2);
-  const steps = Math.round(turns * 44);
-  const points: string[] = [];
-
-  for (let step = 0; step <= steps; step += 1) {
-    const progress = step / steps;
-    const angle = progress * turns * Math.PI * 2;
-    points.push(
-      `${(cx + rx * progress * Math.cos(angle)).toFixed(1)} ${(
-        cy +
-        ry * progress * Math.sin(angle)
-      ).toFixed(1)}`,
-    );
-  }
-
-  return `M ${points.join(" L ")}`;
-};
 
 /**
  * Decorative stroke that draws itself as the surrounding section scrolls.
@@ -82,14 +77,17 @@ export function DrawnLine({
   strokeWidth = 34,
   opacity = 1,
   shape = "ring",
-  turns = 3,
   d,
+  preserveAspectRatio,
   start = motion.drawn.start,
   end = motion.drawn.end,
   scrub = motion.drawn.scrub,
 }: DrawnLineProps) {
   const container = useRef<HTMLSpanElement>(null);
   const path = useRef<SVGPathElement>(null);
+  const preset = shape === "ring" ? null : shapes[shape];
+  const geometry = d ?? preset?.d ?? ellipse(width, height, strokeWidth);
+  const viewBox = preset && !d ? preset.box : `0 0 ${width} ${height}`;
 
   useEffect(() => {
     const line = path.current;
@@ -121,15 +119,15 @@ export function DrawnLine({
 
   return (
     <span ref={container} aria-hidden="true" className={cn("drawn-line", className)}>
-      <svg viewBox={`0 0 ${width} ${height}`} fill="none" focusable="false">
+      <svg
+        viewBox={viewBox}
+        preserveAspectRatio={preserveAspectRatio}
+        fill="none"
+        focusable="false"
+      >
         <path
           ref={path}
-          d={
-            d ??
-            (shape === "spiral"
-              ? spiral(width, height, strokeWidth, turns)
-              : ellipse(width, height, strokeWidth))
-          }
+          d={geometry}
           stroke="currentColor"
           strokeWidth={strokeWidth}
           strokeOpacity={opacity}
