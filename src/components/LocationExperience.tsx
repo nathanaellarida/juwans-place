@@ -1130,12 +1130,14 @@ function GuestProof() {
         <p>Real stay.</p>
         <p>Real place.</p>
       </div>
+      {/* The carousel is pulled up over the heading, so the cards sit on the
+          oversized type rather than clearing it. */}
+      <ReviewCarousel items={reviews} />
       <p className="location-proof-meta">
         <ShieldCheck aria-hidden="true" />
         Hosted by {property.host} · {property.hostStatus} · {property.rating}{" "}
         across {property.reviewCount} Airbnb reviews
       </p>
-      <ReviewCarousel items={reviews} />
       <p className="location-proof-note">
         Reviews are reproduced from the official Airbnb listing. Airbnb remains
         the source for the current rating and the full review history.

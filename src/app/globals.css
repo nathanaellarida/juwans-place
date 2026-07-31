@@ -1498,7 +1498,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 2.2rem;
+  margin-top: 0.5rem;
   font-size: 0.78rem;
   font-weight: 750;
   letter-spacing: 0.05em;
@@ -1514,17 +1514,23 @@ a {
 .location-review-carousel {
   position: relative;
   z-index: 2;
-  margin-top: clamp(3rem, 6vw, 5rem);
+  /* Negative pull lifts the cards onto the oversized heading. */
+  margin-top: clamp(-11rem, -8vw, -3rem);
 }
 
 .location-review-track {
+  --review-inset: clamp(1.25rem, 4vw, 4rem);
   display: flex;
-  margin: 0;
-  padding: 1.5rem clamp(0.5rem, 4vw, 4rem) 2.5rem;
-  gap: 1.5rem;
+  /* Full-bleed: the track runs to the viewport edges so a partially visible
+     card reads as the next one in the carousel rather than a cropped card. */
+  margin: 0 calc(-1 * clamp(1.25rem, 4vw, 4rem));
+  padding: 2rem var(--review-inset) 2.5rem;
+  gap: clamp(1.1rem, 1.8vw, 1.9rem);
   list-style: none;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--review-inset);
   scrollbar-width: none;
 }
 
@@ -1534,26 +1540,26 @@ a {
 
 .location-review-card {
   display: flex;
-  width: clamp(17rem, 27vw, 24rem);
-  min-height: 17rem;
+  width: clamp(17.5rem, 26vw, 25rem);
+  min-height: clamp(16rem, 21vw, 20rem);
   flex: 0 0 auto;
   flex-direction: column;
   justify-content: space-between;
   rotate: var(--review-rotate);
   border-radius: 1rem;
   background: white;
-  padding: clamp(1.5rem, 2.4vw, 2.2rem);
+  padding: clamp(1.6rem, 2.4vw, 2.4rem);
   box-shadow: 0 1.4rem 3rem rgb(0 0 0 / 18%);
   color: black;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   text-align: left;
 }
 
 .location-review-card blockquote {
   margin: 0;
-  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
-  font-weight: 500;
-  line-height: 1.45;
+  font-size: clamp(1rem, 1.25vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .location-review-card blockquote::before {
@@ -1566,8 +1572,8 @@ a {
 
 .location-review-card cite {
   display: block;
-  margin-top: 1.6rem;
-  font-size: 1rem;
+  margin-top: 1.7rem;
+  font-size: clamp(1rem, 1.15vw, 1.15rem);
   font-style: normal;
   font-weight: 850;
 }
@@ -1582,7 +1588,7 @@ a {
 
 .location-review-card.is-placeholder {
   border: 0.14rem dashed rgb(0 0 0 / 28%);
-  background: rgb(255 255 255 / 82%);
+  background: rgb(255 255 255 / 96%);
 }
 
 .location-review-empty {
