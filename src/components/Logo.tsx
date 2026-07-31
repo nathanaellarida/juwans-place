@@ -18,20 +18,21 @@ type LogoProps = {
 /**
  * The Juwan's Place monogram.
  *
- * `public/brand/juwans-place-logo.svg` is the authored file, but it is an SVG
- * wrapper around a bitmap that is carried twice — once as artwork and once as
- * the luminance mask that gives it transparency — so it weighs 97KB. The PNG
- * beside it is the same picture as a single RGBA image at a quarter of that,
- * and next/image can serve it as avif or webp.
+ * A single vector path, so it stays crisp from the 26px header lockup up to
+ * whatever a phone's home screen asks for. Served as a file rather than
+ * inlined, so one 6KB request covers every page instead of the path data
+ * riding along in the markup of each one. The optimiser is skipped because it
+ * refuses SVG, and there is nothing for it to do here anyway.
  */
 export function Logo({ className, size, mono = false, alt }: LogoProps) {
   return (
     <Image
-      src="/brand/juwans-place-logo.png"
+      src="/brand/juwans-place-logo.svg"
       alt={alt ?? ""}
       aria-hidden={alt ? undefined : "true"}
       width={size}
       height={size}
+      unoptimized
       className={cn(
         "select-none object-contain",
         // brightness-0 flattens the gold to black; invert lifts it to white,
