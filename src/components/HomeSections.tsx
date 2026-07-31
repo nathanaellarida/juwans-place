@@ -81,7 +81,7 @@ function PropertyStory() {
               the quiet parts between Cebu plans.
             </p>
             <Link
-              href="/the-home"
+              href="/the-house"
               className="mt-9 inline-flex min-h-11 items-center rounded-lg bg-[#e45d3a] px-6 py-3 text-sm font-bold uppercase text-white transition-transform hover:rotate-2"
             >
               Walk through the home

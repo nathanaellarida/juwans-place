@@ -22,8 +22,8 @@ export default function AccessibilityPage() {
     >
       <h2>Website experience</h2>
       <p>
-        Core navigation, the menu, gallery, lightbox, FAQ, links, and buttons
-        are keyboard accessible. Focus indicators remain visible, headings
+        Core navigation, the menu, the FAQ accordions, links, and buttons are
+        keyboard accessible. Focus indicators remain visible, headings
         describe the page structure, and controls have accessible names and
         practical touch targets.
       </p>

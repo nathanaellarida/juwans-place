@@ -65,8 +65,7 @@ arrival instructions on Airbnb.
 The main routes are:
 
 - `/` — landing page
-- `/the-home` — rooms, amenities, and virtual tour
-- `/gallery` — categorized image browser and lightbox
+- `/the-house` — rooms, amenities, and virtual tour
 - `/location` — general Lapu-Lapu and Mactan context
 - `/house-rules` — stay expectations
 - `/faq` — practical guest questions

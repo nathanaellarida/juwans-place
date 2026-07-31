@@ -27,10 +27,11 @@ export const siteConfig = {
   matterportUrl: optionalUrl(process.env.NEXT_PUBLIC_MATTERPORT_URL),
   areaMapUrl: optionalUrl(process.env.NEXT_PUBLIC_AREA_MAP_URL),
   contactUrl: optionalUrl(process.env.NEXT_PUBLIC_CONTACT_URL),
+  // "The House" rather than "The Home": next to the landing page's "Home" the
+  // two labels were indistinguishable at a glance.
   navigation: [
     { label: "Home", href: "/" },
-    { label: "The Home", href: "/the-home" },
-    { label: "Gallery", href: "/gallery" },
+    { label: "The House", href: "/the-house" },
     { label: "3D Tour", href: "/#tour" },
     { label: "Location", href: "/location" },
     { label: "House Rules", href: "/house-rules" },
@@ -38,16 +39,15 @@ export const siteConfig = {
   ] satisfies NavigationItem[],
   footerNavigation: [
     { label: "Home", href: "/" },
-    { label: "The Home", href: "/the-home" },
-    { label: "Gallery", href: "/gallery" },
+    { label: "The House", href: "/the-house" },
     { label: "Location", href: "/location" },
     { label: "House Rules", href: "/house-rules" },
     { label: "FAQ", href: "/faq" },
   ] satisfies NavigationItem[],
   quickLinks: [
     { label: "Book on Airbnb", href: "#book" },
-    { label: "Airport Pickup", href: "/the-home#services" },
-    { label: "Transportation", href: "/the-home#services" },
+    { label: "Airport Pickup", href: "/the-house#services" },
+    { label: "Transportation", href: "/the-house#services" },
     { label: "Pet-Friendly Notes", href: "/house-rules#pets" },
     { label: "3D Tour", href: "/#tour" },
     { label: "Contact", href: "#contact" },

@@ -22,14 +22,12 @@
 | Scroll-driven location scenes | `src/components/LocationExperience.tsx` |
 | Proximity-based letter-pop interaction | `src/components/InteractiveLetters.tsx` |
 | Image slot / placeholder | `src/components/ImagePanel.tsx` |
-| Gallery filters and lightbox | `src/components/GalleryClient.tsx` |
 | 3D tour gate and iframe | `src/components/VirtualTour.tsx` |
 | Accessible FAQ accordion | `src/components/FaqAccordion.tsx` |
 | Floating contact/tour/top controls | `src/components/FloatingControls.tsx` |
 | Footer | `src/components/Footer.tsx` |
 | Homepage | `src/app/page.tsx` |
-| Detailed property route | `src/app/the-home/page.tsx` |
-| Gallery route | `src/app/gallery/page.tsx` |
+| Detailed property route | `src/app/the-house/page.tsx` |
 | Location route entrypoint | `src/app/location/page.tsx` |
 | Rules route | `src/app/house-rules/page.tsx` |
 | FAQ route | `src/app/faq/page.tsx` |

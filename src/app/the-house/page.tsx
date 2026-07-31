@@ -9,7 +9,7 @@ import { amenities } from "@/data/amenities";
 import { property } from "@/data/property";
 
 export const metadata: Metadata = {
-  title: "The Home",
+  title: "The House",
   description:
     "Explore the bedrooms, shared spaces, amenities, and practical services at Juwan’s Place.",
 };

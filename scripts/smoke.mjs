@@ -10,8 +10,7 @@ const baseUrl = `http://127.0.0.1:${port}`;
 const captureDirectory = path.resolve("implementation-captures");
 const routes = [
   "/",
-  "/the-home",
-  "/gallery",
+  "/the-house",
   "/location",
   "/house-rules",
   "/faq",

@@ -80,7 +80,8 @@ Use only properly licensed destination images. Do not hotlink.
 1. The preferred filename wins when present.
 2. Otherwise, the first image in that category fills the slot.
 3. Otherwise, the designed spatial placeholder is shown.
-4. Every additional approved property image appears in the complete gallery.
+4. Additional approved images stay available to any slot that names their
+   category.
 
 ## Exclusion and privacy
 

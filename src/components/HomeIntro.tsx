@@ -37,7 +37,7 @@ export function HomeIntro() {
             convenience.
           </p>
           <Link
-            href="/the-home"
+            href="/the-house"
             className="mt-8 inline-flex min-h-11 items-center justify-center rounded-[0.55rem] bg-black px-6 py-3 text-sm font-bold uppercase text-white transition-transform hover:rotate-2"
           >
             View the home

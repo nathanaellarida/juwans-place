@@ -22,7 +22,3 @@ export const imageForSlot = (
 
   return images[0] ?? null;
 };
-
-export const galleryImages = imageManifest.filter(
-  (image) => !image.category.includes("/_"),
-);
