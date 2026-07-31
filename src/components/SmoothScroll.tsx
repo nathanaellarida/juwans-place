@@ -15,6 +15,11 @@ export function SmoothScroll() {
       duration: motion.lenis.duration,
       smoothWheel: true,
       anchors: true,
+      // Hands a gesture to a nested scroller only when that scroller can
+      // actually move on the gesture's axis. The review carousel scrolls
+      // horizontally, so sideways gestures pan the row while vertical ones
+      // stay with Lenis and keep the page smooth under the cursor.
+      allowNestedScroll: true,
     });
 
     const update = (time: number) => lenis.raf(time * 1000);

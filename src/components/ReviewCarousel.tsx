@@ -45,9 +45,12 @@ export function ReviewCarousel({ items }: { items: Review[] }) {
 
   return (
     <div className="location-review-carousel">
-      {/* data-lenis-prevent keeps the smooth-scroll wrapper from swallowing
-          horizontal wheel and trackpad gestures inside the track. */}
-      <ul ref={track} data-lenis-prevent className="location-review-track">
+      {/* No data-lenis-prevent here. Opting the track out of Lenis entirely
+          also dropped vertical scrolling back to the native path whenever the
+          cursor sat over a card, which fought the smooth wrapper mid-animation
+          and read as a stutter. Lenis's allowNestedScroll handles the split by
+          gesture direction instead. */}
+      <ul ref={track} className="location-review-track">
         {items.map((review, index) => (
           <li
             key={review.author || `review-${index}`}
