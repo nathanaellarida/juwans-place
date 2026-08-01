@@ -18,9 +18,21 @@ const LAYER_DELAY_MS = motion.route.layerDelay * 1000;
 /** Last layer starts last, so the whole sweep is one delay stack plus a cross. */
 const SWEEP_MS = DURATION_MS + (layers.length - 1) * LAYER_DELAY_MS;
 
-/** If a route somehow never resolves, the visitor must not be left staring at
- *  a closed curtain. */
-const FAILSAFE_MS = 2500;
+/**
+ * Last resort only, for a route that never resolves at all. The curtain is
+ * supposed to open when the new page arrives; this is the escape hatch if that
+ * never happens.
+ *
+ * It used to be 2500ms, which is inside the range a real phone takes to fetch a
+ * route. Measured against a 500ms-latency connection, pages arrived at 6.6s and
+ * 6.9s while this fired at 4.0s — so the curtain swept open over the page the
+ * visitor was leaving, and the new one then appeared with no cover at all. That
+ * is the transition "only closing": the opening had already been spent.
+ *
+ * Long enough now that a slow network cannot trip it. Links are prefetched, so
+ * a normal navigation resolves long before either figure.
+ */
+const FAILSAFE_MS = 12000;
 
 export function RouteTransition() {
   const router = useRouter();
