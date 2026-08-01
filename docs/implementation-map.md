@@ -22,9 +22,9 @@
 | Scroll-driven location scenes | `src/components/LocationExperience.tsx` |
 | Proximity-based letter-pop interaction | `src/components/InteractiveLetters.tsx` |
 | Image slot / placeholder | `src/components/ImagePanel.tsx` |
-| 3D tour gate and iframe | `src/components/VirtualTour.tsx` |
+| 3D tour gate and coming-soon state | `src/components/VirtualTour.tsx` |
 | Accessible FAQ accordion | `src/components/FaqAccordion.tsx` |
-| Floating contact/tour/top controls | `src/components/FloatingControls.tsx` |
+| Floating telephone/tour/top controls | `src/components/FloatingControls.tsx` |
 | Footer | `src/components/Footer.tsx` |
 | Homepage | `src/app/page.tsx` |
 | Detailed property route | `src/app/the-house/page.tsx` |
@@ -40,7 +40,7 @@
 
 | Variable | Missing state | Configured state |
 | --- | --- | --- |
-| `NEXT_PUBLIC_AIRBNB_URL` | clearly disabled “Airbnb link coming soon” controls | safe new-tab Airbnb controls |
+| `NEXT_PUBLIC_AIRBNB_URL` | approved listing default | safe new-tab Airbnb controls |
 | `NEXT_PUBLIC_MATTERPORT_URL` | premium “3D tour coming soon” panel | near-viewport lazy iframe and external fallback |
-| `NEXT_PUBLIC_AREA_MAP_URL` | “Area map coming soon” | external approved area-map control |
-| `NEXT_PUBLIC_CONTACT_URL` | floating contact control hidden; footer says coming soon | floating and footer external contact controls |
+| `NEXT_PUBLIC_AREA_MAP_URL` | approved public listing default | external Google Maps control on `/location` |
+| `NEXT_PUBLIC_CONTACT_URL` | approved telephone default | floating and footer call controls |

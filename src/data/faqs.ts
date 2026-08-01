@@ -40,13 +40,13 @@ export const faqs: Faq[] = [
       "Exact check-in and check-out details are confirmed through Airbnb. The website does not publish or override the live booking terms.",
   },
   {
-    question: "Where is the exact address?",
+    question: "Can I open Juwan’s Place in Google Maps?",
     answer:
-      "For guest and property safety, the exact address is shared only through the confirmed Airbnb booking process.",
+      "Yes. Use the Google Maps link on the Location page for public route planning. Exact check-in, access, and arrival instructions are still provided only through a confirmed Airbnb booking.",
   },
   {
     question: "Is the 3D tour available?",
     answer:
-      "The interactive tour is being prepared. The website will clearly show when a real room-by-room tour becomes available.",
+      "The Matterport tour is coming soon. The website will clearly show when the real room-by-room tour becomes available.",
   },
 ];

@@ -400,9 +400,9 @@ function ReviewsSection() {
             ))}
           </div>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-black/55">
-            This website does not scrape or reproduce guest testimonials.
-            Airbnb remains the source for current ratings and verified review
-            content.
+            Selected verified guest reviews are reproduced on the Location
+            page. Airbnb remains the source for current ratings and the full
+            review history.
           </p>
         </div>
       </Reveal>

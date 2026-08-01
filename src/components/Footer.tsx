@@ -68,10 +68,8 @@ export function Footer() {
                   <a
                     className="transition-colors hover:text-white"
                     href={siteConfig.contactUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
-                    Contact
+                    Call {siteConfig.contactDisplay}
                   </a>
                 ) : (
                   <span className="text-white/40">Contact coming soon</span>

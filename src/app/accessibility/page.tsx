@@ -33,11 +33,13 @@ export default function AccessibilityPage() {
         scrolling, parallax, scroll scrubbing, and non-essential movement are
         skipped or minimized.
       </p>
-      <h2>Images and embeds</h2>
+      <h2>Images and external links</h2>
       <p>
         Property images use descriptive alternative text. Decorative shapes are
-        hidden from assistive technology. A configured 3D tour has an accessible
-        iframe title and an external fallback link.
+        hidden from assistive technology. Airbnb and Google Maps links have
+        clear accessible names, the telephone control identifies the number it
+        calls, and a future configured 3D tour has an accessible iframe title
+        and external fallback link.
       </p>
       <h2>Physical property information</h2>
       <p>

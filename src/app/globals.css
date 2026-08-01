@@ -1753,9 +1753,40 @@ button {
   --faq-accent: var(--location-orange);
 }
 
+.location-map-link {
+  display: flex;
+  width: fit-content;
+  min-height: 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 3rem auto 0;
+  border-radius: 0.65rem;
+  background: var(--location-orange);
+  padding: 0.95rem 1.25rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition:
+    background-color 250ms ease,
+    transform 250ms ease;
+}
+
+.location-map-link:hover {
+  transform: rotate(-1deg);
+  background: black;
+}
+
+.location-map-link svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
 .location-privacy-note {
   max-width: 48rem;
-  margin: 3rem auto 0;
+  margin: 1.5rem auto 0;
   color: rgb(0 0 0 / 55%);
   font-size: 0.82rem;
   line-height: 1.5;

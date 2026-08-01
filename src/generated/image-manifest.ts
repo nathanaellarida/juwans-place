@@ -8,4 +8,101 @@ export type ImageManifestItem = {
   fileName: string;
 };
 
-export const imageManifest: ImageManifestItem[] = [];
+export const imageManifest: ImageManifestItem[] = [
+  {
+    "src": "/images/lapu-lapu/airport/airport-area.jpg",
+    "category": "lapu-lapu/airport",
+    "caption": "Airport Area",
+    "fileName": "airport-area.jpg"
+  },
+  {
+    "src": "/images/lapu-lapu/city/lapu-lapu-city.jpg",
+    "category": "lapu-lapu/city",
+    "caption": "Lapu Lapu City",
+    "fileName": "lapu-lapu-city.jpg"
+  },
+  {
+    "src": "/images/lapu-lapu/coast/mactan-coast.jpg",
+    "category": "lapu-lapu/coast",
+    "caption": "Mactan Coast",
+    "fileName": "mactan-coast.jpg"
+  },
+  {
+    "src": "/images/lapu-lapu/food/local-food.jpg",
+    "category": "lapu-lapu/food",
+    "caption": "Local Food",
+    "fileName": "local-food.jpg"
+  },
+  {
+    "src": "/images/lapu-lapu/monument/lapu-lapu-monument.jpg",
+    "category": "lapu-lapu/monument",
+    "caption": "Lapu Lapu Monument",
+    "fileName": "lapu-lapu-monument.jpg"
+  },
+  {
+    "src": "/images/lapu-lapu/shrine/mactan-shrine.jpg",
+    "category": "lapu-lapu/shrine",
+    "caption": "Mactan Shrine",
+    "fileName": "mactan-shrine.jpg"
+  },
+  {
+    "src": "/images/property/bathrooms/upstairs-bathtub.jpg",
+    "category": "property/bathrooms",
+    "caption": "Upstairs Bathtub",
+    "fileName": "upstairs-bathtub.jpg"
+  },
+  {
+    "src": "/images/property/bedrooms/blue-bedroom.jpg",
+    "category": "property/bedrooms",
+    "caption": "Blue Bedroom",
+    "fileName": "blue-bedroom.jpg"
+  },
+  {
+    "src": "/images/property/bedrooms/pink-bedroom.jpg",
+    "category": "property/bedrooms",
+    "caption": "Pink Bedroom",
+    "fileName": "pink-bedroom.jpg"
+  },
+  {
+    "src": "/images/property/bedrooms/yellow-bedroom.jpg",
+    "category": "property/bedrooms",
+    "caption": "Yellow Bedroom",
+    "fileName": "yellow-bedroom.jpg"
+  },
+  {
+    "src": "/images/property/exterior/exterior-main.jpg",
+    "category": "property/exterior",
+    "caption": "Exterior Main",
+    "fileName": "exterior-main.jpg"
+  },
+  {
+    "src": "/images/property/exterior/home-exterior.jpg",
+    "category": "property/exterior",
+    "caption": "Home Exterior",
+    "fileName": "home-exterior.jpg"
+  },
+  {
+    "src": "/images/property/fitness/stationary-bike.jpg",
+    "category": "property/fitness",
+    "caption": "Stationary Bike",
+    "fileName": "stationary-bike.jpg"
+  },
+  {
+    "src": "/images/property/hero/juwans-place-hero.jpg",
+    "category": "property/hero",
+    "caption": "Juwans Place Hero",
+    "fileName": "juwans-place-hero.jpg"
+  },
+  {
+    "src": "/images/property/kitchen/kitchen-main.jpg",
+    "category": "property/kitchen",
+    "caption": "Kitchen Main",
+    "fileName": "kitchen-main.jpg"
+  },
+  {
+    "src": "/images/property/living/living-room-main.jpg",
+    "category": "property/living",
+    "caption": "Living Room Main",
+    "fileName": "living-room-main.jpg"
+  }
+];

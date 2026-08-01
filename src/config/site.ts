@@ -3,19 +3,26 @@ export type NavigationItem = {
   href: string;
 };
 
-const optionalUrl = (value: string | undefined) => {
+const optionalUrl = (
+  value: string | undefined,
+  allowedProtocols: ReadonlyArray<string> = ["https:", "http:"],
+) => {
   const candidate = value?.trim();
   if (!candidate) return null;
 
   try {
     const parsed = new URL(candidate);
-    return parsed.protocol === "https:" || parsed.protocol === "http:"
-      ? parsed.toString()
-      : null;
+    return allowedProtocols.includes(parsed.protocol) ? parsed.toString() : null;
   } catch {
     return null;
   }
 };
+
+const defaults = {
+  airbnbUrl: "https://www.airbnb.com/rooms/27705702",
+  areaMapUrl: "https://maps.app.goo.gl/2exe4A7Uad8qCo5f9",
+  contactUrl: "tel:+639099493593",
+} as const;
 
 export const siteConfig = {
   name: "Juwan’s Place",
@@ -23,10 +30,18 @@ export const siteConfig = {
   location: "Lapu-Lapu City, Central Visayas, Philippines",
   description:
     "A welcoming three-bedroom entire home for families, friends, tourists, and working travelers exploring Mactan and Cebu.",
-  airbnbUrl: optionalUrl(process.env.NEXT_PUBLIC_AIRBNB_URL),
+  airbnbUrl: optionalUrl(
+    process.env.NEXT_PUBLIC_AIRBNB_URL || defaults.airbnbUrl,
+  ),
   matterportUrl: optionalUrl(process.env.NEXT_PUBLIC_MATTERPORT_URL),
-  areaMapUrl: optionalUrl(process.env.NEXT_PUBLIC_AREA_MAP_URL),
-  contactUrl: optionalUrl(process.env.NEXT_PUBLIC_CONTACT_URL),
+  areaMapUrl: optionalUrl(
+    process.env.NEXT_PUBLIC_AREA_MAP_URL || defaults.areaMapUrl,
+  ),
+  contactUrl: optionalUrl(
+    process.env.NEXT_PUBLIC_CONTACT_URL || defaults.contactUrl,
+    ["https:", "http:", "tel:"],
+  ),
+  contactDisplay: "0909 949 3593",
   // "The House" rather than "The Home": next to the landing page's "Home" the
   // two labels were indistinguishable at a glance.
   navigation: [

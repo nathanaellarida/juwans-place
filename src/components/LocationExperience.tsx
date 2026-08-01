@@ -22,6 +22,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
 import { ReviewCarousel } from "@/components/ReviewCarousel";
+import { siteConfig } from "@/config/site";
 import { faqs } from "@/data/faqs";
 import { places } from "@/data/places";
 import { property } from "@/data/property";
@@ -1135,10 +1136,22 @@ function LocationFaq() {
         <p>Location questions? Here is the honest version.</p>
       </div>
       <FaqAccordion items={faqs.filter((_, index) => [1, 2, 5, 6, 7].includes(index))} initialOpen={null} />
+      {siteConfig.areaMapUrl ? (
+        <a
+          className="location-map-link"
+          href={siteConfig.areaMapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MapPin aria-hidden="true" />
+          Open Juwan’s Place in Google Maps
+          <ArrowUpRight aria-hidden="true" />
+        </a>
+      ) : null}
       <p className="location-privacy-note">
-        Public location guidance is intentionally area-level. The home’s exact
-        address, street, lot, subdivision, and access details are shared only
-        through the confirmed Airbnb booking process.
+        The public Google Maps listing is provided for route planning. Exact
+        check-in, access, lock, and arrival instructions are shared only through
+        the confirmed Airbnb booking process.
       </p>
     </section>
   );

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowUp, MessageCircle, Orbit } from "lucide-react";
+import { ArrowUp, Orbit, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { prefersReducedMotion } from "@/lib/motion";
 
@@ -41,12 +41,11 @@ export function FloatingControls() {
         {siteConfig.contactUrl ? (
           <a
             href={siteConfig.contactUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="floating-control bg-[#e45d3a] text-white"
-            aria-label="Contact Juwan’s Place"
+            aria-label={`Call Juwan’s Place at ${siteConfig.contactDisplay}`}
+            title={`Call ${siteConfig.contactDisplay}`}
           >
-            <MessageCircle aria-hidden="true" size={22} />
+            <Phone aria-hidden="true" size={21} />
           </a>
         ) : null}
         <Link

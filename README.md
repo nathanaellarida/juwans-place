@@ -28,15 +28,15 @@ Open `http://localhost:3000`.
 
 ## Environment variables
 
-All integrations are optional. Missing values render honest, non-clickable
-fallbacks instead of guessed links.
+The approved public links below are configured as safe defaults and may be
+overridden per deployment with environment variables.
 
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_AIRBNB_URL` | Official Juwan's Place Airbnb listing |
-| `NEXT_PUBLIC_MATTERPORT_URL` | Matterport showcase URL for the virtual tour |
-| `NEXT_PUBLIC_AREA_MAP_URL` | General-area map URL; do not use a precise address pin |
-| `NEXT_PUBLIC_CONTACT_URL` | Optional contact link, such as the host's approved WhatsApp URL |
+| `NEXT_PUBLIC_MATTERPORT_URL` | Future Matterport showcase URL; empty keeps the “coming soon” panel |
+| `NEXT_PUBLIC_AREA_MAP_URL` | Host-provided public Juwan's Place Google Maps listing |
+| `NEXT_PUBLIC_CONTACT_URL` | Approved telephone link for `0909 949 3593` |
 
 Reservations and payments must continue through Airbnb only. Do not add direct
 checkout, prices, payment collection, or a guessed listing URL.
@@ -90,8 +90,8 @@ screenshots to `implementation-captures/`.
 1. Import this repository into Vercel.
 2. Use the detected Next.js settings.
 3. Add only the approved environment variables listed above.
-4. Deploy, then verify the Airbnb, Matterport, area map, and contact links in the
-   production environment.
+4. Deploy, then verify the Airbnb, Matterport state, Google Maps, and telephone
+   links in the production environment.
 5. Add the production domain to the Airbnb listing or other trusted host
    profiles so guests can confirm the site's legitimacy.
 

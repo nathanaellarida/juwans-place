@@ -28,16 +28,18 @@ export default function PrivacyPage() {
       </p>
       <h2>External services</h2>
       <p>
-        Booking links open Airbnb in a new tab. An approved area map,
-        Matterport tour, or contact link is loaded only when the corresponding
-        public environment variable is configured.
+        Booking links open Airbnb in a new tab, the location page links to the
+        public Juwan’s Place listing on Google Maps, and the contact control
+        opens the device’s telephone function. A Matterport tour will be
+        embedded only after its approved public URL is configured. This website
+        does not receive reservation, mapping, or call data from those links.
       </p>
       <h2>Property privacy</h2>
       <p>
-        The public website does not publish the exact street, block, lot,
-        subdivision, access instructions, locks, or private documents. The
-        exact address is shared only through the confirmed Airbnb booking
-        process.
+        The website may link to the host-provided public Google Maps listing,
+        but it does not publish private check-in instructions, lock details,
+        access codes, or documents. Those details are shared only through the
+        confirmed Airbnb booking process.
       </p>
       <h2>Photography</h2>
       <p>
