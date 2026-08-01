@@ -20,29 +20,51 @@ export function InteractiveLetters({
     const letters = [
       ...element.querySelectorAll<HTMLElement>("[data-pop-letter]"),
     ];
-    const update = (event: PointerEvent) => {
-      letters.forEach((letter) => {
+    let frame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    // One pass per painted frame, reads strictly before writes. The previous
+    // shape measured each letter after styling the one before it, so every
+    // letter forced its own reflow, on every pointermove — and pointer events
+    // arrive faster than frames. Styles set between paints were never visible,
+    // so the last position before each frame produces identical pixels.
+    const apply = () => {
+      frame = 0;
+      const centers = letters.map((letter) => {
         const rect = letter.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const distance = Math.hypot(
-          event.clientX - centerX,
-          event.clientY - centerY,
-        );
+        return {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+        };
+      });
+      letters.forEach((letter, index) => {
+        const center = centers[index];
+        const distance = Math.hypot(pointerX - center.x, pointerY - center.y);
         const strength = Math.max(0, 1 - distance / 150);
         letter.style.setProperty("--pop", strength.toFixed(3));
         letter.style.setProperty(
           "--pop-direction",
-          event.clientX < centerX ? "-1" : "1",
+          pointerX < center.x ? "-1" : "1",
         );
       });
     };
-    const clear = () =>
+    const update = (event: PointerEvent) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!frame) frame = requestAnimationFrame(apply);
+    };
+    const clear = () => {
+      // A pending frame would re-pop the letters after the pointer has left.
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
       letters.forEach((letter) => letter.style.setProperty("--pop", "0"));
+    };
 
     element.addEventListener("pointermove", update);
     element.addEventListener("pointerleave", clear);
     return () => {
+      if (frame) cancelAnimationFrame(frame);
       element.removeEventListener("pointermove", update);
       element.removeEventListener("pointerleave", clear);
     };

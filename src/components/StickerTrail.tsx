@@ -125,11 +125,33 @@ export function StickerTrail({ className }: StickerTrailProps) {
       drop(x, y);
     };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
+    // The cursor can only be over the hero while the hero is on screen, so the
+    // window listener has nothing to do once it scrolls away — every move
+    // would just measure the container to conclude the pointer is outside it.
+    // Attach it only while the hero intersects the viewport.
+    let attached = false;
+    const attach = () => {
+      if (attached) return;
+      attached = true;
+      window.addEventListener("pointermove", onMove, { passive: true });
+    };
+    const detach = () => {
+      if (!attached) return;
+      attached = false;
+      window.removeEventListener("pointermove", onMove);
+      // Re-seed on the next entry, exactly as leaving the panel does.
+      tracking = false;
+    };
+    const visibility = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) attach();
+      else detach();
+    });
+    visibility.observe(root);
     window.addEventListener("resize", measure);
 
     return () => {
-      window.removeEventListener("pointermove", onMove);
+      visibility.disconnect();
+      detach();
       window.removeEventListener("resize", measure);
       gsap.killTweensOf(nodes);
       gsap.set(nodes, { clearProps: "all" });
