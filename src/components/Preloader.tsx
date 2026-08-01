@@ -181,7 +181,11 @@ export function Preloader() {
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div ref={logo} className="w-[min(58vw,25rem)] opacity-0">
+        {/* text-center, because the wordmark is an inline-flex box: this
+            wrapper is centred but its own width is wider than the lockup, so
+            without it the wordmark aligns to the wrapper's left edge and the
+            whole logo sits left of centre. */}
+        <div ref={logo} className="w-[min(58vw,25rem)] text-center opacity-0">
           <Wordmark />
         </div>
       </div>
