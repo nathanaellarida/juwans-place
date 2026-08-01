@@ -112,6 +112,12 @@ export const imageManifest: ImageManifestItem[] = [
     "fileName": "yellow-bedroom.jpg"
   },
   {
+    "src": "/images/property/details/home-detail.jpg",
+    "category": "property/details",
+    "caption": "Home Detail",
+    "fileName": "home-detail.jpg"
+  },
+  {
     "src": "/images/property/exterior/exterior-main.jpg",
     "category": "property/exterior",
     "caption": "Exterior Main",
