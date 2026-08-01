@@ -116,55 +116,62 @@ button {
   box-shadow: 0 8px 30px rgb(0 0 0 / 22%);
 }
 
-.button-roll {
-  position: relative;
-  text-transform: uppercase;
-}
+/* Layered for the same reason the anchor rule above is. These set `display` on
+   their span children, and unlayered that beat every utility whatever its
+   specificity — so hiding a label on a phone with `max-md:hidden` did nothing
+   and the text was merely clipped by the button's own overflow. Inside a layer,
+   a utility on the span wins and the roll still works everywhere else. */
+@layer components {
+  .button-roll {
+    position: relative;
+    text-transform: uppercase;
+  }
 
-.button-roll > span {
-  display: block;
-  transition: translate 450ms cubic-bezier(0.22, 1, 0.36, 1);
-}
+  .button-roll > span {
+    display: block;
+    transition: translate 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-.button-roll > span + span {
-  position: absolute;
-  translate: 0 150%;
-}
+  .button-roll > span + span {
+    position: absolute;
+    translate: 0 150%;
+  }
 
-.button-roll:hover > span:first-of-type {
-  translate: 0 -160%;
-}
+  .button-roll:hover > span:first-of-type {
+    translate: 0 -160%;
+  }
 
-.button-roll:hover > span + span {
-  translate: 0 0;
-}
+  .button-roll:hover > span + span {
+    translate: 0 0;
+  }
 
-.menu-roll {
-  position: relative;
-  height: 1.05em;
-  contain: paint;
-  overflow: hidden;
-}
+  .menu-roll {
+    position: relative;
+    height: 1.05em;
+    contain: paint;
+    overflow: hidden;
+  }
 
-.menu-roll > span {
-  display: block;
-  transition: translate 480ms cubic-bezier(0.22, 1, 0.36, 1);
-}
+  .menu-roll > span {
+    display: block;
+    transition: translate 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-.menu-roll > span + span {
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--gold);
-  translate: 0 115%;
-}
+  .menu-roll > span + span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--gold);
+    translate: 0 115%;
+  }
 
-.menu-roll:hover > span:first-child {
-  translate: 0 -115%;
-}
+  .menu-roll:hover > span:first-child {
+    translate: 0 -115%;
+  }
 
-.menu-roll:hover > span + span {
-  translate: 0;
+  .menu-roll:hover > span + span {
+    translate: 0;
+  }
 }
 
 .section-pad {

@@ -28,6 +28,19 @@ export const motion = {
     closeDuration: 0.48,
     itemDuration: 0.32,
     itemStagger: 0.07,
+    /**
+     * A phone gets its own, shorter set. There the panel is the whole screen
+     * rather than a card in the corner, so the same 0.8s reads as waiting
+     * rather than as flourish — measured at 945ms from tap to open, of which
+     * 300ms is the panel mounting before any of it starts. The links also
+     * finished a full second after the tap once their delay and stagger were
+     * added up.
+     */
+    openDurationCompact: 0.42,
+    closeDurationCompact: 0.26,
+    itemDurationCompact: 0.22,
+    itemStaggerCompact: 0.03,
+    itemDelayCompact: 0.04,
   },
   route: {
     // Each half of the curtain crosses in this long, and the three colours are

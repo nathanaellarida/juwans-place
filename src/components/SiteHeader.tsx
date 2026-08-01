@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { CalendarCheck, Menu as MenuIcon } from "lucide-react";
 import { BookingLink } from "@/components/BookingLink";
 import { MenuOverlay } from "@/components/MenuOverlay";
 import { Wordmark } from "@/components/Wordmark";
@@ -15,12 +16,19 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
-          className="button-roll pointer-events-auto flex min-h-11 items-center gap-2 overflow-hidden rounded-[0.6rem] bg-black px-5 py-3 text-sm font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d5a82e] max-md:h-12 max-md:min-h-12 max-md:px-4 max-md:text-xs"
+          // Below md the two word buttons and the wordmark left 31px between
+          // them on a 360px screen, which read as crowded even though nothing
+          // actually touched. Each becomes its own icon there and the lockup
+          // gets the middle of the bar to itself.
+          className="button-roll pointer-events-auto flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-[0.6rem] bg-black px-5 py-3 text-sm font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d5a82e] max-md:size-12 max-md:min-h-12 max-md:gap-0 max-md:px-0"
           aria-label="Open menu"
           aria-expanded={menuOpen}
         >
-          <span>Menu</span>
-          <span aria-hidden="true">Menu</span>
+          <span className="max-md:hidden">Menu</span>
+          <span aria-hidden="true" className="max-md:hidden">
+            Menu
+          </span>
+          <MenuIcon aria-hidden="true" size={22} className="md:hidden" />
         </button>
 
         <Link
@@ -34,9 +42,10 @@ export function SiteHeader() {
         </Link>
 
         <BookingLink
-          className="button-roll pointer-events-auto max-w-[11rem] overflow-hidden bg-black text-white max-md:max-w-[8.5rem] max-md:px-3 max-md:text-[0.66rem]"
+          className="button-roll pointer-events-auto max-w-[11rem] overflow-hidden bg-black text-white max-md:size-12 max-md:max-w-none max-md:px-0"
           label="Book on Airbnb"
           missingLabel="Airbnb soon"
+          compactIcon={<CalendarCheck aria-hidden="true" size={22} />}
         />
       </header>
 

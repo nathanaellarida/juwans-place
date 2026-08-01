@@ -34,11 +34,14 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
       return;
     }
 
-    gsap.to(backdrop.current, { opacity: 0, duration: 0.22 });
+    const compact = window.matchMedia("(max-width: 767px)").matches;
+    gsap.to(backdrop.current, { opacity: 0, duration: compact ? 0.16 : 0.22 });
     gsap.to(panel.current, {
       opacity: 0,
       scale: 0,
-      duration: motion.menu.closeDuration,
+      duration: compact
+        ? motion.menu.closeDurationCompact
+        : motion.menu.closeDuration,
       ease: motion.easing.panel,
       onComplete: onClosed,
     });
@@ -53,7 +56,7 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
       gsap.fromTo(
         backdrop.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.28 },
+        { opacity: 1, duration: mobile ? 0.18 : 0.28 },
       );
       gsap.fromTo(
         panel.current,
@@ -65,7 +68,9 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
         {
           opacity: 1,
           scale: 1,
-          duration: motion.menu.openDuration,
+          duration: mobile
+            ? motion.menu.openDurationCompact
+            : motion.menu.openDuration,
           ease: motion.easing.panel,
         },
       );
@@ -75,9 +80,16 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
         {
           opacity: 1,
           y: 0,
-          delay: 0.1,
-          duration: motion.menu.itemDuration,
-          stagger: motion.menu.itemStagger,
+          // The links used to land a second after the tap once the delay and
+          // the stagger across seven items were added together, which is the
+          // part that read as the menu still loading.
+          delay: mobile ? motion.menu.itemDelayCompact : 0.1,
+          duration: mobile
+            ? motion.menu.itemDurationCompact
+            : motion.menu.itemDuration,
+          stagger: mobile
+            ? motion.menu.itemStaggerCompact
+            : motion.menu.itemStagger,
           ease: motion.easing.reveal,
         },
       );
@@ -129,7 +141,10 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
       <button
         ref={backdrop}
         type="button"
-        className="fixed inset-0 z-[600] cursor-default bg-black/12 backdrop-blur-[1px]"
+        // The 1px blur costs a full-screen readback on every frame it is
+        // composited, which a phone GPU pays for while the panel is scaling —
+        // and at 1px there is nothing to see for it. Kept from md up.
+        className="fixed inset-0 z-[600] cursor-default bg-black/12 md:backdrop-blur-[1px]"
         onClick={close}
         aria-label="Close navigation"
         tabIndex={-1}
