@@ -108,18 +108,24 @@ const postcardPlaces = [
     detail: "Your home base",
     color: GREEN,
     glyph: "LL",
+    category: "lapu-lapu/monument",
+    image: "lapu-lapu-monument.jpg",
   },
   {
     name: "Mactan",
     detail: "Island days",
     color: BLUE,
     glyph: "MC",
+    category: "lapu-lapu/coast",
+    image: "mactan-coast.jpg",
   },
   {
     name: "Cebu",
     detail: "Go farther",
     color: YELLOW,
     glyph: "CE",
+    category: "lapu-lapu/city",
+    image: "lapu-lapu-city.jpg",
   },
 ] as const;
 
@@ -493,17 +499,20 @@ export function LocationExperience() {
           },
         });
 
+        // Starts as the row clears the bottom of the viewport rather than well
+        // inside it, so the prints are already settling by the time they are
+        // properly in view instead of visibly popping in late.
         gsap.from(instantCards, {
-          y: -230,
-          scale: 0.42,
-          rotate: (index) => [16, -13, 10][index],
+          y: -140,
+          scale: 0.6,
+          rotate: (index) => [11, -9, 7][index],
           autoAlpha: 0,
-          duration: 0.9,
-          stagger: 0.14,
+          duration: 0.65,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".location-instant-grid",
-            start: "top 82%",
+            start: "top 95%",
             once: true,
           },
         });
@@ -761,6 +770,14 @@ function PostcardSection({
               className="location-postcard"
               style={accentVars(place.color, "postcard")}
             >
+              <ImagePanel
+                category={place.category}
+                preferredFileName={place.image}
+                alt={place.name}
+                label={place.name}
+                className="location-postcard-media absolute inset-0"
+                sizes="(max-width: 767px) 70vw, 24vw"
+              />
               <span>{place.detail}</span>
               <strong aria-hidden="true">{place.glyph}</strong>
               <p>{place.name}</p>
@@ -1011,9 +1028,9 @@ function PerksSection({
           {/* Not wrapped in an overflow mask: the layered colour offsets sit
               outside the heading box and would be clipped. */}
           <h2 data-perks-line>
-            <span>Perks?</span>
-            <span aria-hidden="true">Perks?</span>
-            <span aria-hidden="true">Perks?</span>
+            <span>Extras?</span>
+            <span aria-hidden="true">Extras?</span>
+            <span aria-hidden="true">Extras?</span>
           </h2>
           <p data-perks-line>
             We got

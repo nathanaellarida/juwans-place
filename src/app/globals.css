@@ -12,6 +12,9 @@
   --sunflower: #fcba57;
   --sunflower-deep: #b57d0d;
   --ink-on-sunflower: #141414;
+  /* Kept as a supporting accent so the yellow has something to sit against.
+     White on it only reaches 3.6:1, so pair it with black at button sizes. */
+  --coral: #e45d3a;
   --gold: #d5a82e;
   --seafoam: #9cc6b2;
   --magenta: #8e1e55;
@@ -765,6 +768,29 @@ button {
   will-change: transform;
 }
 
+.location-postcard-media {
+  z-index: 0;
+}
+
+/* Washes the card's colour over the photograph so each postcard still reads as
+   green, blue, or yellow at a glance and the copy keeps a stable backdrop. */
+.location-postcard-media::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--postcard-color);
+  opacity: 0.66;
+  content: "";
+}
+
+.location-postcard > span,
+.location-postcard > strong,
+.location-postcard > p,
+.location-postcard > svg {
+  position: relative;
+  z-index: 1;
+}
+
 .location-postcard > span {
   font-size: 0.7rem;
   font-weight: 750;
@@ -1062,7 +1088,10 @@ button {
      x axis. GSAP folds `translate` into its own transform and would otherwise
      overwrite a -50% centring offset. */
   translate: 0 -50%;
-  color: var(--location-yellow);
+  /* The aerial photograph behind this is bright edge to edge — sky, turquoise
+     water, pale buildings — so the word needs to go darker than the accent to
+     stay readable across all of it. */
+  color: var(--navy);
   font-size: clamp(5rem, 11.5vw, 12rem);
   font-style: italic;
   font-weight: 900;
@@ -1075,9 +1104,12 @@ button {
 
 .location-camera-section {
   position: relative;
-  min-height: 170vh;
+  /* Height comes from the content now. The old 170vh was sized around the
+     camera prop that used to sit above the prints, and left most of a viewport
+     empty once it was removed. */
   overflow: hidden;
-  padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 4vw, 4rem)
+    clamp(5rem, 8vw, 8rem);
   background: var(--location-paper);
 }
 

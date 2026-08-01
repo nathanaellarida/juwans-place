@@ -170,7 +170,7 @@ export function Hero() {
             >
               Explore the home
             </Link>
-            <Link href="/location" className="hero-cta bg-[#d5a82e] text-black">
+            <Link href="/location" className="hero-cta bg-[#e45d3a] text-black">
               Discover Lapu-Lapu
             </Link>
             <BookingLink className="hero-cta rounded-[0.55rem] bg-[#145c5b] text-white" />
