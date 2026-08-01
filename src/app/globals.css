@@ -1536,10 +1536,13 @@ button {
   position: relative;
   display: grid;
   width: clamp(20rem, 33vw, 35rem);
-  height: min(47vh, 30rem);
+  height: min(50vh, 31rem);
   flex: 0 0 auto;
   overflow: hidden;
-  grid-template-rows: auto 1fr;
+  /* minmax(0, 1fr) rather than 1fr: the photo's own min-content height would
+     otherwise stop the row shrinking, which is what pushed it out of the
+     bottom of the card. */
+  grid-template-rows: auto minmax(0, 1fr);
   border-radius: 1.1rem;
   background: var(--perk-color);
   color: var(--perk-ink);
@@ -1547,7 +1550,10 @@ button {
 }
 
 .location-perk-card:nth-child(even) {
-  margin-bottom: 2.5rem;
+  /* The stagger lifts these cards toward the heading, so on a short laptop it
+     comes straight out of the gap below it. Capped against the viewport so the
+     offset shrinks with the room it is borrowing from. */
+  margin-bottom: min(2.5rem, 3vh);
 }
 
 .location-perk-card-copy {
@@ -1571,7 +1577,10 @@ button {
 
 .location-perk-card-copy h3 {
   margin-top: 0.45rem;
-  font-size: clamp(2rem, 4vw, 4rem);
+  /* The card's height is capped by the viewport's height but the heading was
+     sized only against its width, so on a short laptop three lines of it ate
+     the room the photograph needed. The vh term keeps the two in step. */
+  font-size: clamp(1.7rem, min(3.2vw, 4.8vh), 3.25rem);
   font-weight: 900;
   letter-spacing: -0.065em;
   line-height: 0.82;
@@ -1587,7 +1596,10 @@ button {
 }
 
 .location-perk-image {
-  min-height: 17rem;
+  /* Was 17rem — a fixed floor inside a card whose height is capped by the
+     viewport, so on anything shorter than about 1000px the photo was taller
+     than the space left for it and the card simply cut it off. */
+  min-height: 0;
   margin: 0 1.2rem 1.2rem;
   border-radius: 0.85rem;
 }
