@@ -25,9 +25,9 @@ export default function FaqPage() {
           </>
         }
         description="Start with the practical facts here, then use Airbnb for current prices, availability, live policies, and reservation messages."
-        category="property/living"
-        preferredFileName="open-plan-living.jpg"
-        label="Open-plan living area at Juwan’s Place"
+        category="property/exterior"
+        preferredFileName="exterior-main.jpg"
+        label="The exterior of Juwan’s Place"
       />
 
       <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">

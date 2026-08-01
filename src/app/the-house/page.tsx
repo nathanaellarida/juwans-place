@@ -34,9 +34,9 @@ export default function TheHomePage() {
           </>
         }
         description="Three colorful bedrooms and practical shared spaces give families, friends, tourists, and working travelers room to settle in."
-        category="property/exterior"
-        preferredFileName="exterior-main.jpg"
-        label="Juwan’s Place exterior"
+        category="property/bedrooms"
+        preferredFileName="yellow-bedroom.jpg"
+        label="The yellow bedroom at Juwan’s Place"
       />
 
       <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">

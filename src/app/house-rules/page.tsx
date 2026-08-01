@@ -24,9 +24,9 @@ export default function HouseRulesPage() {
           </>
         }
         description="These verified expectations help guests decide whether Juwan’s Place is right for their group before completing a reservation on Airbnb."
-        category="property/exterior"
-        preferredFileName="entrance.jpg"
-        label="Juwan’s Place entrance"
+        category="property/living"
+        preferredFileName="living-room-main.jpg"
+        label="The living room at Juwan’s Place"
       />
 
       <section className="section-pad relative overflow-hidden bg-[#f7f3ea]">

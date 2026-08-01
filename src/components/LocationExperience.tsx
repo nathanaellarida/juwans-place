@@ -22,6 +22,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
 import { ReviewCarousel } from "@/components/ReviewCarousel";
+import { VideoPanel } from "@/components/VideoPanel";
 import { siteConfig } from "@/config/site";
 import { faqs } from "@/data/faqs";
 import { places } from "@/data/places";
@@ -620,15 +621,14 @@ function LocationHero() {
   return (
     <section className="location-hero">
       <div className="location-hero-panel">
-        <ImagePanel
-          category="lapu-lapu/city"
-          preferredFileName="lapu-lapu-city.jpg"
+        <VideoPanel
+          src="/video/cebu-promotional.mp4"
+          posterCategory="lapu-lapu/city"
+          posterFileName="lapu-lapu-city.jpg"
           alt="Lapu-Lapu City and Mactan"
           label="Add approved Lapu-Lapu City photography"
           className="location-hero-media absolute inset-0"
-          sizes="100vw"
           overlay
-          priority
         />
         <div className="location-hero-copy" aria-label="A world where Cebu feels like home">
           <MaskedLine className="text-[clamp(2.3rem,4.2vw,4.5rem)]">

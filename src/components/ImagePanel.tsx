@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { imageForSlot } from "@/lib/images";
-import { cn } from "@/lib/styles";
+import { basePosition, cn } from "@/lib/styles";
 
 type ImagePanelProps = {
   category: string;
@@ -30,7 +30,8 @@ export function ImagePanel({
   return (
     <div
       className={cn(
-        "image-panel relative isolate overflow-hidden bg-[#183e44]",
+        "image-panel isolate overflow-hidden bg-[#183e44]",
+        basePosition(className),
         className,
       )}
     >
