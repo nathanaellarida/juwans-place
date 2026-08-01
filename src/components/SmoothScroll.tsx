@@ -6,6 +6,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, prefersReducedMotion } from "@/lib/motion";
+import { registerScroller } from "@/lib/scrollLock";
 
 /** How often to check whether the new page has stopped resizing, and how long
  *  to keep checking before giving up on a hash target. */
@@ -31,6 +32,9 @@ export function SmoothScroll() {
       allowNestedScroll: true,
     });
     lenis.current = instance;
+    // Lenis owns the scroll position, so a modal cannot hold the page still
+    // with CSS alone — it has to be able to stop the instance too.
+    registerScroller(instance);
 
     const update = (time: number) => instance.raf(time * 1000);
     instance.on("scroll", ScrollTrigger.update);
@@ -51,6 +55,7 @@ export function SmoothScroll() {
     return () => {
       window.removeEventListener("hashchange", onHashChange);
       gsap.ticker.remove(update);
+      registerScroller(null);
       instance.destroy();
       lenis.current = null;
     };

@@ -12,6 +12,7 @@ import { gsap } from "gsap";
 import { BookingLink } from "@/components/BookingLink";
 import { siteConfig } from "@/config/site";
 import { motion, prefersReducedMotion } from "@/lib/motion";
+import { lockScroll, unlockScroll } from "@/lib/scrollLock";
 
 type MenuOverlayProps = {
   onClosed: () => void;
@@ -108,8 +109,7 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
   }, []);
 
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockScroll();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -136,7 +136,7 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
 
     document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockScroll();
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [close]);

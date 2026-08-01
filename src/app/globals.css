@@ -29,6 +29,10 @@
 html {
   scroll-behavior: smooth;
   background: var(--ivory);
+  /* Keeps the scrollbar's track reserved while a modal locks the root's
+     overflow, so the page does not jump sideways by the scrollbar's width as
+     the menu opens. No effect on a platform that draws overlay scrollbars. */
+  scrollbar-gutter: stable;
 }
 
 html,
