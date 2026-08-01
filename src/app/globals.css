@@ -189,9 +189,16 @@ button {
   content: "";
 }
 
+/* The floors below are what a phone actually gets. A clamp returns its floor
+   whenever the preferred term is smaller, so a floor above the phone range
+   pins every handset to one tablet-sized value instead of scaling: 4.4rem only
+   meets 11vw at a 640px viewport, so every screen narrower than that rendered
+   at 70px. Each floor is now set below where its vw term lands on the widest
+   phone, which leaves the vw term in charge across the whole phone range and
+   every width above it untouched. */
 .display-title {
   font-family: var(--font-display);
-  font-size: clamp(4.4rem, 11vw, 11rem);
+  font-size: clamp(2.9rem, 11vw, 11rem);
   font-weight: 400;
   letter-spacing: -0.06em;
   line-height: 0.78;
@@ -200,7 +207,7 @@ button {
 
 .page-title {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 10.5vw, 10rem);
+  font-size: clamp(2.75rem, 10.5vw, 10rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.8;

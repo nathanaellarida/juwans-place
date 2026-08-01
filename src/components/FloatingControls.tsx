@@ -8,6 +8,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 
 export function FloatingControls() {
   const [showTop, setShowTop] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
     let scheduled = false;
@@ -16,6 +17,7 @@ export function FloatingControls() {
       scheduled = true;
       requestAnimationFrame(() => {
         setShowTop(window.scrollY > 900);
+        setPastHero(window.scrollY > window.innerHeight * 0.5);
         scheduled = false;
       });
     };
@@ -34,9 +36,22 @@ export function FloatingControls() {
 
   return (
     <>
+      {/* These sit in the bottom-right corner, which on a phone is where the
+          hero's last call to action and its fine print land. Measured on a
+          393x714 viewport — a handset with the browser bar showing — the hero
+          needs 704px to clear them and has 694px, so the collision cannot be
+          padded away without cutting copy or dropping the 48px tap targets
+          below the accessible minimum.
+
+          So on a phone they stand aside until the hero is half scrolled past,
+          which is the same deferral the back-to-top control below already
+          makes. From `md` up there is room and they never move. The element
+          stays in the DOM either way, so the #contact link still resolves. */}
       <div
         id="contact"
-        className="fixed bottom-5 right-4 z-[490] flex flex-col gap-2 md:bottom-8 md:right-8"
+        className={`fixed bottom-5 right-4 z-[490] flex flex-col gap-2 transition-opacity duration-300 md:bottom-8 md:right-8 ${
+          pastHero ? "" : "max-md:pointer-events-none max-md:opacity-0"
+        }`}
       >
         {siteConfig.contactUrl ? (
           <a

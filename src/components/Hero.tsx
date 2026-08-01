@@ -149,7 +149,7 @@ export function Hero() {
           <h1
             ref={title}
             id="hero-title"
-            className="font-display text-[clamp(4.8rem,11vw,11.5rem)] uppercase leading-[0.75] tracking-[-0.065em]"
+            className="font-display text-[clamp(3rem,11vw,11.5rem)] uppercase leading-[0.75] tracking-[-0.065em]"
           >
             Your Home Base
             <br />
