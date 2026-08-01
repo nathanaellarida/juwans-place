@@ -37,7 +37,19 @@ export function SmoothScroll() {
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
+    // Dropping a hash does not change the pathname, so the reset below never
+    // ran for it: going back from /#tour to / left the page sitting at the
+    // tour's offset under a URL that says the top of the home page. Lenis owns
+    // the position, so the browser's own restoration cannot correct it either.
+    const onHashChange = () => {
+      const hash = window.location.hash;
+      if (hash && hash !== "#") return;
+      instance.scrollTo(0, { immediate: true, force: true });
+    };
+    window.addEventListener("hashchange", onHashChange);
+
     return () => {
+      window.removeEventListener("hashchange", onHashChange);
       gsap.ticker.remove(update);
       instance.destroy();
       lenis.current = null;
