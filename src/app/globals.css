@@ -1307,60 +1307,54 @@ button {
   pointer-events: none;
 }
 
+/* The die-cut artwork carries its own white outline, so the pill border and
+   fill these used to need would only box it in. A square box with
+   object-contain gives the wide bridge and the tall statue the same footprint,
+   and the tilt stays on `rotate` so GSAP's transform can own the pop and the
+   scroll drift without overwriting it. */
 .location-sticker {
   position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 0.26rem solid white;
-  border-radius: 999px;
-  background: var(--sticker-color);
-  padding: 0.6rem 1.05rem;
-  box-shadow: 0 0.7rem 1.7rem rgb(0 0 0 / 24%);
-  color: var(--sticker-ink, white);
-  font-size: 0.76rem;
-  font-weight: 850;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  width: clamp(5.5rem, 8.5vw, 10rem);
+  height: clamp(5.5rem, 8.5vw, 10rem);
+  filter: drop-shadow(0 0.6rem 1.4rem rgb(0 0 0 / 38%));
+  object-fit: contain;
   rotate: var(--sticker-rotate);
   will-change: transform;
 }
 
-.location-sticker svg {
-  width: 1.05rem;
-  height: 1.05rem;
-  stroke-width: 2.2;
-}
-
+/* Scattered around the band the headline runs through — it sits at 54% and
+   spans the full width, and the scroll drift moves each sticker a further 16%
+   of its own height either way, so the gaps above and below allow for that.
+   The first five spots are the balanced set, because five is what ships; spot
+   six is the spare a new landmark would take. */
 .location-sticker-one {
-  top: 8%;
-  left: 7%;
+  top: 3%;
+  left: 6%;
 }
 
 .location-sticker-two {
-  top: 13%;
-  right: 8%;
+  top: 5%;
+  right: 7%;
 }
 
 .location-sticker-three {
-  top: 30%;
-  left: 2%;
+  top: 25%;
+  left: 0%;
 }
 
 .location-sticker-four {
-  top: 34%;
-  right: 3%;
+  bottom: 9%;
+  right: 8%;
 }
 
 .location-sticker-five {
-  bottom: 13%;
+  bottom: 5%;
   left: 12%;
 }
 
 .location-sticker-six {
-  bottom: 17%;
-  right: 11%;
+  top: 28%;
+  right: 1%;
 }
 
 .location-instant-grid {
@@ -2038,20 +2032,14 @@ button {
   }
 
   .location-sticker {
-    gap: 0.3rem;
-    border-width: 0.18rem;
-    padding: 0.42rem 0.7rem;
-    font-size: 0.56rem;
-  }
-
-  .location-sticker svg {
-    width: 0.8rem;
-    height: 0.8rem;
+    width: clamp(4rem, 21vw, 6rem);
+    height: clamp(4rem, 21vw, 6rem);
+    filter: drop-shadow(0 0.35rem 0.8rem rgb(0 0 0 / 38%));
   }
 
   /* The middle pair would land on top of the headline at phone widths. */
   .location-sticker-three,
-  .location-sticker-four {
+  .location-sticker-six {
     display: none;
   }
 

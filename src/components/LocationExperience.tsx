@@ -2,16 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
-import {
-  ArrowUpRight,
-  Compass,
-  Landmark,
-  MapPin,
-  Plane,
-  ShieldCheck,
-  UtensilsCrossed,
-  Waves,
-} from "lucide-react";
+import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookingLink } from "@/components/BookingLink";
@@ -28,6 +19,7 @@ import { faqs } from "@/data/faqs";
 import { places } from "@/data/places";
 import { property } from "@/data/property";
 import { reviews } from "@/data/reviews";
+import { imagesInCategory } from "@/lib/images";
 import { prefersReducedMotion } from "@/lib/motion";
 
 /** Each accent carries the ink that stays legible on it. The yellow is the
@@ -179,50 +171,19 @@ const perkCards = [
 
 /** Die-cut style badges that pop in across the banner. Labels stay at the
  *  area level and reuse the place names already published in the data. */
-const bannerStickers = [
-  {
-    label: "Mactan Shrine",
-    icon: <Landmark aria-hidden="true" />,
-    color: YELLOW,
-    spot: "location-sticker-one",
-    rotate: "-9deg",
-  },
-  {
-    label: "Mactan Coast",
-    icon: <Waves aria-hidden="true" />,
-    color: BLUE,
-    spot: "location-sticker-two",
-    rotate: "7deg",
-  },
-  {
-    label: "Lapu-Lapu Monument",
-    icon: <MapPin aria-hidden="true" />,
-    color: GREEN,
-    spot: "location-sticker-three",
-    rotate: "-12deg",
-  },
-  {
-    label: "Local Food",
-    icon: <UtensilsCrossed aria-hidden="true" />,
-    color: BLUE,
-    spot: "location-sticker-four",
-    rotate: "10deg",
-  },
-  {
-    label: "Airport Routes",
-    icon: <Plane aria-hidden="true" />,
-    color: GREEN,
-    spot: "location-sticker-five",
-    rotate: "-6deg",
-  },
-  {
-    label: "Cebu Adventures",
-    icon: <Compass aria-hidden="true" />,
-    color: YELLOW,
-    spot: "location-sticker-six",
-    rotate: "8deg",
-  },
+/** Where each banner sticker sits and how far it tilts. Artwork comes from the
+ *  manifest in order, so a sixth landmark dropped into public/images/stickers
+ *  takes the spare spot without a code change, and five fill the first five. */
+const bannerSpots = [
+  { spot: "location-sticker-one", rotate: "-9deg" },
+  { spot: "location-sticker-two", rotate: "7deg" },
+  { spot: "location-sticker-three", rotate: "-12deg" },
+  { spot: "location-sticker-four", rotate: "10deg" },
+  { spot: "location-sticker-five", rotate: "-6deg" },
+  { spot: "location-sticker-six", rotate: "8deg" },
 ] as const;
+
+const bannerStickers = imagesInCategory("stickers").slice(0, bannerSpots.length);
 
 export function LocationExperience() {
   const root = useRef<HTMLDivElement>(null);
@@ -936,21 +897,19 @@ function MaskedBanner({
       />
       <p data-banner-word>This is Mactan</p>
       <div className="location-sticker-field" aria-hidden="true">
-        {bannerStickers.map((sticker) => (
-          <span
+        {bannerStickers.map((sticker, index) => (
+          // Decorative, and the same five files the hero trail already loaded,
+          // so next/image would only add a lazy-load wrapper to a cache hit.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             data-sticker
-            key={sticker.label}
-            className={`location-sticker ${sticker.spot}`}
-            style={
-              {
-                ...accentVars(sticker.color, "sticker"),
-                "--sticker-rotate": sticker.rotate,
-              } as CSSProperties
-            }
-          >
-            {sticker.icon}
-            <strong>{sticker.label}</strong>
-          </span>
+            key={sticker.src}
+            src={sticker.src}
+            alt=""
+            draggable={false}
+            className={`location-sticker ${bannerSpots[index].spot}`}
+            style={{ "--sticker-rotate": bannerSpots[index].rotate } as CSSProperties}
+          />
         ))}
       </div>
     </section>
