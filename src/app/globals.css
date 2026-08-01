@@ -35,9 +35,28 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Lenis's own recommended rule, which this project had skipped. While Lenis is
+   animating the scroll it writes scrollTop every frame; scroll-behavior: smooth
+   makes any native scroll that lands mid-animation — PageDown, Space, Home/End,
+   find-in-page, a focus jump — spawn a second, browser-driven animation writing
+   the same scrollTop. The two writers alternate and each "corrects" the other
+   backwards: measured a +37px, −18px, +12px frame sequence, which is the
+   intermittent one-frame jerk while scrolling. The class is only present while
+   Lenis is actively smoothing, so a key pressed at rest still gets the native
+   smooth glide it has today. */
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 html,
 body {
   max-width: 100%;
+  /* The clip line is the real rule; the hidden line is a fallback for
+     Safari 15, which does not know clip and would otherwise drop the
+     declaration entirely and allow sideways panning. hidden on the root
+     propagates to the viewport rather than creating a scroll container,
+     so the sticky panels are unaffected either way. */
+  overflow-x: hidden;
   overflow-x: clip;
 }
 

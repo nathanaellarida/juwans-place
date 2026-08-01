@@ -117,7 +117,13 @@ export function Hero() {
   return (
     <section
       ref={root}
-      className="relative h-dvh min-h-[42rem] bg-[#f7f3ea] p-2.5 md:p-4"
+      // svh, not dvh: dvh re-resolves as the phone's browser bar collapses, so
+      // the hero grew while the page was moving and pushed everything below it
+      // down mid-scroll — felt as a jump under the finger, and the height
+      // change also forced the scroll triggers to re-measure. svh is the bar-
+      // visible size the page already painted at, so nothing reflows during
+      // scrolling. The sticky panels made the same choice for the same reason.
+      className="relative h-svh min-h-[42rem] bg-[#f7f3ea] p-2.5 md:p-4"
       aria-labelledby="hero-title"
     >
       <div className="relative h-full overflow-hidden rounded-[1.1rem] bg-[#102f3e]">

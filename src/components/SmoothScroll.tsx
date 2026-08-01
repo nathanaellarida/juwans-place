@@ -21,6 +21,13 @@ export function SmoothScroll() {
     if (prefersReducedMotion()) return;
 
     gsap.registerPlugin(ScrollTrigger);
+    // On a phone, hiding and showing the browser bar fires resize while the
+    // page is moving under the finger. ScrollTrigger's own resize handler
+    // refreshes every trigger, and a refresh mid-scroll recomputes the cached
+    // offsets that scrubbed and pinned sections are animating against — which
+    // lands as a one-frame jump. This flag makes ScrollTrigger ignore exactly
+    // that resize (touch device, width unchanged) and nothing else.
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const instance = new Lenis({
       duration: motion.lenis.duration,
       smoothWheel: true,
@@ -52,8 +59,46 @@ export function SmoothScroll() {
     };
     window.addEventListener("hashchange", onHashChange);
 
+    // Lenis 1.3.25 only adopts a native scroll when it is idle — its
+    // onNativeScroll ignores events that land while isScrolling is "smooth",
+    // so a PageDown, Space, Home/End, find-in-page or scrollbar drag arriving
+    // mid-lerp is overwritten by the very next animation frame: the page yanks
+    // backwards and springs forward again, one frame at a time. Measured as a
+    // +36px, −18px, +12px scroll sequence on consecutive frames.
+    //
+    // Detect the foreign write and make Lenis yield. Two signals, either
+    // sufficient: Lenis marks its own writes with a flag its handler consumes
+    // (a capture listener runs first and can still see it), and a foreign jump
+    // moves the page much farther from Lenis's animated position than one
+    // frame of its own lerp ever could. reset() adopts the new position and
+    // stops the stale animation; wheel input keeps flowing through Lenis
+    // untouched, so the scroll feel does not change.
+    // reset() is typed private but is a plain runtime method the library
+    // itself uses for exactly this yielding (middle-click autoscroll). The
+    // version is pinned, and both lookups are guarded so a future Lenis that
+    // renames its internals degrades to today's behavior, not a crash.
+    const internals = instance as unknown as {
+      _preventNextNativeScrollEvent?: boolean;
+      reset?: () => void;
+    };
+    const yieldToNativeScroll = () => {
+      if (instance.isScrolling !== "smooth") return;
+      const drift = Math.abs(window.scrollY - instance.animatedScroll);
+      const foreign =
+        internals._preventNextNativeScrollEvent === false ||
+        drift > Math.max(250, Math.abs(instance.velocity) * 3);
+      if (foreign && drift > 1) internals.reset?.();
+    };
+    window.addEventListener("scroll", yieldToNativeScroll, {
+      capture: true,
+      passive: true,
+    });
+
     return () => {
       window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("scroll", yieldToNativeScroll, {
+        capture: true,
+      });
       gsap.ticker.remove(update);
       registerScroller(null);
       instance.destroy();
@@ -81,9 +126,21 @@ export function SmoothScroll() {
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
 
     let debounce = 0;
+    const refreshWhenSettled = () => {
+      // Refreshing recomputes every trigger's cached offsets, and doing that
+      // while Lenis is still lerping snaps each scrubbed element to its
+      // re-derived position — a visible mid-scroll jump. The work is not
+      // skipped, only held until the scroll settles; the debounce re-arms at
+      // the same interval it already used.
+      if (lenis.current?.isScrolling) {
+        debounce = window.setTimeout(refreshWhenSettled, 200);
+        return;
+      }
+      ScrollTrigger.refresh();
+    };
     const observer = new ResizeObserver(() => {
       window.clearTimeout(debounce);
-      debounce = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+      debounce = window.setTimeout(refreshWhenSettled, 200);
     });
     observer.observe(document.body);
 
