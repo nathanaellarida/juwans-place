@@ -138,9 +138,16 @@ export function Preloader() {
       aria-live="polite"
       aria-label={`Loading Juwan’s Place, ${progress}%`}
     >
+      {/* The three strokes read as one broken ring around the lockup. Their
+          legs used to close in on the middle — the teal one came down onto the
+          monogram and the gold one rose into the percentage — so each is
+          shifted outwards, away from the centre column. Shifted rather than
+          scaled up: these boxes are sized in viewport units, so enlarging one
+          thickens its stroke by the same factor and gives the clearance
+          straight back. */}
       <svg
         aria-hidden="true"
-        className="absolute -left-[16vw] -top-[35vh] h-[70vh] w-[78vw] rotate-[8deg] text-[#145c5b] md:-top-[28vh]"
+        className="absolute -left-[16vw] -top-[35vh] h-[70vh] w-[78vw] rotate-[8deg] text-[#145c5b] md:-top-[39vh]"
         viewBox="0 0 600 360"
         fill="none"
       >
@@ -168,7 +175,7 @@ export function Preloader() {
       </svg>
       <svg
         aria-hidden="true"
-        className="absolute -bottom-[31vh] -left-[6vw] h-[58vh] w-[70vw] rotate-[160deg] text-[#d5a82e]"
+        className="absolute -bottom-[33vh] -left-[30vw] h-[58vh] w-[70vw] rotate-[160deg] text-[#d5a82e] md:-left-[20vw]"
         viewBox="0 0 600 360"
         fill="none"
       >
@@ -186,7 +193,7 @@ export function Preloader() {
             without it the wordmark aligns to the wrapper's left edge and the
             whole logo sits left of centre. */}
         <div ref={logo} className="w-[min(58vw,25rem)] text-center opacity-0">
-          <Wordmark />
+          <Wordmark large />
         </div>
       </div>
       <p
