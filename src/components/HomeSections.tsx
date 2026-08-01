@@ -70,7 +70,7 @@ function PropertyStory() {
         <Reveal>
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#9cc6b2]">Living together</p>
-            <h2 className="font-display text-[clamp(4.4rem,8vw,8rem)] uppercase leading-[0.78] tracking-[-0.055em]">
+            <h2 className="font-display text-[clamp(2.2rem,8vw,8rem)] uppercase leading-[0.78] tracking-[-0.055em]">
               Space to live.
               <br />
               Room to rest.
@@ -217,7 +217,7 @@ function ServicesSection() {
             <p className="mt-16 text-xs font-bold uppercase tracking-[0.17em]">
               For qualifying longer stays
             </p>
-            <h2 className="mt-4 font-display text-[clamp(4rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+            <h2 className="mt-4 font-display text-[clamp(2.2rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
               Airport
               <br />
               pickup.
@@ -240,7 +240,7 @@ function ServicesSection() {
             <p className="mt-16 text-xs font-bold uppercase tracking-[0.17em]">
               Cebu City & province trips
             </p>
-            <h2 className="mt-4 font-display text-[clamp(4rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+            <h2 className="mt-4 font-display text-[clamp(2.2rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
               Go
               <br />
               farther.
@@ -358,7 +358,7 @@ function ReviewsSection() {
         <div data-reveal-item>
           <p className="eyebrow mb-7 text-[#8e1e55]">Verified on Airbnb</p>
           <div className="flex items-baseline gap-4">
-            <span className="font-display text-[clamp(6rem,12vw,11rem)] leading-[0.7] tracking-[-0.06em]">
+            <span className="font-display text-[clamp(2.7rem,12vw,11rem)] leading-[0.7] tracking-[-0.06em]">
               {property.rating}
             </span>
             <Star className="fill-[#d5a82e] text-[#d5a82e]" aria-hidden />
@@ -376,7 +376,7 @@ function ReviewsSection() {
         </div>
 
         <div data-reveal-item>
-          <h2 className="font-display text-[clamp(4rem,7.5vw,7.5rem)] uppercase leading-[0.8] tracking-[-0.05em]">
+          <h2 className="font-display text-[clamp(2.2rem,7.5vw,7.5rem)] uppercase leading-[0.8] tracking-[-0.05em]">
             What guests value.
           </h2>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -425,7 +425,7 @@ function RulesSection() {
         <div className="grid gap-12 md:grid-cols-[0.72fr_1.28fr] md:items-start">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#f3c75d]">Stay with confidence</p>
-            <h2 className="font-display text-[clamp(4.7rem,8.5vw,8.5rem)] uppercase leading-[0.78] tracking-[-0.055em]">
+            <h2 className="font-display text-[clamp(2.2rem,8.5vw,8.5rem)] uppercase leading-[0.78] tracking-[-0.055em]">
               Clear rules.
               <br />
               Safer stays.
@@ -481,7 +481,7 @@ function FaqSection() {
         <div className="grid gap-10 md:grid-cols-[0.55fr_1.45fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#145c5b]">Before you book</p>
-            <h2 className="font-display text-[clamp(4.5rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+            <h2 className="font-display text-[clamp(2.2rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
               Questions,
               <br />
               answered.

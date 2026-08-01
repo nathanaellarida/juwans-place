@@ -597,13 +597,13 @@ function LocationHero() {
           <MaskedLine className="text-[clamp(2.3rem,4.2vw,4.5rem)]">
             A world where
           </MaskedLine>
-          <MaskedLine className="text-[clamp(5.4rem,11vw,11rem)]">
+          <MaskedLine className="text-[clamp(2.475rem,11vw,11rem)]">
             Cebu
           </MaskedLine>
           <MaskedLine className="text-[clamp(2.2rem,4.6vw,5rem)]">
             feels like
           </MaskedLine>
-          <MaskedLine className="text-[clamp(5.4rem,11vw,11rem)]">
+          <MaskedLine className="text-[clamp(2.475rem,11vw,11rem)]">
             home.
           </MaskedLine>
         </div>

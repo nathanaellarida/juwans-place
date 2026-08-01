@@ -21,7 +21,7 @@ export function HomeIntro() {
       <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-14 md:grid-cols-[1.15fr_0.65fr] md:gap-20">
         <div data-reveal-item>
           <p className="eyebrow mb-7 text-[#b57d0d]">The bedrooms</p>
-          <h2 className="font-display text-[clamp(4.8rem,8vw,8.5rem)] leading-[0.78] tracking-[-0.055em]">
+          <h2 className="font-display text-[clamp(2.2rem,8vw,8.5rem)] leading-[0.78] tracking-[-0.055em]">
             One Home.
             <br />
             Three Colorful
@@ -69,7 +69,7 @@ export function HomeIntro() {
               className="flex h-[32%] flex-col items-center justify-center px-7 py-6 text-center text-white"
               style={{ backgroundColor: room.color }}
             >
-              <h3 className="font-display text-[clamp(3rem,4.2vw,4.7rem)] uppercase leading-none tracking-[-0.045em]">
+              <h3 className="font-display text-[clamp(2.2rem,4.2vw,4.7rem)] uppercase leading-none tracking-[-0.045em]">
                 {room.name}
               </h3>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/85 md:text-base">
