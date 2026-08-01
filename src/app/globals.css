@@ -1604,8 +1604,11 @@ button {
      viewport, so on anything shorter than about 1000px the photo was taller
      than the space left for it and the card simply cut it off. */
   min-height: 0;
-  margin: 0 1.2rem 1.2rem;
-  border-radius: 0.85rem;
+  /* Runs off the bottom edge of the card. The side insets stay, so the square
+     bottom corners sit clear of the card's own 1.1rem corner arc and nothing
+     of the photograph is lost to it. */
+  margin: 0 1.2rem;
+  border-radius: 0.85rem 0.85rem 0 0;
 }
 
 .location-proof-section {
