@@ -251,6 +251,20 @@ button {
   width: calc(50% + 1px);
   height: 100dvh;
   pointer-events: none;
+  /* Moved by a CSS transform transition rather than tweened from JavaScript.
+     This curtain exists to cover a route change, so it is always animating
+     while the incoming page mounts — and that mount blocks the main thread for
+     over a second on /location. A tween written frame by frame from JS cannot
+     paint through a block like that: it resumes past its own end and jumps
+     straight to open, which is why the opening kept getting cut. Lag smoothing
+     would not have saved it either, since a blocked main thread paints nothing
+     at all. Transform transitions run on the compositor, so this keeps moving
+     at the right speed while the main thread is busy elsewhere. */
+  transform: translateX(0);
+  transition: transform var(--curtain-duration) cubic-bezier(0.65, 0, 0.35, 1);
+  transition-delay: var(--curtain-delay, 0ms);
+  /* Holds the compositor layer so the first frame does not wait on promotion. */
+  will-change: transform;
 }
 
 .route-curtain-left {
@@ -259,6 +273,20 @@ button {
 
 .route-curtain-right {
   left: 100%;
+}
+
+.route-curtain-left[data-closed="true"] {
+  transform: translateX(100%);
+}
+
+.route-curtain-right[data-closed="true"] {
+  transform: translateX(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-curtain {
+    transition: none;
+  }
 }
 
 /* Cursor trail. Sits above the hero photograph and its gradient but below the
