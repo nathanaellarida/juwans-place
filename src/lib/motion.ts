@@ -30,8 +30,12 @@ export const motion = {
     itemStagger: 0.07,
   },
   route: {
-    duration: 0.72,
-    layerDelay: 0.09,
+    // Each half of the curtain crosses in this long, and the three colours are
+    // offset by layerDelay, so a close runs duration + 2 * layerDelay and a
+    // navigation costs roughly twice that. Kept tight: the curtain should read
+    // as a wipe between pages, not as a wait.
+    duration: 0.55,
+    layerDelay: 0.08,
   },
   parallax: {
     travelPercent: 9,

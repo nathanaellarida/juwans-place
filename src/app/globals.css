@@ -233,6 +233,27 @@ button {
   scale: 1.02;
 }
 
+/* Route curtain. Each half is parked just outside the viewport by layout, not
+   by a transform, so GSAP has the transform to itself and xPercent 0 always
+   means "off screen". The extra pixel of width overlaps the two halves at the
+   seam, which stops a hairline of the old page showing through on viewport
+   widths that do not halve evenly. */
+.route-curtain {
+  position: fixed;
+  top: 0;
+  width: calc(50% + 1px);
+  height: 100dvh;
+  pointer-events: none;
+}
+
+.route-curtain-left {
+  right: 100%;
+}
+
+.route-curtain-right {
+  left: 100%;
+}
+
 /* Cursor trail. Sits above the hero photograph and its gradient but below the
    headline, which is z-index 3 on the location hero and 10 on the home one, so
    a sticker can never land on top of the copy. `overflow: hidden` clips the

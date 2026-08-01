@@ -5,61 +5,68 @@ import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
-const colors = ["#fcba57", "#8e1e55", "#145c5b"];
+/** Closes front to back and opens back to front, so the logo yellow is the
+ *  colour that lands last over the old page and lifts first off the new one. */
+const layers = [
+  { color: "var(--teal)" },
+  { color: "var(--coral)" },
+  { color: "var(--sunflower)" },
+];
+
+const EASE = "power3.inOut";
+
+/** If a route somehow never resolves, the visitor must not be left staring at
+ *  a closed curtain. */
+const FAILSAFE_MS = 2500;
 
 export function RouteTransition() {
   const router = useRouter();
   const pathname = usePathname();
   const left = useRef<Array<HTMLDivElement | null>>([]);
   const right = useRef<Array<HTMLDivElement | null>>([]);
-  const transitioning = useRef(false);
+  const busy = useRef(false);
+  const failsafe = useRef(0);
 
-  const revealPage = useCallback(() => {
+  const open = useCallback(() => {
+    window.clearTimeout(failsafe.current);
+
+    const both = [...left.current, ...right.current];
+    both.forEach((panel) => {
+      if (panel) panel.style.pointerEvents = "none";
+    });
+
     if (prefersReducedMotion()) {
-      left.current.forEach((element) => element && gsap.set(element, { xPercent: -100 }));
-      right.current.forEach((element) => element && gsap.set(element, { xPercent: 100 }));
-      transitioning.current = false;
+      both.forEach((panel) => panel && gsap.set(panel, { xPercent: 0 }));
+      busy.current = false;
       return;
     }
 
     const timeline = gsap.timeline({
       onComplete: () => {
-        transitioning.current = false;
+        busy.current = false;
       },
     });
 
-    colors.forEach((_, index) => {
-      const delay = index * motion.route.layerDelay;
+    for (let index = layers.length - 1; index >= 0; index -= 1) {
+      const at = (layers.length - 1 - index) * motion.route.layerDelay;
       timeline.to(
-        left.current[index],
-        {
-          xPercent: -100,
-          duration: motion.route.duration,
-          ease: motion.easing.smooth,
-        },
-        delay,
+        [left.current[index], right.current[index]],
+        { xPercent: 0, duration: motion.route.duration, ease: EASE },
+        at,
       );
-      timeline.to(
-        right.current[index],
-        {
-          xPercent: 100,
-          duration: motion.route.duration,
-          ease: motion.easing.smooth,
-        },
-        delay,
-      );
-    });
+    }
   }, []);
 
+  // Runs on mount and after every navigation, so whatever is covering the page
+  // lifts once the new route has painted.
   useEffect(() => {
-    const timer = window.setTimeout(revealPage, 80);
+    const timer = window.setTimeout(open, 60);
     return () => window.clearTimeout(timer);
-  }, [pathname, revealPage]);
+  }, [pathname, open]);
 
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
       if (
-        event.defaultPrevented ||
         event.metaKey ||
         event.ctrlKey ||
         event.shiftKey ||
@@ -84,73 +91,78 @@ export function RouteTransition() {
         return;
       }
 
+      const href = `${destination.pathname}${destination.search}${destination.hash}`;
+
+      // Next's Link runs its own onClick and then bails on a prevented event,
+      // and React delegates from the root — below document. Listening in the
+      // capture phase is what puts us ahead of it: preventDefault here stops
+      // Link from navigating, while its onClick still fires, so things like the
+      // menu's close-on-select keep working.
       event.preventDefault();
-      if (transitioning.current) return;
+      if (busy.current) return;
+      busy.current = true;
 
       if (prefersReducedMotion()) {
-        router.push(`${destination.pathname}${destination.search}${destination.hash}`);
+        busy.current = false;
+        router.push(href);
         return;
       }
 
-      transitioning.current = true;
       const timeline = gsap.timeline({
         onStart: () => {
-          [...left.current, ...right.current].forEach((element) => {
-            if (element) element.style.pointerEvents = "auto";
+          [...left.current, ...right.current].forEach((panel) => {
+            if (panel) panel.style.pointerEvents = "auto";
           });
         },
         onComplete: () => {
-          router.push(
-            `${destination.pathname}${destination.search}${destination.hash}`,
-          );
+          router.push(href);
+          failsafe.current = window.setTimeout(open, FAILSAFE_MS);
         },
       });
 
-      [...colors].reverse().forEach((_, reverseIndex) => {
-        const index = colors.length - reverseIndex - 1;
-        const delay = reverseIndex * motion.route.layerDelay;
+      layers.forEach((_, index) => {
+        const at = index * motion.route.layerDelay;
         timeline.to(
           left.current[index],
-          {
-            xPercent: 0,
-            duration: motion.route.duration,
-            ease: motion.easing.smooth,
-          },
-          delay,
+          { xPercent: 100, duration: motion.route.duration, ease: EASE },
+          at,
         );
         timeline.to(
           right.current[index],
-          {
-            xPercent: 0,
-            duration: motion.route.duration,
-            ease: motion.easing.smooth,
-          },
-          delay,
+          { xPercent: -100, duration: motion.route.duration, ease: EASE },
+          at,
         );
       });
     };
 
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, [router]);
+    document.addEventListener("click", onClick, true);
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      window.clearTimeout(failsafe.current);
+    };
+  }, [router, open]);
 
   return (
     <div aria-hidden="true">
-      {colors.map((color, index) => (
-        <div key={`left-${color}`}>
+      {layers.map((layer, index) => (
+        <div key={layer.color}>
+          {/* Parked off screen by layout rather than by a transform, so GSAP
+              owns the transform outright. A CSS translate here would be read as
+              the starting x and the panels would travel twice as far as they
+              should — which is exactly why this curtain never appeared. */}
           <div
             ref={(element) => {
               left.current[index] = element;
             }}
-            className="fixed left-0 top-0 z-[9000] h-dvh w-1/2 -translate-x-full pointer-events-none"
-            style={{ backgroundColor: color, zIndex: 9000 - index }}
+            className="route-curtain route-curtain-left"
+            style={{ background: layer.color, zIndex: 9000 + index }}
           />
           <div
             ref={(element) => {
               right.current[index] = element;
             }}
-            className="fixed right-0 top-0 z-[9000] h-dvh w-1/2 translate-x-full pointer-events-none"
-            style={{ backgroundColor: color, zIndex: 9000 - index }}
+            className="route-curtain route-curtain-right"
+            style={{ background: layer.color, zIndex: 9000 + index }}
           />
         </div>
       ))}
