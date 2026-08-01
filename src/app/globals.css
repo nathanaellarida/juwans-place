@@ -752,7 +752,6 @@ button {
 
 .location-postcard {
   --postcard-color: var(--location-green);
-  --postcard-ink: white;
   position: absolute;
   inset: 0;
   display: grid;
@@ -761,9 +760,12 @@ button {
   grid-template-rows: auto 1fr auto;
   border: 0.55rem solid white;
   border-radius: 0.6rem;
+  /* Only ever seen while the photograph is still loading. */
   background: var(--postcard-color);
   box-shadow: 0 0.5rem 0 rgb(0 0 0 / 12%);
-  color: var(--postcard-ink);
+  /* The copy sits on the photograph now, not on the card colour, so it is
+     white on all three and leans on the gradient below for contrast. */
+  color: white;
   padding: 1.1rem;
   will-change: transform;
 }
@@ -772,45 +774,42 @@ button {
   z-index: 0;
 }
 
-/* Washes the card's colour over the photograph so each postcard still reads as
-   green, blue, or yellow at a glance and the copy keeps a stable backdrop. */
+/* No colour cast over the photograph — just enough shading at the two edges the
+   copy sits on to keep it readable. The middle of the frame stays untouched. */
 .location-postcard-media::after {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: var(--postcard-color);
-  opacity: 0.66;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 42%) 0%,
+    rgb(0 0 0 / 8%) 26%,
+    rgb(0 0 0 / 10%) 58%,
+    rgb(0 0 0 / 60%) 100%
+  );
   content: "";
 }
 
 .location-postcard > span,
-.location-postcard > strong,
 .location-postcard > p,
 .location-postcard > svg {
   position: relative;
   z-index: 1;
 }
 
+/* Rows are pinned explicitly. The monogram used to occupy the middle row and
+   push these to the ends; without it they would auto-flow into row one. */
 .location-postcard > span {
+  grid-column: 1 / -1;
+  grid-row: 1;
   font-size: 0.7rem;
   font-weight: 750;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.location-postcard > strong {
-  grid-column: 1 / -1;
-  align-self: center;
-  justify-self: center;
-  color: transparent;
-  font-size: clamp(7rem, 11vw, 11rem);
-  font-weight: 900;
-  letter-spacing: -0.12em;
-  line-height: 0.7;
-  -webkit-text-stroke: 0.16rem var(--postcard-ink);
-}
-
 .location-postcard > p {
+  grid-row: 3;
   align-self: end;
   font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: 900;
@@ -820,7 +819,9 @@ button {
 }
 
 .location-postcard > svg {
+  grid-row: 3;
   align-self: end;
+  justify-self: end;
 }
 
 .location-collage-scroll {
@@ -1088,10 +1089,11 @@ button {
      x axis. GSAP folds `translate` into its own transform and would otherwise
      overwrite a -50% centring offset. */
   translate: 0 -50%;
-  /* The aerial photograph behind this is bright edge to edge — sky, turquoise
-     water, pale buildings — so the word needs to go darker than the accent to
-     stay readable across all of it. */
-  color: var(--navy);
+  color: white;
+  /* The aerial photograph behind this is bright in places — sky, pale
+     buildings, sun on the water — so the white carries a soft shadow rather
+     than relying on the image staying dark enough underneath it. */
+  text-shadow: 0 0.06em 0.5em rgb(0 0 0 / 45%);
   font-size: clamp(5rem, 11.5vw, 12rem);
   font-style: italic;
   font-weight: 900;

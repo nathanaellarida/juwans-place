@@ -107,7 +107,6 @@ const postcardPlaces = [
     name: "Lapu-Lapu",
     detail: "Your home base",
     color: GREEN,
-    glyph: "LL",
     category: "lapu-lapu/monument",
     image: "lapu-lapu-monument.jpg",
   },
@@ -115,7 +114,6 @@ const postcardPlaces = [
     name: "Mactan",
     detail: "Island days",
     color: BLUE,
-    glyph: "MC",
     category: "lapu-lapu/coast",
     image: "mactan-coast.jpg",
   },
@@ -123,7 +121,6 @@ const postcardPlaces = [
     name: "Cebu",
     detail: "Go farther",
     color: YELLOW,
-    glyph: "CE",
     category: "lapu-lapu/city",
     image: "lapu-lapu-city.jpg",
   },
@@ -779,7 +776,6 @@ function PostcardSection({
                 sizes="(max-width: 767px) 70vw, 24vw"
               />
               <span>{place.detail}</span>
-              <strong aria-hidden="true">{place.glyph}</strong>
               <p>{place.name}</p>
               <MapPin aria-hidden="true" size={28} strokeWidth={1.5} />
             </article>
