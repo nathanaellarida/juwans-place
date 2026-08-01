@@ -331,7 +331,11 @@ export function LocationExperience() {
           .to(
             sideCopy,
             {
-              x: (index) => [-70, 70][index],
+              // The captions rest 6.5% in from the panel edge on a wide screen,
+              // which is ~90px of room to slide into. A phone rests them at a
+              // flat 1.25rem, so the same 70px push drove them half off the
+              // screen and sliced the words down the middle.
+              x: (index) => (desktop.matches ? [-70, 70] : [-16, 16])[index],
               autoAlpha: 0.22,
               duration: 1.1,
               ease: "power3.inOut",
@@ -354,15 +358,31 @@ export function LocationExperience() {
       if (collageSection.current) {
         const collageCards =
           collageSection.current.querySelectorAll("[data-collage-card]");
+        // A phone panel is 667–915px tall and the copy owns the middle third of
+        // it, so the 240–325px of travel a desktop panel absorbs would sweep
+        // every card straight through the headline. The narrow layout keeps the
+        // drift to roughly a quarter of that, and the rotation deltas shrink
+        // with it — a wide swing grows the card's bounding box as much as the
+        // travel does.
+        const drift = desktop.matches
+          ? {
+              from: { y: [150, -120, 190], rotate: [-16, 12, 9] },
+              to: { y: [-90, 110, -135], rotate: [-5, -8, 3] },
+            }
+          : {
+              from: { y: [26, -22, 34], rotate: [-3, 3, 2] },
+              to: { y: [-26, 22, -34], rotate: [2, -2, -2] },
+            };
+
         gsap.fromTo(
           collageCards,
           {
-            y: (index) => [150, -120, 190][index],
-            rotate: (index) => [-16, 12, 9][index],
+            y: (index) => drift.from.y[index],
+            rotate: (index) => drift.from.rotate[index],
           },
           {
-            y: (index) => [-90, 110, -135][index],
-            rotate: (index) => [-5, -8, 3][index],
+            y: (index) => drift.to.y[index],
+            rotate: (index) => drift.to.rotate[index],
             ease: "none",
             scrollTrigger: {
               trigger: collageSection.current,

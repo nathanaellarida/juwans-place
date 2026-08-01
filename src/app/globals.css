@@ -2004,23 +2004,30 @@ button {
     height: 150vh;
   }
 
+  /* The panel is a single column on a phone, so the cards cannot sit beside
+     the copy the way they do on a wide screen — they have to sit above and
+     below it. Two share the band over the headline and the third takes the
+     band under the paragraph, where it is free to run behind the button. */
   .location-collage-card {
-    width: 40vw;
+    width: 38vw;
   }
 
   .location-collage-one {
-    top: 8%;
-    left: -4%;
+    top: 4%;
+    left: -5%;
+    rotate: -6deg;
   }
 
   .location-collage-two {
-    top: 12%;
+    top: 6%;
     right: -5%;
+    rotate: 5deg;
   }
 
   .location-collage-three {
-    right: -4%;
-    bottom: 4%;
+    right: -3%;
+    bottom: 1%;
+    rotate: -4deg;
   }
 
   .location-collage-copy {
