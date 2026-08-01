@@ -138,16 +138,29 @@ export function Preloader() {
       aria-live="polite"
       aria-label={`Loading Juwan’s Place, ${progress}%`}
     >
-      {/* The three strokes read as one broken ring around the lockup. Their
-          legs used to close in on the middle — the teal one came down onto the
-          monogram and the gold one rose into the percentage — so each is
-          shifted outwards, away from the centre column. Shifted rather than
-          scaled up: these boxes are sized in viewport units, so enlarging one
-          thickens its stroke by the same factor and gives the clearance
-          straight back. */}
+      {/* One arch per screen edge — top, right, left — each turned so its two
+          legs run out through that edge and only the crown of the arch reaches
+          into frame. Turned rather than nudged: the legs are the arch's far
+          ends, so while they pointed inwards one always finished in open space,
+          and sliding the shape far enough to hide that end took the whole arch
+          off screen with it. The gold one is on the left rather than the bottom
+          because the arch is wider than it is deep: sat on the bottom edge its
+          legs straddle the percentage, and no offset clears it.
+
+          overflow-visible matters as much as the geometry. A round cap reaches
+          half a stroke width past its endpoint, which is outside a viewBox that
+          stops at the path — and an <svg> clips to its own box by default, so
+          the caps were being shaved off square. The overlay's own
+          overflow-hidden still trims at the screen edge, which is the only crop
+          that should show.
+
+          Boxes are sized in vmin at the viewBox's own 5:3, so each arch keeps
+          its proportions and scales against whichever axis is shorter. Sizing
+          against height alone let them grow past a narrow viewport and reach
+          back into the middle. */}
       <svg
         aria-hidden="true"
-        className="absolute -left-[16vw] -top-[35vh] h-[70vh] w-[78vw] rotate-[8deg] text-[#145c5b] md:-top-[39vh]"
+        className="absolute -left-[18vw] -top-[21vmin] h-[70vmin] w-[117vmin] rotate-[176deg] overflow-visible text-[#145c5b]"
         viewBox="0 0 600 360"
         fill="none"
       >
@@ -161,7 +174,7 @@ export function Preloader() {
       </svg>
       <svg
         aria-hidden="true"
-        className="absolute -right-[26vw] -top-[16vh] h-[58vh] w-[70vw] rotate-[-20deg] text-[#fcba57]"
+        className="absolute -right-[54vmin] top-[calc(38%-35vmin)] h-[70vmin] w-[117vmin] rotate-[-96deg] overflow-visible text-[#fcba57]"
         viewBox="0 0 600 360"
         fill="none"
       >
@@ -175,7 +188,7 @@ export function Preloader() {
       </svg>
       <svg
         aria-hidden="true"
-        className="absolute -bottom-[33vh] -left-[30vw] h-[58vh] w-[70vw] rotate-[160deg] text-[#d5a82e] md:-left-[20vw]"
+        className="absolute -left-[54vmin] top-[calc(64%-35vmin)] h-[70vmin] w-[117vmin] rotate-[84deg] overflow-visible text-[#d5a82e]"
         viewBox="0 0 600 360"
         fill="none"
       >
