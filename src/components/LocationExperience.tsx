@@ -21,6 +21,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
 import { ReviewCarousel } from "@/components/ReviewCarousel";
+import { StickerTrail } from "@/components/StickerTrail";
 import { VideoPanel } from "@/components/VideoPanel";
 import { siteConfig } from "@/config/site";
 import { faqs } from "@/data/faqs";
@@ -630,6 +631,7 @@ function LocationHero() {
           className="location-hero-media absolute inset-0"
           overlay
         />
+        <StickerTrail />
         <div className="location-hero-copy" aria-label="A world where Cebu feels like home">
           <MaskedLine className="text-[clamp(2.3rem,4.2vw,4.5rem)]">
             A world where

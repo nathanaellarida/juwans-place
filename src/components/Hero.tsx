@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { BookingLink } from "@/components/BookingLink";
 import { ImagePanel } from "@/components/ImagePanel";
+import { StickerTrail } from "@/components/StickerTrail";
 import { property } from "@/data/property";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
@@ -135,6 +136,7 @@ export function Hero() {
           className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/25"
           aria-hidden="true"
         />
+        <StickerTrail />
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pb-8 pt-24 text-center text-white md:px-8 md:pt-28">
           <p

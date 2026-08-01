@@ -8,7 +8,9 @@ const outputFile = path.join(root, "src", "generated", "image-manifest.ts");
 // `postcards` and `extras` back one card each on the location page, so a photo
 // dropped in there changes that card alone rather than every slot sharing a
 // category. Both fall back to the shared photography while they are empty.
-const approvedRoots = ["property", "lapu-lapu", "postcards", "extras"];
+// `stickers` is the cursor-trail artwork rather than photography: every file in
+// it joins the trail, so a new landmark is a drop-in with no code change.
+const approvedRoots = ["property", "lapu-lapu", "postcards", "extras", "stickers"];
 const extensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 
 const toCaption = (fileName) =>

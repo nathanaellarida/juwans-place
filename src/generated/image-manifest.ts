@@ -10,6 +10,30 @@ export type ImageManifestItem = {
 
 export const imageManifest: ImageManifestItem[] = [
   {
+    "src": "/images/extras/airport/extras-airport.jpg",
+    "category": "extras/airport",
+    "caption": "Extras Airport",
+    "fileName": "extras-airport.jpg"
+  },
+  {
+    "src": "/images/extras/cebu/extras-cebu.jpg",
+    "category": "extras/cebu",
+    "caption": "Extras Cebu",
+    "fileName": "extras-cebu.jpg"
+  },
+  {
+    "src": "/images/extras/home/extras-home.jpg",
+    "category": "extras/home",
+    "caption": "Extras Home",
+    "fileName": "extras-home.jpg"
+  },
+  {
+    "src": "/images/extras/mactan/extras-mactan.jpg",
+    "category": "extras/mactan",
+    "caption": "Extras Mactan",
+    "fileName": "extras-mactan.jpg"
+  },
+  {
     "src": "/images/lapu-lapu/airport/airport-area.jpg",
     "category": "lapu-lapu/airport",
     "caption": "Airport Area",
@@ -44,6 +68,24 @@ export const imageManifest: ImageManifestItem[] = [
     "category": "lapu-lapu/shrine",
     "caption": "Mactan Shrine",
     "fileName": "mactan-shrine.jpg"
+  },
+  {
+    "src": "/images/postcards/cebu/polaroid-cebu.jpg",
+    "category": "postcards/cebu",
+    "caption": "Polaroid Cebu",
+    "fileName": "polaroid-cebu.jpg"
+  },
+  {
+    "src": "/images/postcards/lapu-lapu/polaroid-lapulapu.jpg",
+    "category": "postcards/lapu-lapu",
+    "caption": "Polaroid Lapulapu",
+    "fileName": "polaroid-lapulapu.jpg"
+  },
+  {
+    "src": "/images/postcards/mactan/polaroid-mactan.jpg",
+    "category": "postcards/mactan",
+    "caption": "Polaroid Mactan",
+    "fileName": "polaroid-mactan.jpg"
   },
   {
     "src": "/images/property/bathrooms/upstairs-bathtub.jpg",
@@ -104,5 +146,35 @@ export const imageManifest: ImageManifestItem[] = [
     "category": "property/living",
     "caption": "Living Room Main",
     "fileName": "living-room-main.jpg"
+  },
+  {
+    "src": "/images/stickers/cebu-cordova-bridge.webp",
+    "category": "stickers",
+    "caption": "Cebu Cordova Bridge",
+    "fileName": "cebu-cordova-bridge.webp"
+  },
+  {
+    "src": "/images/stickers/juwans-place-home.webp",
+    "category": "stickers",
+    "caption": "Juwans Place Home",
+    "fileName": "juwans-place-home.webp"
+  },
+  {
+    "src": "/images/stickers/lapu-lapu-statue.webp",
+    "category": "stickers",
+    "caption": "Lapu Lapu Statue",
+    "fileName": "lapu-lapu-statue.webp"
+  },
+  {
+    "src": "/images/stickers/mactan-monument.webp",
+    "category": "stickers",
+    "caption": "Mactan Monument",
+    "fileName": "mactan-monument.webp"
+  },
+  {
+    "src": "/images/stickers/magellans-cross.webp",
+    "category": "stickers",
+    "caption": "Magellans Cross",
+    "fileName": "magellans-cross.webp"
   }
 ];

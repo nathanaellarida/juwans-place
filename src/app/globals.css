@@ -233,6 +233,37 @@ button {
   scale: 1.02;
 }
 
+/* Cursor trail. Sits above the hero photograph and its gradient but below the
+   headline, which is z-index 3 on the location hero and 10 on the home one, so
+   a sticker can never land on top of the copy. `overflow: hidden` clips the
+   trail to the rounded hero panel. */
+.sticker-trail {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sticker-trail-item {
+  --sticker-size: clamp(5.5rem, 9vw, 9.5rem);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sticker-size);
+  /* A square box with object-contain gives every artwork the same footprint
+     whether it is the wide bridge or the tall statue. */
+  height: var(--sticker-size);
+  filter: drop-shadow(0 0.5rem 1rem rgb(0 0 0 / 32%));
+  opacity: 0;
+  object-fit: contain;
+  transform-origin: center;
+  /* GSAP takes both over with autoAlpha; until the first drop the pool stays
+     out of the paint entirely. */
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
 .rotating-badge > svg:first-child {
   animation: badge-spin 22s linear infinite;
 }
