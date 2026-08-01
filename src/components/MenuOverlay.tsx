@@ -63,7 +63,12 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
         {
           opacity: 0,
           scale: 0,
-          transformOrigin: mobile ? "top right" : "top left",
+          // The corner the panel grows out of has to be the corner the button
+          // that opened it sits in, and Menu is top-left at every width. Below
+          // md the panel is also flush to the left edge and rounded only on the
+          // right, so a right-hand origin grew it backwards, out of its own
+          // square edge and away from the tap.
+          transformOrigin: "top left",
         },
         {
           opacity: 1,
