@@ -5,7 +5,10 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicRoot = path.join(root, "public", "images");
 const outputFile = path.join(root, "src", "generated", "image-manifest.ts");
-const approvedRoots = ["property", "lapu-lapu"];
+// `postcards` and `extras` back one card each on the location page, so a photo
+// dropped in there changes that card alone rather than every slot sharing a
+// category. Both fall back to the shared photography while they are empty.
+const approvedRoots = ["property", "lapu-lapu", "postcards", "extras"];
 const extensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 
 const toCaption = (fileName) =>

@@ -5,6 +5,10 @@ import { basePosition, cn } from "@/lib/styles";
 type ImagePanelProps = {
   category: string;
   preferredFileName?: string;
+  /** Used while `category` has no image of its own, so a slot can own a folder
+   *  and keep showing shared photography until something is dropped into it. */
+  fallbackCategory?: string;
+  fallbackFileName?: string;
   alt: string;
   label?: string;
   className?: string;
@@ -17,6 +21,8 @@ type ImagePanelProps = {
 export function ImagePanel({
   category,
   preferredFileName,
+  fallbackCategory,
+  fallbackFileName,
   alt,
   label,
   className,
@@ -25,7 +31,9 @@ export function ImagePanel({
   sizes = "(max-width: 768px) 100vw, 50vw",
   overlay = false,
 }: ImagePanelProps) {
-  const image = imageForSlot(category, preferredFileName);
+  const image =
+    imageForSlot(category, preferredFileName) ??
+    (fallbackCategory ? imageForSlot(fallbackCategory, fallbackFileName) : null);
 
   return (
     <div

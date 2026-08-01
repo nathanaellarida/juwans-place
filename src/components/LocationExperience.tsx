@@ -102,38 +102,46 @@ const featureCards = [
   },
 ] as const;
 
+/** `category` is this card's own folder. Drop a photograph in and only this
+ *  card changes; while it is empty the shared `fallback` shows instead. */
 const postcardPlaces = [
   {
     name: "Lapu-Lapu",
     detail: "Your home base",
     color: GREEN,
-    category: "lapu-lapu/monument",
-    image: "lapu-lapu-monument.jpg",
+    category: "postcards/lapu-lapu",
+    fallback: "lapu-lapu/monument",
+    fallbackImage: "lapu-lapu-monument.jpg",
   },
   {
     name: "Mactan",
     detail: "Island days",
     color: BLUE,
-    category: "lapu-lapu/coast",
-    image: "mactan-coast.jpg",
+    category: "postcards/mactan",
+    fallback: "lapu-lapu/coast",
+    fallbackImage: "mactan-coast.jpg",
   },
   {
     name: "Cebu",
     detail: "Go farther",
     color: YELLOW,
-    category: "lapu-lapu/city",
-    image: "lapu-lapu-city.jpg",
+    category: "postcards/cebu",
+    fallback: "lapu-lapu/city",
+    fallbackImage: "lapu-lapu-city.jpg",
   },
 ] as const;
 
+/** Same arrangement as the postcards: each card owns a folder, and falls back
+ *  to the shared photography until one is dropped in. */
 const perkCards = [
   {
     number: "01",
     eyebrow: "Easy arrivals",
     title: "Airport-area base",
     copy: "Start and end a Cebu trip from Lapu-Lapu City. Qualifying longer stays may include pickup when the host confirms it.",
-    category: "lapu-lapu/airport",
-    image: "airport-area.jpg",
+    category: "extras/airport",
+    fallback: "lapu-lapu/airport",
+    fallbackImage: "airport-area.jpg",
     color: YELLOW,
   },
   {
@@ -141,8 +149,9 @@ const perkCards = [
     eyebrow: "Local days",
     title: "Mactan within reach",
     copy: "Make room for history, food, coastlines, and island experiences without turning the home into a secondary detail.",
-    category: "lapu-lapu/coast",
-    image: "mactan-coast.jpg",
+    category: "extras/mactan",
+    fallback: "lapu-lapu/coast",
+    fallbackImage: "mactan-coast.jpg",
     color: BLUE,
   },
   {
@@ -150,8 +159,9 @@ const perkCards = [
     eyebrow: "Wider plans",
     title: "Cebu on your terms",
     copy: "Transportation may be arranged for Cebu City and province trips, subject to the host’s availability.",
-    category: "lapu-lapu/city",
-    image: "lapu-lapu-city.jpg",
+    category: "extras/cebu",
+    fallback: "lapu-lapu/city",
+    fallbackImage: "lapu-lapu-city.jpg",
     color: GREEN,
   },
   {
@@ -159,8 +169,9 @@ const perkCards = [
     eyebrow: "Room to rest",
     title: "An entire home",
     copy: "Come back from the island to bedrooms, shared living space, and the privacy of a whole house rather than a single room.",
-    category: "property/exterior",
-    image: "home-exterior.jpg",
+    category: "extras/home",
+    fallback: "property/exterior",
+    fallbackImage: "home-exterior.jpg",
     color: YELLOW,
   },
 ] as const;
@@ -769,7 +780,8 @@ function PostcardSection({
             >
               <ImagePanel
                 category={place.category}
-                preferredFileName={place.image}
+                fallbackCategory={place.fallback}
+                fallbackFileName={place.fallbackImage}
                 alt={place.name}
                 label={place.name}
                 className="location-postcard-media absolute inset-0"
@@ -1054,7 +1066,8 @@ function PerksSection({
               </div>
               <ImagePanel
                 category={perk.category}
-                preferredFileName={perk.image}
+                fallbackCategory={perk.fallback}
+                fallbackFileName={perk.fallbackImage}
                 alt={perk.title}
                 label={perk.title}
                 className="location-perk-image"
