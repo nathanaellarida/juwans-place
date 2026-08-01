@@ -27,6 +27,16 @@ const defaults = {
 export const siteConfig = {
   name: "Juwan’s Place",
   shortName: "Juwan’s",
+  /**
+   * The canonical origin. Open Graph and Twitter card images are declared as
+   * paths, and a crawler cannot fetch a path — Next has to resolve them against
+   * an absolute origin, and without one it falls back to localhost, which is
+   * what the build has been warning about. Overridable so preview deployments
+   * describe themselves rather than production.
+   */
+  url:
+    optionalUrl(process.env.NEXT_PUBLIC_SITE_URL, ["https:"]) ??
+    "https://juwansplace.com",
   location: "Lapu-Lapu City, Central Visayas, Philippines",
   description:
     "A welcoming three-bedroom entire home for families, friends, tourists, and working travelers exploring Mactan and Cebu.",

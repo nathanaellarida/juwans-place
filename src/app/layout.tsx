@@ -8,6 +8,7 @@ import { SiteShell } from "@/components/SiteShell";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "Juwan’s Place | Entire Home in Lapu-Lapu City",
     template: "%s | Juwan’s Place",
@@ -21,9 +22,13 @@ export const metadata: Metadata = {
     "Cebu vacation rental",
     "Airbnb Lapu-Lapu City",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_PH",
+    url: siteConfig.url,
     siteName: siteConfig.name,
     title: "Juwan’s Place | Your Home Base in Lapu-Lapu",
     description: siteConfig.description,
