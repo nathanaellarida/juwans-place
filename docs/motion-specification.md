@@ -9,12 +9,12 @@ All project timing values are centralized in `src/lib/motion.ts`.
 | Preloader progress | First page load after assets/fonts begin resolving | Minimum `1.4s`; exit `0.9s` | expressive + `expo.inOut` | skipped |
 | Preloader curves | First page load | `1.2s` draw | `power4.out` | skipped |
 | Preloader logo | First page load | `0.75s` | `back.out(1.7)` | skipped |
-| Hero image | `juwans:ready` event | `1.35s` | `power2.inOut` | final state immediately |
+| Hero image | page cover begins lifting | `1.35s` | `power2.inOut` | final state immediately |
 | Hero title lines | after image begins | `1.05s`, `0.1s` stagger | `power4.out` | unsplit, visible |
 | Hero supporting content | after title begins | `0.72s` | `power3.out` | visible |
 | Hero controls | after title begins | `0.65s`, `0.08s` stagger | `back.out(1.7)` | visible |
 | Hero parallax | hero scroll | scrub `0.8` | linear | disabled |
-| Section reveals | section reaches `top 84%` | `0.95s`, `0.09s` stagger | `power3.out` | visible |
+| Section reveals | section reaches `top 84%`, once uncovered | `0.95s`, `0.09s` stagger | `power3.out` | visible |
 | Media parallax | media crosses viewport | `-9%` to `9%`, scrub `.75` | linear | disabled |
 | Bedroom hover | pointer hover | `0.7s` image scale | smooth CSS easing | no essential information depends on it |
 | Location feature reel | vertical scroll across `500vh` | scrub `.8` | linear | horizontal touch row / static cards |
@@ -25,7 +25,7 @@ All project timing values are centralized in `src/lib/motion.ts`.
 | Menu open | menu activation | `0.8s` | `circ.inOut` | immediate |
 | Menu links | panel opens | `0.32s`, `0.07s` stagger | `power3.out` | immediate |
 | Menu close | close/Escape/backdrop/link | `0.48s` | `circ.inOut` | immediate |
-| Route curtains | eligible internal navigation | `0.72s`, `.09s` layers | `power2.inOut` | direct navigation |
+| Route curtains | eligible internal navigation | `0.55s`, `.08s` layers | `power3.inOut` | direct navigation |
 | Rotating badge | idle | `22s` loop | linear | stopped |
 | Back to top | after `900px` page scroll | `300ms` appearance | CSS ease | no smooth scroll |
 
@@ -35,9 +35,26 @@ All project timing values are centralized in `src/lib/motion.ts`.
 - Progress follows font and primary-image readiness, with a short minimum used
   to make the transition readable.
 - It never waits on non-essential below-the-fold assets.
-- Completion sets a document state and dispatches `juwans:ready` so the hero
-  animation begins after the overlay exits.
 - It does not use a long fake delay.
+
+## Entrance handover
+
+Two things cover the page: the loading screen on a first visit and the route
+curtain on every navigation. Both register with `src/lib/entrance.ts` while they
+are down and release as they *begin* to move, not once they have gone.
+
+Entrance animations — the hero and the section reveals — wait on that release,
+so they are already under way in the frames the cover is pulling back over.
+Releasing on completion instead uncovered a settled page that then reset and
+replayed itself, and behind the curtain it meant an entrance finished unseen.
+Both covers ease in slowly, so the first frames reveal nothing and the reset is
+never visible.
+
+The wait is bounded: held content starts at zero opacity, so a cover that
+somehow never reported lifting would strand it blank.
+
+The loading screen still sets a document state and dispatches `juwans:ready` at
+the same moment it releases.
 
 ## Text reveals
 

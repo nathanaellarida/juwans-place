@@ -10,6 +10,7 @@ import { BookingLink } from "@/components/BookingLink";
 import { ImagePanel } from "@/components/ImagePanel";
 import { StickerTrail } from "@/components/StickerTrail";
 import { property } from "@/data/property";
+import { onPageUncovered } from "@/lib/entrance";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
 export function Hero() {
@@ -100,14 +101,14 @@ export function Hero() {
       cleanupAnimation = () => context.revert();
     };
 
-    if (document.documentElement.dataset.juwansLoaded === "true") {
-      animate();
-    } else {
-      window.addEventListener("juwans:ready", animate, { once: true });
-    }
+    // Starts as soon as nothing is covering the page — which is the moment the
+    // loading screen begins to wipe or the route curtain begins to part, not
+    // the moment either has finished. Both used to hand over on completion, so
+    // the hero was uncovered fully formed and then reset to play itself in.
+    const cancel = onPageUncovered(animate);
 
     return () => {
-      window.removeEventListener("juwans:ready", animate);
+      cancel();
       cleanupAnimation?.();
       split?.revert();
     };

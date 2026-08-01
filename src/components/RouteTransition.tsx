@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
+import { coverPage, dropCover, uncoverPage } from "@/lib/entrance";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
 /** Closes front to back and opens back to front, so the logo yellow is the
@@ -26,6 +27,7 @@ export function RouteTransition() {
   const right = useRef<Array<HTMLDivElement | null>>([]);
   const busy = useRef(false);
   const failsafe = useRef(0);
+  const covering = useRef(false);
 
   const open = useCallback(() => {
     window.clearTimeout(failsafe.current);
@@ -34,6 +36,16 @@ export function RouteTransition() {
     both.forEach((panel) => {
       if (panel) panel.style.pointerEvents = "none";
     });
+
+    // Released as the curtain starts to part, not after. The new route mounts
+    // while the curtain is still shut, so an entrance left to start on mount
+    // played out behind it and the page was simply already settled by the time
+    // it could be seen. Only this component's own cover is released — the first
+    // run of the effect below is a mount, not a navigation.
+    if (covering.current) {
+      covering.current = false;
+      uncoverPage();
+    }
 
     if (prefersReducedMotion()) {
       both.forEach((panel) => panel && gsap.set(panel, { xPercent: 0 }));
@@ -58,10 +70,18 @@ export function RouteTransition() {
   }, []);
 
   // Runs on mount and after every navigation, so whatever is covering the page
-  // lifts once the new route has painted.
+  // lifts once the new route has painted. Two frames rather than a fixed pause:
+  // the second one is scheduled from inside the first, which puts it after the
+  // paint that renders the new route instead of guessing at how long that takes.
   useEffect(() => {
-    const timer = window.setTimeout(open, 60);
-    return () => window.clearTimeout(timer);
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(open);
+    });
+    return () => {
+      cancelAnimationFrame(first);
+      cancelAnimationFrame(second);
+    };
   }, [pathname, open]);
 
   useEffect(() => {
@@ -113,6 +133,8 @@ export function RouteTransition() {
           [...left.current, ...right.current].forEach((panel) => {
             if (panel) panel.style.pointerEvents = "auto";
           });
+          covering.current = true;
+          coverPage();
         },
         onComplete: () => {
           router.push(href);
@@ -139,6 +161,10 @@ export function RouteTransition() {
     return () => {
       document.removeEventListener("click", onClick, true);
       window.clearTimeout(failsafe.current);
+      if (covering.current) {
+        covering.current = false;
+        dropCover();
+      }
     };
   }, [router, open]);
 

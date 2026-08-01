@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { motion, prefersReducedMotion } from "@/lib/motion";
+import { coverPage, dropCover, uncoverPage } from "@/lib/entrance";
 import { Wordmark } from "@/components/Wordmark";
 
 const SESSION_KEY = "juwans-place-preloader-complete";
@@ -35,6 +36,17 @@ export function Preloader() {
     }
 
     document.body.style.overflow = "hidden";
+    // Registered before the hero's own effect runs — `SiteShell` sits ahead of
+    // `main` in the layout, so this component's effect fires first — which is
+    // what lets the hero find the page covered and hold its entrance.
+    coverPage();
+    let released = false;
+    const release = () => {
+      if (released) return;
+      released = true;
+      uncoverPage();
+    };
+
     const startedAt = performance.now();
     let assetsReady = false;
     let animationFrame = 0;
@@ -92,7 +104,6 @@ export function Preloader() {
               } catch {
                 // Session storage can be unavailable in hardened browsers.
               }
-              signalReady();
               setVisible(false);
             },
           })
@@ -108,6 +119,16 @@ export function Preloader() {
               yPercent: -100,
               duration: motion.preloader.exitDuration,
               ease: "expo.inOut",
+              // The handover point. Waiting for the wipe to finish meant the
+              // overlay pulled back over a settled hero, which then reset and
+              // animated in — a second of dead page followed by a replay.
+              // Announced as the wipe begins instead, so the hero is already
+              // moving in the frames the wipe uncovers. expo.inOut barely
+              // travels at first, so nothing is revealed mid-reset.
+              onStart: () => {
+                signalReady();
+                release();
+              },
             },
             "+=0.1",
           );
@@ -121,6 +142,10 @@ export function Preloader() {
     return () => {
       cancelAnimationFrame(animationFrame);
       document.body.style.overflow = "";
+      if (!released) {
+        released = true;
+        dropCover();
+      }
     };
   }, []);
 

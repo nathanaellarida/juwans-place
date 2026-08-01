@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onPageUncovered } from "@/lib/entrance";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/styles";
 
@@ -33,29 +34,38 @@ export function Reveal({ children, className, stagger }: RevealProps) {
     // with no resize or load event to invalidate them; late images and pinned
     // sections then move everything again. The observer reports real geometry
     // each time the browser recomputes it, so it cannot go stale.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        gsap.to(targets, {
-          y: 0,
-          opacity: 1,
-          duration: motion.reveal.duration,
-          stagger: stagger ?? motion.reveal.stagger,
-          ease: motion.easing.reveal,
-          overwrite: "auto",
-        });
-      },
-      // Mirrors the previous "top 84%" start: hold until the block has cleared
-      // the bottom sixth of the viewport.
-      { rootMargin: "0px 0px -16% 0px" },
-    );
-
     gsap.set(targets, { y: motion.reveal.y, opacity: 0 });
-    observer.observe(container);
+
+    let observer: IntersectionObserver | null = null;
+
+    // Hidden from mount but not watched until the page is uncovered. A block
+    // already in view when a route loads would otherwise spend its whole
+    // entrance behind the closed curtain and be sitting there, finished, the
+    // moment the curtain parted.
+    const cancel = onPageUncovered(() => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer?.disconnect();
+          gsap.to(targets, {
+            y: 0,
+            opacity: 1,
+            duration: motion.reveal.duration,
+            stagger: stagger ?? motion.reveal.stagger,
+            ease: motion.easing.reveal,
+            overwrite: "auto",
+          });
+        },
+        // Mirrors the previous "top 84%" start: hold until the block has
+        // cleared the bottom sixth of the viewport.
+        { rootMargin: "0px 0px -16% 0px" },
+      );
+      observer.observe(container);
+    });
 
     return () => {
-      observer.disconnect();
+      cancel();
+      observer?.disconnect();
       gsap.killTweensOf(targets);
       gsap.set(targets, { clearProps: "opacity,transform" });
     };
