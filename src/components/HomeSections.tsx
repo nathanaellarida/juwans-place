@@ -208,48 +208,223 @@ function ServicesSection() {
         rightInk="edge-ink-plum"
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
+        <div
+          data-reveal-item
+          className="mb-10 grid gap-5 md:mb-14 md:grid-cols-[0.9fr_1.1fr] md:items-end"
+        >
+          <div>
+            <p className="eyebrow text-[#145c5b]">Getting around</p>
+            <h2 className="mt-5 max-w-4xl font-display text-[clamp(3rem,7vw,7.5rem)] uppercase leading-[0.78] tracking-[-0.055em]">
+              From touchdown
+              <br />
+              to day trips.
+            </h2>
+          </div>
+          <p className="body-large max-w-2xl text-black/65 md:justify-self-end">
+            Start in Mactan, then make Cebu your own. The host can help arrange
+            the journeys on either side of your stay when availability allows.
+          </p>
+        </div>
         <div className="grid gap-5 md:grid-cols-2">
           <article
             data-reveal-item
-            className="relative min-h-[34rem] overflow-hidden rounded-[1.1rem] bg-[#fcba57] p-8 text-black md:p-12"
+            className="group relative min-h-[38rem] overflow-hidden rounded-[1.1rem] bg-[#fcba57] p-8 text-black md:p-12"
           >
-            <Plane aria-hidden="true" className="size-14" strokeWidth={1.35} />
-            <p className="mt-16 text-xs font-bold uppercase tracking-[0.17em]">
-              For qualifying longer stays
-            </p>
-            <h2 className="mt-4 font-display text-[clamp(2.2rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
-              Airport
-              <br />
-              pickup.
-            </h2>
-            <p className="mt-7 max-w-lg text-lg leading-relaxed text-black/75">
-              Free airport pickup may be available when the stay meets the
-              host’s conditions. Confirm availability through Airbnb before
-              relying on this service.
-            </p>
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 size-full text-black"
+              viewBox="0 0 720 680"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <pattern
+                  id="airport-card-dots"
+                  width="8"
+                  height="8"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <circle
+                    cx="1"
+                    cy="1"
+                    r="0.7"
+                    fill="currentColor"
+                    opacity="0.09"
+                  />
+                </pattern>
+              </defs>
+              <rect width="720" height="680" fill="url(#airport-card-dots)" />
+              <path
+                d="M-55 222 C88 106 184 306 318 205 S535 98 775 254"
+                fill="none"
+                stroke="currentColor"
+                strokeDasharray="4 13"
+                strokeLinecap="round"
+                strokeWidth="3"
+                opacity="0.2"
+              />
+              <circle
+                cx="318"
+                cy="205"
+                r="8"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                opacity="0.26"
+              />
+              <circle
+                cx="318"
+                cy="205"
+                r="2.5"
+                fill="currentColor"
+                opacity="0.4"
+              />
+            </svg>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-2 top-20 font-display text-[clamp(8rem,17vw,16rem)] leading-none tracking-[-0.08em] text-black/[0.055]"
+            >
+              CEB
+            </span>
+
+            <div className="relative z-10 flex items-start justify-between gap-5">
+              <span className="flex size-20 -rotate-6 items-center justify-center rounded-full border-2 border-dashed border-black/55 transition-transform duration-300 group-hover:-rotate-2">
+                <Plane
+                  aria-hidden="true"
+                  className="size-11"
+                  strokeWidth={1.35}
+                />
+              </span>
+              <span className="pt-2 text-right text-[0.68rem] font-bold uppercase leading-relaxed tracking-[0.18em] text-black/60">
+                01 / Arrive
+                <br />
+                Mactan-Cebu
+              </span>
+            </div>
+
+            <div className="relative z-10 mt-16">
+              <p className="inline-flex rounded-full border border-black/30 bg-[#fcba57]/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] backdrop-blur-[2px]">
+                Long stays · Host arranged
+              </p>
+              <h3 className="mt-5 font-display text-[clamp(3.25rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+                Airport
+                <br />
+                pickup.
+              </h3>
+              <p className="mt-7 max-w-lg text-lg leading-relaxed text-black/75">
+                Free airport pickup may be available when the stay meets the
+                host’s conditions. Confirm availability through Airbnb before
+                relying on this service.
+              </p>
+              <BookingLink
+                className="mt-8 bg-black text-white transition-transform hover:-rotate-1"
+                label="Ask about pickup"
+                showIcon
+              />
+            </div>
           </article>
           <article
             data-reveal-item
-            className="relative min-h-[34rem] overflow-hidden rounded-[1.1rem] bg-[#145c5b] p-8 text-white md:p-12"
+            className="group relative min-h-[38rem] overflow-hidden rounded-[1.1rem] bg-[#145c5b] p-8 text-white md:p-12"
           >
-            <CarFront
+            <svg
               aria-hidden="true"
-              className="size-14"
-              strokeWidth={1.35}
-            />
-            <p className="mt-16 text-xs font-bold uppercase tracking-[0.17em]">
-              Cebu City & province trips
-            </p>
-            <h2 className="mt-4 font-display text-[clamp(2.2rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
-              Go
-              <br />
-              farther.
-            </h2>
-            <p className="mt-7 max-w-lg text-lg leading-relaxed text-white/80">
-              Transportation may be arranged around city plans and province
-              trips. Service depends on availability and is confirmed with the
-              host.
-            </p>
+              className="pointer-events-none absolute inset-0 size-full text-white"
+              viewBox="0 0 720 680"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <pattern
+                  id="trip-card-dots"
+                  width="8"
+                  height="8"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <circle
+                    cx="1"
+                    cy="1"
+                    r="0.7"
+                    fill="currentColor"
+                    opacity="0.08"
+                  />
+                </pattern>
+              </defs>
+              <rect width="720" height="680" fill="url(#trip-card-dots)" />
+              <path
+                d="M-35 278 C88 152 187 351 326 234 S548 129 762 326"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="3"
+                opacity="0.17"
+              />
+              <path
+                d="M-35 300 C88 174 187 373 326 256 S548 151 762 348"
+                fill="none"
+                stroke="currentColor"
+                strokeDasharray="2 12"
+                strokeLinecap="round"
+                strokeWidth="2"
+                opacity="0.22"
+              />
+              <circle
+                cx="326"
+                cy="245"
+                r="9"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                opacity="0.3"
+              />
+              <circle
+                cx="326"
+                cy="245"
+                r="2.5"
+                fill="currentColor"
+                opacity="0.5"
+              />
+            </svg>
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-1 top-20 font-display text-[clamp(7rem,15vw,14rem)] leading-none tracking-[-0.08em] text-white/[0.055]"
+            >
+              CEBU
+            </span>
+
+            <div className="relative z-10 flex items-start justify-between gap-5">
+              <span className="flex size-20 rotate-6 items-center justify-center rounded-full border-2 border-dashed border-white/55 transition-transform duration-300 group-hover:rotate-2">
+                <CarFront
+                  aria-hidden="true"
+                  className="size-11"
+                  strokeWidth={1.35}
+                />
+              </span>
+              <span className="pt-2 text-right text-[0.68rem] font-bold uppercase leading-relaxed tracking-[0.18em] text-white/65">
+                02 / Explore
+                <br />
+                Cebu island
+              </span>
+            </div>
+
+            <div className="relative z-10 mt-16">
+              <p className="inline-flex rounded-full border border-white/30 bg-[#145c5b]/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.17em] backdrop-blur-[2px]">
+                City · Province · Your pace
+              </p>
+              <h3 className="mt-5 font-display text-[clamp(3.25rem,6.5vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+                Go
+                <br />
+                farther.
+              </h3>
+              <p className="mt-7 max-w-lg text-lg leading-relaxed text-white/80">
+                Transportation may be arranged around city plans and province
+                trips. Service depends on availability and is confirmed with the
+                host.
+              </p>
+              <BookingLink
+                className="mt-8 bg-[#fcba57] text-black transition-transform hover:rotate-1"
+                label="Plan with the host"
+                showIcon
+              />
+            </div>
           </article>
         </div>
         <p
