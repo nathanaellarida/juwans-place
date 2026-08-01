@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import {
   ArrowUpRight,
-  Camera,
   Compass,
   Landmark,
   MapPin,
@@ -30,9 +29,19 @@ import { property } from "@/data/property";
 import { reviews } from "@/data/reviews";
 import { prefersReducedMotion } from "@/lib/motion";
 
-const ORANGE = "#ff431e";
-const BLUE = "#1384c5";
-const GREEN = "#307c5f";
+/** Each accent carries the ink that stays legible on it. The yellow is the
+ *  logo colour and is far too light for the white the other two use. */
+const YELLOW = { bg: "#fcba57", ink: "#141414" } as const;
+const BLUE = { bg: "#1384c5", ink: "#ffffff" } as const;
+const GREEN = { bg: "#307c5f", ink: "#ffffff" } as const;
+
+type Accent = typeof YELLOW | typeof BLUE | typeof GREEN;
+
+const accentVars = (accent: Accent, name: string) =>
+  ({
+    [`--${name}-color`]: accent.bg,
+    [`--${name}-ink`]: accent.ink,
+  }) as CSSProperties;
 
 const featureCards = [
   {
@@ -47,7 +56,7 @@ const featureCards = [
     copy: "Stay in Lapu-Lapu City within the wider Mactan airport area.",
     category: "lapu-lapu/airport",
     image: "airport-area.jpg",
-    color: ORANGE,
+    color: YELLOW,
   },
   {
     title: "Island days, home nights",
@@ -68,7 +77,7 @@ const featureCards = [
     copy: "Return from the city to three bedrooms and practical shared spaces.",
     category: "property/living",
     image: "living-room-main.jpg",
-    color: ORANGE,
+    color: YELLOW,
   },
   {
     title: "Plans can go farther",
@@ -89,7 +98,7 @@ const featureCards = [
     copy: "Come back to residential comfort with 24/7 neighborhood security.",
     category: "property/exterior",
     image: "home-exterior.jpg",
-    color: ORANGE,
+    color: YELLOW,
   },
 ] as const;
 
@@ -109,7 +118,7 @@ const postcardPlaces = [
   {
     name: "Cebu",
     detail: "Go farther",
-    color: ORANGE,
+    color: YELLOW,
     glyph: "CE",
   },
 ] as const;
@@ -122,7 +131,7 @@ const perkCards = [
     copy: "Start and end a Cebu trip from Lapu-Lapu City. Qualifying longer stays may include pickup when the host confirms it.",
     category: "lapu-lapu/airport",
     image: "airport-area.jpg",
-    color: ORANGE,
+    color: YELLOW,
   },
   {
     number: "02",
@@ -149,7 +158,7 @@ const perkCards = [
     copy: "Come back from the island to bedrooms, shared living space, and the privacy of a whole house rather than a single room.",
     category: "property/exterior",
     image: "home-exterior.jpg",
-    color: ORANGE,
+    color: YELLOW,
   },
 ] as const;
 
@@ -159,7 +168,7 @@ const bannerStickers = [
   {
     label: "Mactan Shrine",
     icon: <Landmark aria-hidden="true" />,
-    color: ORANGE,
+    color: YELLOW,
     spot: "location-sticker-one",
     rotate: "-9deg",
   },
@@ -194,7 +203,7 @@ const bannerStickers = [
   {
     label: "Cebu Adventures",
     icon: <Compass aria-hidden="true" />,
-    color: ORANGE,
+    color: YELLOW,
     spot: "location-sticker-six",
     rotate: "8deg",
   },
@@ -484,46 +493,20 @@ export function LocationExperience() {
           },
         });
 
-        const shutter = gsap.timeline({
+        gsap.from(instantCards, {
+          y: -230,
+          scale: 0.42,
+          rotate: (index) => [16, -13, 10][index],
+          autoAlpha: 0,
+          duration: 0.9,
+          stagger: 0.14,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: ".location-camera",
-            start: "top 76%",
+            trigger: ".location-instant-grid",
+            start: "top 82%",
             once: true,
           },
         });
-
-        shutter
-          .from(".location-camera", {
-            scale: 0.72,
-            rotate: -7,
-            autoAlpha: 0,
-            duration: 0.85,
-            ease: "back.out(1.7)",
-          })
-          // Fire the flash, then let the prints drop out of the camera.
-          .to(
-            ".location-camera-flash",
-            { opacity: 0.85, duration: 0.12, ease: "power1.out" },
-            "-=0.15",
-          )
-          .to(".location-camera-flash", {
-            opacity: 0,
-            duration: 0.45,
-            ease: "power2.out",
-          })
-          .from(
-            instantCards,
-            {
-              y: -230,
-              scale: 0.42,
-              rotate: (index) => [16, -13, 10][index],
-              autoAlpha: 0,
-              duration: 0.9,
-              stagger: 0.14,
-              ease: "power3.out",
-            },
-            "-=0.3",
-          );
 
         // Drift uses yPercent so it composes with the entrance tween on y.
         gsap.fromTo(
@@ -699,7 +682,7 @@ function FeatureReel({
             <article
               key={card.title}
               className="location-feature-card"
-              style={{ "--card-color": card.color } as CSSProperties}
+              style={accentVars(card.color, "card")}
             >
               <ImagePanel
                 category={card.category}
@@ -738,7 +721,7 @@ function PostcardSection({
           left="edgeWave"
           right="edgeArc"
           leftInk="edge-ink-green"
-          rightInk="edge-ink-orange"
+          rightInk="edge-ink-yellow"
         />
         <div className="location-ghost-title location-postcard-title">
           <span className="location-line-mask">
@@ -776,7 +759,7 @@ function PostcardSection({
               data-postcard
               key={place.name}
               className="location-postcard"
-              style={{ "--postcard-color": place.color } as CSSProperties}
+              style={accentVars(place.color, "postcard")}
             >
               <span>{place.detail}</span>
               <strong aria-hidden="true">{place.glyph}</strong>
@@ -921,7 +904,7 @@ function MaskedBanner({
       <EdgeLines
         left="edgeHook"
         right="edgeReturn"
-        leftInk="edge-ink-orange"
+        leftInk="edge-ink-yellow"
         rightInk="edge-ink-blue"
       />
       <p data-banner-word>This is Mactan</p>
@@ -933,7 +916,7 @@ function MaskedBanner({
             className={`location-sticker ${sticker.spot}`}
             style={
               {
-                "--sticker-color": sticker.color,
+                ...accentVars(sticker.color, "sticker"),
                 "--sticker-rotate": sticker.rotate,
               } as CSSProperties
             }
@@ -980,12 +963,6 @@ function CameraSection({
           <span data-camera-line>Mactan</span>
         </strong>
       </div>
-      <div className="location-camera">
-        <Camera aria-hidden="true" />
-        <span>JUWAN CAM</span>
-        <i aria-hidden="true" />
-        <div className="location-camera-flash" aria-hidden="true" />
-      </div>
       <div className="location-instant-grid">
         {places.slice(3, 6).map((place, index) => (
           <article
@@ -1028,7 +1005,7 @@ function PerksSection({
           left="edgeCross"
           right="edgeLoop"
           leftInk="edge-ink-blue"
-          rightInk="edge-ink-orange"
+          rightInk="edge-ink-yellow"
         />
         <div className="location-perks-copy">
           {/* Not wrapped in an overflow mask: the layered colour offsets sit
@@ -1054,7 +1031,7 @@ function PerksSection({
               data-perk-card
               key={perk.number}
               className="location-perk-card"
-              style={{ "--perk-color": perk.color } as CSSProperties}
+              style={accentVars(perk.color, "perk")}
             >
               <div className="location-perk-card-copy">
                 <span>{perk.number}</span>
@@ -1128,7 +1105,7 @@ function LocationFaq() {
       <EdgeLines
         left="edgeDrift"
         right="edgeZag"
-        leftInk="edge-ink-orange"
+        leftInk="edge-ink-yellow"
         rightInk="edge-ink-blue"
       />
       <div className="location-faq-heading">

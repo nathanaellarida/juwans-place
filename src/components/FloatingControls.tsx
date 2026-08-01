@@ -41,7 +41,7 @@ export function FloatingControls() {
         {siteConfig.contactUrl ? (
           <a
             href={siteConfig.contactUrl}
-            className="floating-control bg-[#e45d3a] text-white"
+            className="floating-control bg-[#fcba57] text-black"
             aria-label={`Call Juwan’s Place at ${siteConfig.contactDisplay}`}
             title={`Call ${siteConfig.contactDisplay}`}
           >

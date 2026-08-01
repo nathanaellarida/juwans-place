@@ -78,7 +78,7 @@ export default function HouseRulesPage() {
         </Reveal>
       </section>
 
-      <section className="section-pad relative overflow-hidden bg-[#e45d3a] text-center text-white">
+      <section className="section-pad relative overflow-hidden bg-[#fcba57] text-center text-black">
         <EdgeLines
           left="edgeDrift"
           right="edgeArc"
@@ -96,7 +96,7 @@ export default function HouseRulesPage() {
           </h2>
           <p
             data-reveal-item
-            className="mx-auto mt-8 max-w-2xl text-lg text-white/75"
+            className="mx-auto mt-8 max-w-2xl text-lg text-black/70"
           >
             Current availability, pricing, fees, cancellation rules, arrival
             details, reservations, and payments are handled on Airbnb only.

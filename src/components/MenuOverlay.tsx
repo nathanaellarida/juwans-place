@@ -145,7 +145,7 @@ export function MenuOverlay({ onClosed }: MenuOverlayProps) {
           ref={closeButton}
           type="button"
           onClick={close}
-          className="mb-7 flex size-12 shrink-0 items-center justify-center rounded-full bg-white text-[#e45d3a] shadow-[4px_0_0_#145c5b] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white max-md:ml-auto"
+          className="mb-7 flex size-12 shrink-0 items-center justify-center rounded-full bg-white text-[#b57d0d] shadow-[4px_0_0_#145c5b] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white max-md:ml-auto"
           aria-label="Close menu"
         >
           <X aria-hidden="true" size={23} />

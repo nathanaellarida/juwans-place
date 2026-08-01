@@ -43,7 +43,7 @@ export default function TheHomePage() {
         <EdgeLines
           left="edgeWave"
           right="edgeSpiral"
-          leftInk="edge-ink-coral"
+          leftInk="edge-ink-sunflower"
           rightInk="edge-ink-teal"
         />
         <Reveal className="relative z-10 mx-auto max-w-[92rem]">
@@ -126,12 +126,12 @@ export default function TheHomePage() {
           left="edgeTail"
           right="edgeZag"
           leftInk="edge-ink-teal"
-          rightInk="edge-ink-coral"
+          rightInk="edge-ink-sunflower"
         />
         <Reveal className="relative z-10 mx-auto max-w-[92rem]">
           <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr]">
             <div>
-              <p data-reveal-item className="eyebrow mb-7 text-[#e45d3a]">
+              <p data-reveal-item className="eyebrow mb-7 text-[#b57d0d]">
                 Shared spaces
               </p>
               <h2 data-reveal-item className="font-display text-[clamp(4.5rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">

@@ -35,7 +35,7 @@ export default function FaqPage() {
           left="edgeHook"
           right="edgeSweep"
           leftInk="edge-ink-teal"
-          rightInk="edge-ink-coral"
+          rightInk="edge-ink-sunflower"
         />
         <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.55fr_1.45fr]">
           <div data-reveal-item>

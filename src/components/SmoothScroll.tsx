@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
 export function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (prefersReducedMotion()) return;
 
@@ -32,6 +35,32 @@ export function SmoothScroll() {
       lenis.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ScrollTrigger caches each trigger's start and end as absolute scroll
+    // offsets. A client-side navigation replaces the page without firing the
+    // resize or load events it would otherwise refresh on, and media that
+    // arrives afterwards moves everything again — so every cached offset
+    // belongs to a layout that no longer exists. Refresh once the new page has
+    // painted, then keep watching the document for height changes.
+    const frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    let debounce = 0;
+    const observer = new ResizeObserver(() => {
+      window.clearTimeout(debounce);
+      debounce = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+    });
+    observer.observe(document.body);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(debounce);
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   return null;
 }

@@ -166,7 +166,7 @@ export function Hero() {
           >
             <Link
               href="#home-intro"
-              className="hero-cta bg-[#e45d3a] text-white"
+              className="hero-cta bg-[#fcba57] text-black"
             >
               Explore the home
             </Link>

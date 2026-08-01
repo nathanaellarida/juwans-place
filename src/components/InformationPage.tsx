@@ -28,7 +28,7 @@ export function InformationPage({
           left="edgeCurl"
           right="edgeArc"
           leftInk="edge-ink-teal"
-          rightInk="edge-ink-coral"
+          rightInk="edge-ink-sunflower"
         />
         <div className="prose-juwans relative z-10 mx-auto max-w-4xl">
           {children}

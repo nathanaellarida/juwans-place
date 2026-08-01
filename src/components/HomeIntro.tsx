@@ -20,7 +20,7 @@ export function HomeIntro() {
 
       <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-14 md:grid-cols-[1.15fr_0.65fr] md:gap-20">
         <div data-reveal-item>
-          <p className="eyebrow mb-7 text-[#e45d3a]">The bedrooms</p>
+          <p className="eyebrow mb-7 text-[#b57d0d]">The bedrooms</p>
           <h2 className="font-display text-[clamp(4.8rem,8vw,8.5rem)] leading-[0.78] tracking-[-0.055em]">
             One Home.
             <br />

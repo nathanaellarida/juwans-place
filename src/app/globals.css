@@ -6,7 +6,12 @@
   --wood: #3a2a22;
   --teal: #145c5b;
   --navy: #102f3e;
-  --coral: #e45d3a;
+  /* The accent taken straight from the logo mark. Yellow this light cannot
+     carry white text, so anything filled with it uses --ink-on-sunflower, and
+     small text or icons sitting on a pale background use --sunflower-deep. */
+  --sunflower: #fcba57;
+  --sunflower-deep: #b57d0d;
+  --ink-on-sunflower: #141414;
   --gold: #d5a82e;
   --seafoam: #9cc6b2;
   --magenta: #8e1e55;
@@ -60,8 +65,8 @@ button {
 }
 
 ::selection {
-  background: var(--coral);
-  color: white;
+  background: var(--sunflower);
+  color: var(--ink-on-sunflower);
 }
 
 .font-body {
@@ -90,7 +95,7 @@ button {
 
 .skip-link:focus {
   translate: 0;
-  outline: 3px solid var(--coral);
+  outline: 3px solid var(--sunflower-deep);
 }
 
 :focus-visible {
@@ -355,7 +360,11 @@ button {
 }
 
 .faq-accordion {
-  --faq-accent: #e45d3a;
+  --faq-accent: var(--sunflower);
+  /* Everything that sits on the accent fill reads off this, so the accordion
+     stays legible whichever accent a section hands it. */
+  --faq-ink: var(--ink-on-sunflower);
+  --faq-accent-strong: var(--sunflower-deep);
   --faq-radius: 0.9rem;
 }
 
@@ -424,7 +433,7 @@ button {
   width: 1.05rem;
   height: 0.17rem;
   border-radius: 999px;
-  background: white;
+  background: var(--faq-ink);
   transition:
     background-color 450ms ease,
     transform 450ms ease,
@@ -436,7 +445,7 @@ button {
 }
 
 .faq-item.is-open .faq-toggle i {
-  background: var(--faq-accent);
+  background: var(--faq-accent-strong);
 }
 
 .faq-item.is-open .faq-toggle i:last-child {
@@ -454,7 +463,7 @@ button {
 .faq-answer {
   max-width: 60rem;
   padding: 0 clamp(1rem, 2vw, 1.75rem) 1.6rem;
-  color: white;
+  color: var(--faq-ink);
   font-size: clamp(0.92rem, 1.05vw, 1.05rem);
   line-height: 1.6;
 }
@@ -483,7 +492,7 @@ button {
 }
 
 .location-experience {
-  --location-orange: #ff431e;
+  --location-yellow: var(--sunflower);
   --location-blue: #1384c5;
   --location-green: #307c5f;
   --location-paper: #f6f6f6;
@@ -608,6 +617,9 @@ button {
 
 .location-feature-card {
   --card-color: var(--location-blue);
+  /* Each card ships its own ink because the yellow in the trio cannot carry
+     white text the way the blue and green can. */
+  --card-ink: white;
   position: relative;
   flex: 0 0 clamp(20rem, 32vw, 34rem);
   width: clamp(20rem, 32vw, 34rem);
@@ -615,7 +627,7 @@ button {
   overflow: hidden;
   border-radius: clamp(0.8rem, 1.2vw, 1.1rem);
   background: var(--card-color);
-  color: white;
+  color: var(--card-ink);
 }
 
 .location-feature-card:nth-child(even) {
@@ -670,7 +682,7 @@ button {
   bottom: 1.35rem;
   left: 1.45rem;
   max-width: 84%;
-  color: rgb(255 255 255 / 75%);
+  color: color-mix(in srgb, currentColor 75%, transparent);
   font-size: 0.76rem;
   line-height: 1.18;
 }
@@ -737,6 +749,7 @@ button {
 
 .location-postcard {
   --postcard-color: var(--location-green);
+  --postcard-ink: white;
   position: absolute;
   inset: 0;
   display: grid;
@@ -747,7 +760,7 @@ button {
   border-radius: 0.6rem;
   background: var(--postcard-color);
   box-shadow: 0 0.5rem 0 rgb(0 0 0 / 12%);
-  color: white;
+  color: var(--postcard-ink);
   padding: 1.1rem;
   will-change: transform;
 }
@@ -768,7 +781,7 @@ button {
   font-weight: 900;
   letter-spacing: -0.12em;
   line-height: 0.7;
-  -webkit-text-stroke: 0.16rem white;
+  -webkit-text-stroke: 0.16rem var(--postcard-ink);
 }
 
 .location-postcard > p {
@@ -787,12 +800,12 @@ button {
 .location-collage-scroll {
   position: relative;
   height: 180vh;
-  background: var(--location-orange);
+  background: var(--location-yellow);
 }
 
 .location-collage-panel {
-  background: var(--location-orange);
-  color: white;
+  background: var(--location-yellow);
+  color: var(--ink-on-sunflower);
 }
 
 .location-collage-words {
@@ -1004,10 +1017,10 @@ button {
   align-items: center;
   justify-content: space-between;
   margin-top: 1.25rem;
-  border: 1px solid var(--location-orange);
+  border: 1px solid var(--sunflower-deep);
   border-radius: 0.6rem;
   padding: 0.85rem 1rem;
-  color: var(--location-orange);
+  color: var(--sunflower-deep);
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -1019,8 +1032,8 @@ button {
 
 .location-place-card a:hover {
   transform: rotate(-1deg);
-  background: var(--location-orange);
-  color: white;
+  background: var(--location-yellow);
+  color: var(--ink-on-sunflower);
 }
 
 .location-masked-banner {
@@ -1049,7 +1062,7 @@ button {
      x axis. GSAP folds `translate` into its own transform and would otherwise
      overwrite a -50% centring offset. */
   translate: 0 -50%;
-  color: var(--location-orange);
+  color: var(--location-yellow);
   font-size: clamp(5rem, 11.5vw, 12rem);
   font-style: italic;
   font-weight: 900;
@@ -1079,7 +1092,7 @@ button {
 
 .location-camera-heading > span {
   display: block;
-  color: var(--location-orange);
+  color: var(--sunflower-deep);
   font-size: clamp(5rem, 11vw, 11rem);
 }
 
@@ -1093,7 +1106,7 @@ button {
   left: -4vw;
   width: clamp(9rem, 13vw, 16rem);
   height: 78%;
-  color: var(--location-orange);
+  color: var(--location-yellow);
 }
 
 .location-camera-line-right {
@@ -1142,8 +1155,8 @@ button {
   bottom: 4%;
 }
 
-.edge-ink-coral {
-  color: #e45d3a;
+.edge-ink-sunflower {
+  color: var(--sunflower);
 }
 
 .edge-ink-teal {
@@ -1174,8 +1187,8 @@ button {
   color: #f7f3ea;
 }
 
-.edge-ink-orange {
-  color: var(--location-orange);
+.edge-ink-yellow {
+  color: var(--location-yellow);
 }
 
 .edge-ink-blue {
@@ -1218,7 +1231,7 @@ button {
   background: var(--sticker-color);
   padding: 0.6rem 1.05rem;
   box-shadow: 0 0.7rem 1.7rem rgb(0 0 0 / 24%);
-  color: white;
+  color: var(--sticker-ink, white);
   font-size: 0.76rem;
   font-weight: 850;
   letter-spacing: 0.05em;
@@ -1262,71 +1275,6 @@ button {
 .location-sticker-six {
   bottom: 17%;
   right: 11%;
-}
-
-.location-camera {
-  position: relative;
-  display: grid;
-  width: clamp(17rem, 31vw, 30rem);
-  aspect-ratio: 1.35;
-  place-items: center;
-  margin: clamp(4rem, 7vw, 7rem) auto 0;
-  border: 0.35rem solid #111;
-  border-radius: 2rem;
-  background: white;
-  box-shadow:
-    0 1.2rem 2.8rem rgb(0 0 0 / 12%),
-    inset 0 -1.5rem 0 #ececec;
-}
-
-.location-camera > svg {
-  width: 38%;
-  height: 38%;
-  stroke-width: 1.1;
-}
-
-.location-camera > span {
-  position: absolute;
-  bottom: 0.75rem;
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
-.location-camera > i {
-  position: absolute;
-  top: 12%;
-  right: 11%;
-  width: 1.4rem;
-  height: 1.4rem;
-  border: 0.25rem solid white;
-  border-radius: 999px;
-  background: var(--location-orange);
-  box-shadow: 0 0 0 1px black;
-  animation: camera-record 1.8s ease-in-out infinite;
-}
-
-@keyframes camera-record {
-  0%,
-  100% {
-    opacity: 1;
-    scale: 1;
-  }
-
-  50% {
-    opacity: 0.35;
-    scale: 0.82;
-  }
-}
-
-.location-camera-flash {
-  position: absolute;
-  z-index: 2;
-  border-radius: 2rem;
-  background: white;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .location-instant-grid {
@@ -1409,7 +1357,7 @@ button {
 }
 
 .location-perks-copy h2 span:nth-child(2) {
-  color: var(--location-orange);
+  color: var(--location-yellow);
   translate: -0.045em 0.045em;
   opacity: 0.85;
 }
@@ -1461,7 +1409,8 @@ button {
 }
 
 .location-perk-card {
-  --perk-color: var(--location-orange);
+  --perk-color: var(--location-yellow);
+  --perk-ink: var(--ink-on-sunflower);
   position: relative;
   display: grid;
   width: clamp(20rem, 33vw, 35rem);
@@ -1471,7 +1420,7 @@ button {
   grid-template-rows: auto 1fr;
   border-radius: 1.1rem;
   background: var(--perk-color);
-  color: white;
+  color: var(--perk-ink);
   will-change: transform;
 }
 
@@ -1510,7 +1459,7 @@ button {
 .location-perk-card-copy p {
   max-width: 34rem;
   margin-top: 0.8rem;
-  color: rgb(255 255 255 / 78%);
+  color: color-mix(in srgb, currentColor 78%, transparent);
   font-size: 0.82rem;
   line-height: 1.35;
 }
@@ -1675,7 +1624,7 @@ button {
   place-items: center;
   border-radius: 999px;
   background: white;
-  color: var(--location-orange);
+  color: var(--location-yellow);
   cursor: pointer;
   transition:
     background-color 250ms ease,
@@ -1685,7 +1634,7 @@ button {
 }
 
 .location-review-controls button:last-child {
-  background: var(--location-orange);
+  background: var(--location-yellow);
   color: white;
 }
 
@@ -1750,7 +1699,7 @@ button {
 }
 
 .location-faq-section .faq-accordion {
-  --faq-accent: var(--location-orange);
+  --faq-accent: var(--location-yellow);
 }
 
 .location-map-link {
@@ -1761,7 +1710,7 @@ button {
   gap: 0.75rem;
   margin: 3rem auto 0;
   border-radius: 0.65rem;
-  background: var(--location-orange);
+  background: var(--location-yellow);
   padding: 0.95rem 1.25rem;
   color: white;
   font-size: 0.8rem;

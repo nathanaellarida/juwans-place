@@ -9,7 +9,7 @@ const stayCards = [
   {
     eyebrow: "Private home",
     title: "Family Stays",
-    color: "#e45d3a",
+    color: "#fcba57",
   },
   {
     eyebrow: "Mactan base",

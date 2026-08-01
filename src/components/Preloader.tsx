@@ -154,7 +154,7 @@ export function Preloader() {
       </svg>
       <svg
         aria-hidden="true"
-        className="absolute -right-[26vw] -top-[16vh] h-[58vh] w-[70vw] rotate-[-20deg] text-[#e45d3a]"
+        className="absolute -right-[26vw] -top-[16vh] h-[58vh] w-[70vw] rotate-[-20deg] text-[#fcba57]"
         viewBox="0 0 600 360"
         fill="none"
       >

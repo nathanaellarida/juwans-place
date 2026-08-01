@@ -64,7 +64,7 @@ function PropertyStory() {
         left="edgeHook"
         right="edgeSweep"
         leftInk="edge-ink-mint"
-        rightInk="edge-ink-coral"
+        rightInk="edge-ink-sunflower"
       />
       <div className="section-pad relative z-10 mx-auto grid max-w-[100rem] gap-14 md:grid-cols-[0.72fr_1.28fr] md:items-center">
         <Reveal>
@@ -82,7 +82,7 @@ function PropertyStory() {
             </p>
             <Link
               href="/the-house"
-              className="mt-9 inline-flex min-h-11 items-center rounded-lg bg-[#e45d3a] px-6 py-3 text-sm font-bold uppercase text-white transition-transform hover:rotate-2"
+              className="mt-9 inline-flex min-h-11 items-center rounded-lg bg-[#fcba57] px-6 py-3 text-sm font-bold uppercase text-black transition-transform hover:rotate-2"
             >
               Walk through the home
             </Link>
@@ -147,7 +147,7 @@ function AmenitiesSection() {
       <EdgeLines
         left="edgeWave"
         right="edgeArc"
-        leftInk="edge-ink-coral"
+        leftInk="edge-ink-sunflower"
         rightInk="edge-ink-gold"
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
@@ -211,7 +211,7 @@ function ServicesSection() {
         <div className="grid gap-5 md:grid-cols-2">
           <article
             data-reveal-item
-            className="relative min-h-[34rem] overflow-hidden rounded-[1.1rem] bg-[#e45d3a] p-8 text-white md:p-12"
+            className="relative min-h-[34rem] overflow-hidden rounded-[1.1rem] bg-[#fcba57] p-8 text-black md:p-12"
           >
             <Plane aria-hidden="true" className="size-14" strokeWidth={1.35} />
             <p className="mt-16 text-xs font-bold uppercase tracking-[0.17em]">
@@ -222,7 +222,7 @@ function ServicesSection() {
               <br />
               pickup.
             </h2>
-            <p className="mt-7 max-w-lg text-lg leading-relaxed text-white/80">
+            <p className="mt-7 max-w-lg text-lg leading-relaxed text-black/75">
               Free airport pickup may be available when the stay meets the
               host’s conditions. Confirm availability through Airbnb before
               relying on this service.
@@ -352,7 +352,7 @@ function ReviewsSection() {
         left="edgeBloom"
         right="edgeSpiral"
         leftInk="edge-ink-plum"
-        rightInk="edge-ink-coral"
+        rightInk="edge-ink-sunflower"
       />
       <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <div data-reveal-item>
@@ -387,7 +387,7 @@ function ReviewsSection() {
                 style={{
                   backgroundColor:
                     index === 0
-                      ? "#e45d3a"
+                      ? "#fcba57"
                       : index === 1
                         ? "#d5a82e"
                         : index === 2
@@ -474,7 +474,7 @@ function FaqSection() {
       <EdgeLines
         left="edgeStep"
         right="edgeSlope"
-        leftInk="edge-ink-coral"
+        leftInk="edge-ink-sunflower"
         rightInk="edge-ink-teal"
       />
       <Reveal className="relative z-10 mx-auto max-w-[92rem]">
@@ -509,7 +509,7 @@ function FinalBookingSection() {
         <EdgeLines
           left="edgeTail"
           right="edgeFold"
-          leftInk="edge-ink-coral"
+          leftInk="edge-ink-sunflower"
           rightInk="edge-ink-gold"
         />
         <Reveal className="relative z-10 max-w-5xl">

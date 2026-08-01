@@ -82,7 +82,7 @@ function TourPlaceholder({ configured }: { configured: boolean }) {
         aria-hidden="true"
       />
       <span
-        className="absolute left-1/2 top-1/2 size-[min(58vw,35rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e45d3a]/50"
+        className="absolute left-1/2 top-1/2 size-[min(58vw,35rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#fcba57]/50"
         aria-hidden="true"
       />
       <span

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { motion, prefersReducedMotion } from "@/lib/motion";
 
-const colors = ["#e45d3a", "#8e1e55", "#145c5b"];
+const colors = ["#fcba57", "#8e1e55", "#145c5b"];
 
 export function RouteTransition() {
   const router = useRouter();
