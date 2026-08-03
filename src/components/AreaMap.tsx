@@ -55,7 +55,9 @@ export function AreaMap({ className, fill = false }: AreaMapProps) {
           here so it carries the site's type and colours and can name the two
           actions instead of relying on unlabelled Google chrome. */}
       <div className="pointer-events-none absolute inset-x-3 top-3 flex justify-start sm:inset-x-4 sm:top-4">
-        <div className="pointer-events-auto max-w-[min(22rem,calc(100%-1rem))] rounded-[0.8rem] bg-white p-4 shadow-[0_0.6rem_1.6rem_rgb(0_0_0/18%)]">
+        {/* text-left explicitly: both sections that use this map centre their
+            own copy, and the card was inheriting that. */}
+        <div className="pointer-events-auto max-w-[min(22rem,calc(100%-1rem))] rounded-[0.8rem] bg-white p-4 text-left shadow-[0_0.6rem_1.6rem_rgb(0_0_0/18%)]">
           <div className="flex items-start gap-3">
             <span
               className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-[#145c5b] text-white"

@@ -65,7 +65,10 @@ export const siteConfig = {
     process.env.NEXT_PUBLIC_CONTACT_URL || defaults.contactUrl,
     ["https:", "http:", "tel:"],
   ),
-  contactDisplay: "0909 949 3593",
+  /** International form, since the listing's guests are largely arriving from
+   *  outside the Philippines and cannot dial the national 0 prefix. Matches the
+   *  +63 number contactUrl already dialled. */
+  contactDisplay: "(+63) 909 949 3593",
   // "The House" rather than "The Home": next to the landing page's "Home" the
   // two labels were indistinguishable at a glance.
   navigation: [
