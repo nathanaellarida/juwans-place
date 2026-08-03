@@ -95,10 +95,26 @@ export function RouteTransition() {
 
       const destination = new URL(anchor.href, window.location.href);
       if (destination.origin !== window.location.origin) return;
+
       if (
         destination.pathname === window.location.pathname &&
         destination.search === window.location.search
       ) {
+        // An anchor on this page: leave it entirely alone so the browser and
+        // Lenis handle the jump the way they already do.
+        if (destination.hash) return;
+
+        // A link to the page you are already on — Home in the menu while the
+        // home page is open. There is nothing to cover, but Next still treated
+        // it as a navigation and re-rendered the whole route for no change,
+        // which on a phone is real work landing right as the menu animates
+        // shut. Prevented here so that never starts, and answered the way the
+        // click means it: back to the top.
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
+        });
         return;
       }
 
