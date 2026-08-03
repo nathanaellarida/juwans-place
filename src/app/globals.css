@@ -1823,26 +1823,32 @@ button {
   line-height: 1.5;
 }
 
-.location-faq-section {
+/* Lands on one screen the way the hero does: the heading and the note take
+   what they need and the map fills the rest. min- rather than a fixed height,
+   so a short window grows instead of clipping the map away. */
+.location-map-section {
   position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
   overflow: hidden;
-  padding: clamp(7rem, 12vw, 12rem) clamp(1.25rem, 17vw, 17rem);
+  padding: clamp(3.5rem, 6vw, 6rem) clamp(1.25rem, 2.5vw, 2.5rem);
   background: white;
 }
 
 /* The section's horizontal padding collapses on small screens, where the edge
-   strokes would otherwise reach across the questions and paint over them. */
-.location-faq-section > :not(.drawn-line) {
+   strokes would otherwise reach across the content and paint over it. */
+.location-map-section > :not(.drawn-line) {
   position: relative;
   z-index: 2;
 }
 
-.location-faq-heading {
-  margin-bottom: clamp(4rem, 7vw, 7rem);
+.location-map-heading {
+  margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
   text-align: center;
 }
 
-.location-faq-heading h2 {
+.location-map-heading h2 {
   font-size: clamp(2.25rem, 10vw, 10rem);
   font-style: italic;
   font-weight: 900;
@@ -1850,7 +1856,7 @@ button {
   line-height: 0.7;
 }
 
-.location-faq-heading p {
+.location-map-heading p {
   margin-top: 1.3rem;
   font-size: 0.82rem;
   font-weight: 800;
@@ -1858,46 +1864,13 @@ button {
   text-transform: uppercase;
 }
 
-.location-faq-section .faq-accordion {
-  --faq-accent: var(--location-yellow);
-}
-
-/* The section's own children are constrained to a reading measure, which is
-   narrower than a map wants to be. */
+/* Grows into whatever the heading and the note leave, and caps its measure so
+   the map does not stretch into a letterbox on an ultrawide screen. */
 .location-area-map {
-  max-width: 72rem;
+  min-height: 18rem;
+  max-width: 104rem;
+  flex: 1;
   margin-inline: auto;
-}
-
-.location-map-link {
-  display: flex;
-  width: fit-content;
-  min-height: 3.5rem;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 3rem auto 0;
-  border-radius: 0.65rem;
-  background: var(--location-yellow);
-  padding: 0.95rem 1.25rem;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 850;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition:
-    background-color 250ms ease,
-    transform 250ms ease;
-}
-
-.location-map-link:hover {
-  transform: rotate(-1deg);
-  background: black;
-}
-
-.location-map-link svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex: 0 0 auto;
 }
 
 .location-privacy-note {
@@ -2221,11 +2194,7 @@ button {
     font-size: min(5rem, 22.222vw);
   }
 
-  .location-faq-section {
-    padding-inline: 1.25rem;
-  }
-
-  .location-faq-heading h2 {
+  .location-map-heading h2 {
     font-size: min(5.8rem, 25.778vw);
   }
 

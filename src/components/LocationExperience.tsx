@@ -592,7 +592,7 @@ export function LocationExperience() {
       <CameraSection sectionRef={cameraSection} />
       <PerksSection sectionRef={perksSection} trackRef={perkTrack} />
       <GuestProof />
-      <LocationFaq />
+      <LocationMap />
     </div>
   );
 }
@@ -1102,9 +1102,9 @@ function GuestProof() {
   );
 }
 
-function LocationFaq() {
+function LocationMap() {
   return (
-    <section id="area-note" className="location-faq-section">
+    <section id="area-note" className="location-map-section">
       {/* Drawn while the section is on screen rather than on approach, so the
           stroke is visibly still being laid down when the reader arrives. */}
       <EdgeLines
@@ -1116,11 +1116,11 @@ function LocationFaq() {
       {/* This section used to repeat five questions the FAQ page already
           answers in full, which is the only place they need to live. A page
           about the location is better ended by the location itself. */}
-      <div className="location-faq-heading">
+      <div className="location-map-heading">
         <h2>Find us</h2>
         <p>Juwan’s Place on the map, in Barangay Babag.</p>
       </div>
-      <AreaMap className="location-area-map" />
+      <AreaMap fill className="location-area-map" />
       <p className="location-privacy-note">
         Lock codes, keys, and arrival instructions are shared through the
         confirmed Airbnb booking.

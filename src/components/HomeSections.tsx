@@ -680,38 +680,42 @@ function FaqSection() {
 
 function FinalBookingSection() {
   return (
-    <section id="book" className="bg-[#f7f3ea] p-2.5 md:p-4">
-      <div className="relative overflow-hidden rounded-[1.1rem] bg-[#145c5b] px-6 py-[clamp(3.5rem,7vw,6rem)] text-center text-white">
-        <EdgeLines
-          left="edgeTail"
-          right="edgeFold"
-          leftInk="edge-ink-sunflower"
-          rightInk="edge-ink-gold"
-        />
-        <Reveal className="relative z-10 mx-auto max-w-5xl">
-          <p data-reveal-item className="eyebrow mb-8 text-[#9cc6b2]">
-            Ready when you are
-          </p>
-          <h2 data-reveal-item className="display-title">
-            Make Lapu-Lapu
-            <br />
-            feel like home.
-          </h2>
-          <div data-reveal-item className="mt-[clamp(2.5rem,4vw,3.5rem)]">
-            <AreaMap />
-          </div>
-          <div data-reveal-item>
-            <BookingLink
-              className="mt-9 bg-white text-black transition-transform hover:rotate-2"
-              showIcon
-            />
-          </div>
-          <p data-reveal-item className="mt-5 text-xs text-white/50">
-            For guest protection, reservations and payments are completed
-            through Airbnb only.
-          </p>
-        </Reveal>
-      </div>
+    // The map used to sit inside the teal card, which read as a panel within a
+    // panel — two nested rounded boxes with the map's own frame making a third.
+    // It gets the section itself now, the way the location page presents it.
+    <section
+      id="book"
+      // Teal, because the section above it is the same cream as the page and
+      // the two ran together as one long field with a map floating in it.
+      className="relative flex min-h-svh flex-col overflow-hidden bg-[#145c5b] px-[clamp(1.25rem,2.5vw,2.5rem)] py-[clamp(2.5rem,4.5vw,5rem)] text-center text-white"
+    >
+      <EdgeLines
+        left="edgeTail"
+        right="edgeFold"
+        leftInk="edge-ink-sunflower"
+        rightInk="edge-ink-gold"
+      />
+      <Reveal className="relative z-10 flex min-h-0 flex-1 flex-col">
+        <div data-reveal-item className="location-map-heading">
+          <h2>Find us</h2>
+          <p>Juwan’s Place on the map, in Barangay Babag.</p>
+        </div>
+        {/* The map takes whatever the heading and the controls leave, so the
+            section lands on one screen the way the hero does. */}
+        <div data-reveal-item className="flex min-h-[13rem] flex-1 flex-col">
+          <AreaMap fill className="mx-auto h-full max-w-[104rem] flex-1" />
+        </div>
+        <div data-reveal-item>
+          <BookingLink
+            className="mt-8 bg-white text-black transition-transform hover:rotate-2"
+            showIcon
+          />
+        </div>
+        <p data-reveal-item className="mt-4 text-xs text-white/55">
+          For guest protection, reservations and payments are completed through
+          Airbnb only.
+        </p>
+      </Reveal>
     </section>
   );
 }

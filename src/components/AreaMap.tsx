@@ -22,18 +22,22 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat}
 
 type AreaMapProps = {
   className?: string;
-  /** Aspect on a phone, where a wide map is unreadably short. */
-  compact?: boolean;
+  /**
+   * Drops the component's own height so the caller can size it — used where
+   * the map is a flex child filling whatever the section has left after its
+   * heading and controls.
+   */
+  fill?: boolean;
 };
 
-export function AreaMap({ className, compact = false }: AreaMapProps) {
+export function AreaMap({ className, fill = false }: AreaMapProps) {
   const openUrl = siteConfig.areaMapUrl;
 
   return (
     <div
       className={cn(
         "relative isolate w-full overflow-hidden rounded-[1.1rem] bg-[#e8e4dc]",
-        compact ? "h-[26rem]" : "h-[clamp(22rem,46vh,34rem)]",
+        fill ? "" : "h-[clamp(26rem,66vh,46rem)]",
         className,
       )}
     >
