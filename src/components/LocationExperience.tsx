@@ -1,8 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
-import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  ShieldCheck,
+} from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AreaMap } from "@/components/AreaMap";
@@ -651,6 +663,49 @@ function FeatureReel({
   sectionRef: React.RefObject<HTMLElement | null>;
   trackRef: React.RefObject<HTMLDivElement | null>;
 }) {
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  // On a phone the track is a real horizontal scroller, so the buttons only
+  // have to read its position. On a wide screen it is transformed by the
+  // ScrollTrigger above and never scrolls; the controls are display:none there,
+  // so whatever this reports is unused.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const sync = () => {
+      setAtStart(track.scrollLeft <= 4);
+      setAtEnd(track.scrollLeft + track.clientWidth >= track.scrollWidth - 4);
+    };
+
+    sync();
+    track.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+
+    return () => {
+      track.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, [trackRef]);
+
+  const step = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const cards = track.children;
+    // Measured from one card's left edge to the next rather than assumed: the
+    // card is a vw and the gap is a clamp(), so neither is a constant.
+    const amount =
+      cards.length > 1
+        ? cards[1].getBoundingClientRect().left -
+          cards[0].getBoundingClientRect().left
+        : track.clientWidth * 0.8;
+    track.scrollBy({
+      left: direction * amount,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
+  };
+
   return (
     <section
       id="location-features"
@@ -675,7 +730,11 @@ function FeatureReel({
             <em>go farther.</em>
           </p>
         </div>
-        <div ref={trackRef} className="location-feature-track">
+        <div
+          ref={trackRef}
+          id="location-feature-track"
+          className="location-feature-track"
+        >
           {featureCards.map((card, index) => (
             <article
               key={card.title}
@@ -697,6 +756,27 @@ function FeatureReel({
               <small>{card.copy}</small>
             </article>
           ))}
+        </div>
+
+        <div className="location-feature-controls">
+          <button
+            type="button"
+            onClick={() => step(-1)}
+            disabled={atStart}
+            aria-label="Show the previous card"
+            aria-controls="location-feature-track"
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => step(1)}
+            disabled={atEnd}
+            aria-label="Show the next card"
+            aria-controls="location-feature-track"
+          >
+            <ChevronRight aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>
