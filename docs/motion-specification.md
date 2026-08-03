@@ -77,8 +77,7 @@ The menu is a real modal dialog:
 - the page is scroll-locked while open; and
 - focus returns to the initiating control.
 
-The visual scale origin is upper-left on desktop and
-upper-right on mobile.
+The visual scale origin is upper-left on desktop and upper-right on mobile.
 
 ## Route transition
 

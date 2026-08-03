@@ -236,8 +236,7 @@ guest to move a conversation off Airbnb. See
 
 ## Ownership
 
-The code, design, copy and the Juwan's Place identity in this repository are
-original work. Property photography and the Juwan's Place name belong to
-the property owner.
+The Juwan's Place name, identity and property photography belong to the property
+owner. The code and copy in this repository were written for this project.
 
 No open-source licence is granted.
