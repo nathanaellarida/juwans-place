@@ -236,8 +236,13 @@ guest to move a conversation off Airbnb. See
 
 ## Ownership
 
-The Juwan's Place name, identity and property photography belong to the property
-owner. The code and copy in this repository were written for this project.
+**The source code is MIT licensed.** Take what is useful — a component, the
+motion setup, the whole approach. No attribution needed beyond keeping the
+notice with any substantial portion you carry over.
 
-No open-source licence is granted — see [LICENSE](LICENSE). Reading the code and
-learning from it is welcome; copying it into your own work is not.
+**The brand and the property's own material are not.** The Juwan's Place name,
+wordmark and identity, the photography and video, and the written copy belong
+to the property owner. Build your own site with this code; don't publish one
+that presents itself as Juwan's Place.
+
+Full terms in [LICENSE](LICENSE).

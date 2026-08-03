@@ -1,7 +1,7 @@
 {
   "name": "juwans-place",
   "version": "1.0.0",
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "scripts": {
     "predev": "node scripts/generate-image-manifest.mjs",
