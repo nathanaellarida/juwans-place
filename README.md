@@ -239,4 +239,5 @@ guest to move a conversation off Airbnb. See
 The Juwan's Place name, identity and property photography belong to the property
 owner. The code and copy in this repository were written for this project.
 
-No open-source licence is granted.
+No open-source licence is granted — see [LICENSE](LICENSE). Reading the code and
+learning from it is welcome; copying it into your own work is not.
