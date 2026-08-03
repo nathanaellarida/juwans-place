@@ -1,0 +1,48 @@
+Juwan's Place — additional terms
+
+Read this alongside LICENSE. The MIT licence in that file covers the source
+code of this repository. It does not cover everything in the repository, and
+the exceptions below travel with it.
+
+
+WHAT THE MIT LICENCE COVERS
+
+The source code: components, styles, configuration, scripts and build setup.
+
+Take what is useful. Copy a component, the motion setup, or the whole approach.
+No attribution is needed beyond keeping the MIT notice with any substantial
+portion you carry over.
+
+
+WHAT IT DOES NOT COVER
+
+Copyright (c) 2026 Juwan's Place. All rights reserved.
+
+No permission is granted for any of the following, and none of it is licensed
+under MIT:
+
+  - the Juwan's Place name, wordmark, logo and brand identity, including the
+    files in public/brand and the icons in src/app
+
+  - photography and video, including everything under public/images and
+    public/video
+
+  - the written copy of the site, including the text held in src/data,
+    src/config and the page components in src/app
+
+These belong to the owner of Juwan's Place. Build your own site with this code
+freely; do not publish something that presents itself as Juwan's Place, and do
+not reuse the property's photographs or words.
+
+
+THIRD-PARTY MATERIAL
+
+Some material in this repository is the property of others and is covered by
+neither notice above. It remains subject to the rights of its respective
+owners.
+
+
+QUESTIONS
+
+For anything the MIT licence does not cover, contact the repository owner
+through GitHub.

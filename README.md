@@ -19,6 +19,12 @@
   <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white">
   <img alt="GSAP ScrollTrigger" src="https://img.shields.io/badge/GSAP-ScrollTrigger-88CE02?style=flat-square&logo=greensock&logoColor=black">
   <img alt="Deployed on Vercel" src="https://img.shields.io/badge/Vercel-deployed-000000?style=flat-square&logo=vercel&logoColor=white">
+  <a href="LICENSE"><img alt="Code licensed MIT" src="https://img.shields.io/badge/code-MIT-3DA639?style=flat-square"></a>
+</p>
+
+<p align="center">
+  <sub>The <strong>source code</strong> is MIT licensed — take what is useful.<br>
+  The Juwan's Place <strong>brand, photography and written copy are not</strong>: see <a href="NOTICE">NOTICE</a>.</sub>
 </p>
 
 ---
@@ -245,4 +251,5 @@ wordmark and identity, the photography and video, and the written copy belong
 to the property owner. Build your own site with this code; don't publish one
 that presents itself as Juwan's Place.
 
-Full terms in [LICENSE](LICENSE).
+The MIT grant is in [LICENSE](LICENSE); what it excludes, and why, is in
+[NOTICE](NOTICE).
