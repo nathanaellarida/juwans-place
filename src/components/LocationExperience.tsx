@@ -210,8 +210,29 @@ export function LocationExperience() {
     if (!root.current || prefersReducedMotion()) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    const desktop = window.matchMedia("(min-width: 768px)");
-    const context = gsap.context(() => {
+
+    /**
+     * matchMedia rather than one read of `.matches`. This decided desktop or
+     * phone once, at mount, and never looked again — so crossing 768px by
+     * resizing left the page in a state neither layout expects. The reel kept
+     * the transform ScrollTrigger had scrubbed onto it, a -4045px translate
+     * under phone CSS that expects none, which carried all eight cards off
+     * screen; the postcards kept a fan measured for a wide panel. Widening a
+     * page that opened narrow was as bad in reverse: the scrub was never built,
+     * so the reel just sat there.
+     *
+     * GSAP reverts everything a condition created the moment that condition
+     * stops matching and then runs the branch that now applies, which is the
+     * teardown this was missing.
+     */
+    const media = gsap.matchMedia(root.current);
+
+    // Held in a variable rather than written inline at the call below, so the
+    // body keeps the indentation it had under gsap.context and this stays a
+    // change of behaviour rather than a reflow of the whole file.
+    const setup = (context: gsap.Context) => {
+      const desktop = Boolean(context.conditions?.desktop);
+
       gsap.from(".location-hero-line", {
         yPercent: 125,
         opacity: 0,
@@ -231,7 +252,7 @@ export function LocationExperience() {
         },
       );
 
-      if (desktop.matches && featureSection.current && featureTrack.current) {
+      if (desktop && featureSection.current && featureTrack.current) {
         const distance = () =>
           Math.max(
             0,
@@ -287,7 +308,7 @@ export function LocationExperience() {
           },
         });
 
-        const spread = desktop.matches ? 108 : 0;
+        const spread = desktop ? 108 : 0;
 
         // The stack rises while the panel is still scrolling in, and lands as
         // it locks to the top. Running this inside the pinned timeline instead
@@ -330,9 +351,9 @@ export function LocationExperience() {
             {
               xPercent: (index) => [-spread, 0, spread][index],
               y: (index) =>
-                desktop.matches ? [-48, 52, -48][index] : [-165, 5, 175][index],
+                desktop ? [-48, 52, -48][index] : [-165, 5, 175][index],
               rotate: (index) => [-7, 1, 7][index],
-              scale: desktop.matches ? 0.92 : 0.86,
+              scale: desktop ? 0.92 : 0.86,
               duration: 1.1,
               ease: "power3.inOut",
             },
@@ -345,7 +366,7 @@ export function LocationExperience() {
               // which is ~90px of room to slide into. A phone rests them at a
               // flat 1.25rem, so the same 70px push drove them half off the
               // screen and sliced the words down the middle.
-              x: (index) => (desktop.matches ? [-70, 70] : [-16, 16])[index],
+              x: (index) => (desktop ? [-70, 70] : [-16, 16])[index],
               autoAlpha: 0.22,
               duration: 1.1,
               ease: "power3.inOut",
@@ -374,7 +395,7 @@ export function LocationExperience() {
         // drift to roughly a quarter of that, and the rotation deltas shrink
         // with it — a wide swing grows the card's bounding box as much as the
         // travel does.
-        const drift = desktop.matches
+        const drift = desktop
           ? {
               from: { y: [150, -120, 190], rotate: [-16, 12, 9] },
               to: { y: [-90, 110, -135], rotate: [-5, -8, 3] },
@@ -465,7 +486,7 @@ export function LocationExperience() {
 
         // Kept small: the headline nearly fills its box, so a wide drift
         // would push the wordmark past the banner's clipped edge.
-        if (desktop.matches) {
+        if (desktop) {
           gsap.fromTo(
             "[data-banner-word]",
             { xPercent: 3.5 },
@@ -549,7 +570,7 @@ export function LocationExperience() {
         });
       }
 
-      if (desktop.matches && perksSection.current && perkTrack.current) {
+      if (desktop && perksSection.current && perkTrack.current) {
         const cards = perksSection.current.querySelectorAll("[data-perk-card]");
         // Stop once the last card sits the same distance from the right edge
         // as the first one starts from the left, so the track does not run on
@@ -588,9 +609,14 @@ export function LocationExperience() {
           },
         });
       }
-    }, root);
+    };
 
-    return () => context.revert();
+    media.add(
+      { desktop: "(min-width: 768px)", phone: "(max-width: 767px)" },
+      setup,
+    );
+
+    return () => media.revert();
   }, []);
 
   return (
