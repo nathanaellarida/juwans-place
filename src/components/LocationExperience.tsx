@@ -5,17 +5,15 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { ArrowUpRight, MapPin, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AreaMap } from "@/components/AreaMap";
 import { BookingLink } from "@/components/BookingLink";
 import { DrawnLine } from "@/components/DrawnLine";
 import { EdgeLines } from "@/components/EdgeLines";
-import { FaqAccordion } from "@/components/FaqAccordion";
 import { ImagePanel } from "@/components/ImagePanel";
 import { InteractiveLetters } from "@/components/InteractiveLetters";
 import { ReviewCarousel } from "@/components/ReviewCarousel";
 import { StickerTrail } from "@/components/StickerTrail";
 import { VideoPanel } from "@/components/VideoPanel";
-import { siteConfig } from "@/config/site";
-import { faqs } from "@/data/faqs";
 import { places } from "@/data/places";
 import { property } from "@/data/property";
 import { reviews } from "@/data/reviews";
@@ -1115,27 +1113,17 @@ function LocationFaq() {
         leftInk="edge-ink-yellow"
         rightInk="edge-ink-blue"
       />
+      {/* This section used to repeat five questions the FAQ page already
+          answers in full, which is the only place they need to live. A page
+          about the location is better ended by the location itself. */}
       <div className="location-faq-heading">
-        <h2>FAQs</h2>
-        <p>Location questions? Here is the honest version.</p>
+        <h2>Find us</h2>
+        <p>Juwan’s Place on the map, in Barangay Babag.</p>
       </div>
-      <FaqAccordion items={faqs.filter((_, index) => [1, 2, 5, 6, 7].includes(index))} initialOpen={null} />
-      {siteConfig.areaMapUrl ? (
-        <a
-          className="location-map-link"
-          href={siteConfig.areaMapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <MapPin aria-hidden="true" />
-          Open Juwan’s Place in Google Maps
-          <ArrowUpRight aria-hidden="true" />
-        </a>
-      ) : null}
+      <AreaMap className="location-area-map" />
       <p className="location-privacy-note">
-        The public Google Maps listing is provided for route planning. Exact
-        check-in, access, lock, and arrival instructions are shared only through
-        the confirmed Airbnb booking process.
+        Lock codes, keys, and arrival instructions are shared through the
+        confirmed Airbnb booking.
       </p>
     </section>
   );

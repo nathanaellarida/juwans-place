@@ -38,6 +38,20 @@ export const siteConfig = {
     optionalUrl(process.env.NEXT_PUBLIC_SITE_URL, ["https:"]) ??
     "https://juwansplace.com",
   location: "Lapu-Lapu City, Central Visayas, Philippines",
+  /**
+   * Published deliberately. The property is already a public Google Maps
+   * listing under its own name, so pages that claimed the address was withheld
+   * until booking were describing something that was never true. What genuinely
+   * waits for a confirmed reservation is access: lock codes, keys, and the
+   * arrival instructions themselves.
+   */
+  address: {
+    street: "Block 26 Lot 8, La Aldea Buena Mactan",
+    area: "Barangay Babag, Lapu-Lapu City, Cebu",
+    /** From the host's public Google Maps listing. */
+    lat: 10.2874793,
+    lng: 123.954961,
+  },
   description:
     "A welcoming three-bedroom entire home for families, friends, tourists, and working travelers exploring Mactan and Cebu.",
   airbnbUrl: optionalUrl(

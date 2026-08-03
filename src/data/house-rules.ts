@@ -51,6 +51,6 @@ export const houseRules = [
     id: "booking",
     title: "Booking safety",
     detail:
-      "Reservations and payments must be completed through Airbnb. The exact address is shared only through the confirmed booking process.",
+      "Reservations and payments must be completed through Airbnb. Keys, lock codes, and arrival instructions are shared through the confirmed booking.",
   },
 ] as const;

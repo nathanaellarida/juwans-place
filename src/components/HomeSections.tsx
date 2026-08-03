@@ -14,6 +14,7 @@ import {
   Users,
   Wifi,
 } from "lucide-react";
+import { AreaMap } from "@/components/AreaMap";
 import { BookingLink } from "@/components/BookingLink";
 import { EdgeLines } from "@/components/EdgeLines";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -680,14 +681,14 @@ function FaqSection() {
 function FinalBookingSection() {
   return (
     <section id="book" className="bg-[#f7f3ea] p-2.5 md:p-4">
-      <div className="relative flex min-h-[74vh] items-center justify-center overflow-hidden rounded-[1.1rem] bg-[#145c5b] px-6 py-24 text-center text-white">
+      <div className="relative overflow-hidden rounded-[1.1rem] bg-[#145c5b] px-6 py-[clamp(3.5rem,7vw,6rem)] text-center text-white">
         <EdgeLines
           left="edgeTail"
           right="edgeFold"
           leftInk="edge-ink-sunflower"
           rightInk="edge-ink-gold"
         />
-        <Reveal className="relative z-10 max-w-5xl">
+        <Reveal className="relative z-10 mx-auto max-w-5xl">
           <p data-reveal-item className="eyebrow mb-8 text-[#9cc6b2]">
             Ready when you are
           </p>
@@ -696,13 +697,9 @@ function FinalBookingSection() {
             <br />
             feel like home.
           </h2>
-          <p
-            data-reveal-item
-            className="mx-auto mt-8 max-w-2xl text-balance text-lg text-white/70"
-          >
-            See current availability, pricing, booking terms, and verified
-            reviews on Airbnb.
-          </p>
+          <div data-reveal-item className="mt-[clamp(2.5rem,4vw,3.5rem)]">
+            <AreaMap />
+          </div>
           <div data-reveal-item>
             <BookingLink
               className="mt-9 bg-white text-black transition-transform hover:rotate-2"

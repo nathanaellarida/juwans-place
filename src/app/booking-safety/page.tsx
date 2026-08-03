@@ -35,9 +35,10 @@ export default function BookingSafetyPage() {
       </p>
       <h2>Address and access details</h2>
       <p>
-        The exact property address and arrival instructions are provided only
-        through the confirmed booking process. Public pages intentionally show
-        only Lapu-Lapu City and Mactan area context.
+        The address is public. Juwan’s Place is listed on Google Maps and shown
+        on this website, so a route can be planned before booking. What is
+        shared only through the confirmed booking are the access details: keys,
+        lock codes, and the arrival instructions themselves.
       </p>
       <h2>Changing information</h2>
       <p>

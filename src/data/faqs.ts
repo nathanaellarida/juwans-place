@@ -40,9 +40,9 @@ export const faqs: Faq[] = [
       "Exact check-in and check-out details are confirmed through Airbnb. The website does not publish or override the live booking terms.",
   },
   {
-    question: "Can I open Juwan’s Place in Google Maps?",
+    question: "Where exactly is Juwan’s Place?",
     answer:
-      "Yes. Use the Google Maps link on the Location page for public route planning. Exact check-in, access, and arrival instructions are still provided only through a confirmed Airbnb booking.",
+      "Block 26 Lot 8, La Aldea Buena Mactan, Barangay Babag, Lapu-Lapu City, Cebu. The map is embedded on the Location page and on the home page, and the listing can be opened in Google Maps for directions. Keys, lock codes, and arrival instructions are shared through the confirmed Airbnb booking.",
   },
   {
     question: "Is the 3D tour available?",

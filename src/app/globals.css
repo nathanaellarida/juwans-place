@@ -1862,6 +1862,13 @@ button {
   --faq-accent: var(--location-yellow);
 }
 
+/* The section's own children are constrained to a reading measure, which is
+   narrower than a map wants to be. */
+.location-area-map {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
 .location-map-link {
   display: flex;
   width: fit-content;

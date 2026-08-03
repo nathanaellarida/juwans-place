@@ -36,16 +36,17 @@ export default function PrivacyPage() {
       </p>
       <h2>Property privacy</h2>
       <p>
-        The website may link to the host-provided public Google Maps listing,
-        but it does not publish private check-in instructions, lock details,
-        access codes, or documents. Those details are shared only through the
-        confirmed Airbnb booking process.
+        The website embeds and links to the host-provided public Google Maps
+        listing, so the address is published here as it already is on Google.
+        It does not publish private check-in instructions, lock details, access
+        codes, or documents. Those are shared only through the confirmed Airbnb
+        booking process.
       </p>
       <h2>Photography</h2>
       <p>
-        Approved images should not reveal personal information, precise address
-        details, access controls, or identifiable guests. Location metadata
-        should be removed before publishing when it creates a privacy risk.
+        Approved images should not reveal personal information, access
+        controls, or identifiable guests. Location metadata should be removed
+        before publishing when it creates a privacy risk.
       </p>
     </InformationPage>
   );
