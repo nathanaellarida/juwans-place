@@ -71,7 +71,7 @@ function PropertyStory() {
         <Reveal>
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#9cc6b2]">Living together</p>
-            <h2 className="font-display text-[clamp(2.2rem,8vw,8rem)] uppercase leading-[0.78] tracking-[-0.055em]">
+            <h2 className="font-display text-[clamp(2.2rem,8vw,8rem)] uppercase leading-[0.78] tracking-[-0.055em] max-md:text-[min(3.5rem,13vw)]">
               Space to live.
               <br />
               Room to rest.
@@ -552,7 +552,7 @@ function ReviewsSection() {
         </div>
 
         <div data-reveal-item>
-          <h2 className="font-display text-[clamp(2.2rem,7.5vw,7.5rem)] uppercase leading-[0.8] tracking-[-0.05em]">
+          <h2 className="font-display text-[clamp(2.2rem,7.5vw,7.5rem)] uppercase leading-[0.8] tracking-[-0.05em] max-md:text-[min(3.6rem,13.5vw)]">
             What guests value.
           </h2>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -601,7 +601,7 @@ function RulesSection() {
         <div className="grid gap-12 md:grid-cols-[0.72fr_1.28fr] md:items-start">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#f3c75d]">Stay with confidence</p>
-            <h2 className="font-display text-[clamp(2.2rem,8.5vw,8.5rem)] uppercase leading-[0.78] tracking-[-0.055em]">
+            <h2 className="font-display text-[clamp(2.2rem,8.5vw,8.5rem)] uppercase leading-[0.78] tracking-[-0.055em] max-md:text-[min(3.75rem,14vw)]">
               Clear rules.
               <br />
               Safer stays.
@@ -657,7 +657,7 @@ function FaqSection() {
         <div className="grid gap-10 md:grid-cols-[0.55fr_1.45fr]">
           <div data-reveal-item>
             <p className="eyebrow mb-7 text-[#145c5b]">Before you book</p>
-            <h2 className="font-display text-[clamp(2.2rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em]">
+            <h2 className="font-display text-[clamp(2.2rem,7vw,7rem)] uppercase leading-[0.78] tracking-[-0.05em] max-md:text-[min(3.6rem,13.5vw)]">
               Questions,
               <br />
               answered.

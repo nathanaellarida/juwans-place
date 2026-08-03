@@ -21,7 +21,11 @@ export function HomeIntro() {
       <Reveal className="relative z-10 mx-auto grid max-w-[92rem] gap-14 md:grid-cols-[1.15fr_0.65fr] md:gap-20">
         <div data-reveal-item>
           <p className="eyebrow mb-7 text-[#b57d0d]">The bedrooms</p>
-          <h2 className="font-display text-[clamp(2.2rem,8vw,8.5rem)] leading-[0.78] tracking-[-0.055em]">
+          {/* The clamp floor governs every phone — 8vw only overtakes 2.2rem at
+              440px — so this rendered at a flat 35px next to 67-75px headlines
+              on every other page. The mobile size is set on its own here, sized
+              off vw so it scales, and capped where 8vw picks it up at 768px. */}
+          <h2 className="font-display text-[clamp(2.2rem,8vw,8.5rem)] leading-[0.78] tracking-[-0.055em] max-md:text-[min(4rem,15vw)]">
             One Home.
             <br />
             Three Colorful
@@ -69,7 +73,9 @@ export function HomeIntro() {
               className="flex h-[32%] flex-col items-center justify-center px-7 py-6 text-center text-white"
               style={{ backgroundColor: room.color }}
             >
-              <h3 className="font-display text-[clamp(2.2rem,4.2vw,4.7rem)] uppercase leading-none tracking-[-0.045em]">
+              {/* 4.2vw is sized for one of three columns; on a phone the card
+                  is the full width, so the name gets its own size there. */}
+              <h3 className="font-display text-[clamp(2.2rem,4.2vw,4.7rem)] uppercase leading-none tracking-[-0.045em] max-md:text-[min(2.8rem,11.5vw)]">
                 {room.name}
               </h3>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/85 md:text-base">
