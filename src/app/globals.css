@@ -252,11 +252,13 @@ button {
 
 .hero-cta {
   display: inline-flex;
-  min-height: 3rem;
+  /* Three of these stack on a phone, so each 4px of height costs 12. 2.75rem
+     is still a 44px target, the size a finger is specified against. */
+  min-height: 2.75rem;
   align-items: center;
   justify-content: center;
   border-radius: 0.55rem;
-  padding: 0.85rem 1.25rem;
+  padding: 0.7rem 1.25rem;
   font-size: 0.78rem;
   font-weight: 750;
   text-transform: uppercase;
@@ -268,6 +270,64 @@ button {
 .hero-cta:hover {
   rotate: 2deg;
   scale: 1.02;
+}
+
+/* The row form has all the room it needs. */
+@media (min-width: 768px) {
+  .hero-cta {
+    min-height: 3rem;
+    padding: 0.85rem 1.25rem;
+  }
+}
+
+/* The hero has to fit the screen it is on, and the screen it is on is whatever
+   the browser has left after its own bars. Two things give when there is not
+   enough room, and neither is the section's height.
+
+   Below 390px the headline no longer fits "Your Home Base" on one line at its
+   floor size, so it broke into three lines and left "Base" stranded on its own.
+   Scaling it down there restores the two the copy is written for. */
+@media (max-width: 389px) {
+  #hero-title {
+    font-size: clamp(2.45rem, 12.2vw, 3rem);
+  }
+}
+
+/* And on a genuinely short screen — a 568px handset, a landscape phone, a small
+   laptop window — the stack itself compresses. Without this the column is
+   taller than the space it is centred in, and centring something too tall
+   spills it out of both ends at once: the facts line lands on the wordmark and
+   the note lands on the scroll arrow. */
+@media (max-height: 620px) and (max-width: 767px) {
+  .hero-stack {
+    padding-top: 4.4rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-stack > p:first-of-type {
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-stack > h1 {
+    font-size: clamp(2.2rem, 11vw, 2.9rem);
+  }
+
+  .hero-stack > p:nth-of-type(2) {
+    margin-top: 0.55rem;
+  }
+
+  .hero-stack > div {
+    margin-top: 0.8rem;
+  }
+
+  .hero-stack > p:last-of-type {
+    margin-top: 0.55rem;
+  }
+
+  .hero-cta {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.25rem;
+  }
 }
 
 /* Route curtain. Each half is parked just outside the viewport by layout, not

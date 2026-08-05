@@ -123,7 +123,14 @@ export function Hero() {
       // change also forced the scroll triggers to re-measure. svh is the bar-
       // visible size the page already painted at, so nothing reflows during
       // scrolling. The sticky panels made the same choice for the same reason.
-      className="relative h-svh min-h-[42rem] bg-[#f7f3ea] p-2.5 md:p-4"
+      //
+      // No min-height. A 42rem floor meant the hero measured 672px whatever
+      // the screen was, so every viewport shorter than that — a 640px phone
+      // with its address bar showing, a 568px one, a short desktop window —
+      // got a hero taller than the screen and a scroll arrow below the fold.
+      // The height is the viewport now, and the content below is sized to fit
+      // inside the smallest of them.
+      className="relative h-svh bg-[#f7f3ea] p-2.5 md:p-4"
       aria-labelledby="hero-title"
     >
       <div className="relative h-full overflow-hidden rounded-[1.1rem] bg-[#102f3e]">
@@ -145,10 +152,14 @@ export function Hero() {
         />
         <StickerTrail />
 
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pb-8 pt-24 text-center text-white md:px-8 md:pt-28">
+        {/* The top pad only has to clear the fixed header, whose buttons end
+            at 59px on a phone; 24 (96px) was holding 37px of nothing. Every
+            gap below is set twice so a short screen gets the tight rhythm and
+            nothing changes from md up. */}
+        <div className="hero-stack relative z-10 flex h-full flex-col items-center justify-center px-4 pb-16 pt-[4.6rem] text-center text-white md:px-8 md:pb-8 md:pt-28">
           <p
             ref={facts}
-            className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-white/80 md:text-sm"
+            className="mb-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white/80 md:mb-6 md:text-sm"
           >
             {property.factsLine}
           </p>
@@ -163,7 +174,7 @@ export function Hero() {
           </h1>
           <p
             ref={copy}
-            className="mt-7 max-w-[46rem] text-balance text-sm leading-relaxed text-white/90 md:text-lg"
+            className="mt-4 max-w-[46rem] text-balance text-sm leading-relaxed text-white/90 md:mt-7 md:text-lg"
           >
             A welcoming three-bedroom home for families, friends, tourists, and
             working travelers exploring Mactan and Cebu.
@@ -171,7 +182,7 @@ export function Hero() {
 
           <div
             ref={controls}
-            className="mt-8 flex w-full max-w-3xl flex-col items-stretch justify-center gap-3 sm:flex-row"
+            className="mt-5 flex w-full max-w-3xl flex-col items-stretch justify-center gap-2.5 sm:flex-row md:mt-8 md:gap-3"
           >
             <Link
               href="#home-intro"
@@ -184,7 +195,7 @@ export function Hero() {
             </Link>
             <BookingLink className="hero-cta rounded-[0.55rem] bg-[#145c5b] text-white" />
           </div>
-          <p className="mt-5 max-w-lg text-xs leading-relaxed text-white/60">
+          <p className="mt-3.5 max-w-lg text-xs leading-relaxed text-white/60 md:mt-5">
             For guest protection, reservations and payments are completed
             through Airbnb only.
           </p>
@@ -192,7 +203,7 @@ export function Hero() {
 
         <Link
           href="#home-intro"
-          className="absolute bottom-5 left-5 z-20 flex size-12 items-center justify-center rounded-full border border-white/50 text-white transition-transform hover:rotate-45 md:bottom-7 md:left-7"
+          className="absolute bottom-3 left-3 z-20 flex size-10 items-center justify-center rounded-full border border-white/50 text-white transition-transform hover:rotate-45 md:bottom-7 md:left-7 md:size-12"
           aria-label="Continue to property introduction"
         >
           <ArrowDownRight aria-hidden="true" />
