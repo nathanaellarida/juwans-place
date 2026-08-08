@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
     "Answers to common questions about capacity, booking, visitors, pets, pickup, transport, and privacy at Juwan’s Place.",
+  alternates: {
+    canonical: "/faq",
+  },
 };
 
 export default function FaqPage() {

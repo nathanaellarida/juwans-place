@@ -4,6 +4,9 @@ import { InformationPage } from "@/components/InformationPage";
 export const metadata: Metadata = {
   title: "Privacy",
   description: "Privacy information for the Juwan’s Place marketing website.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {

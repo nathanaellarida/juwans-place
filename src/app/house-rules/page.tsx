@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "House Rules",
   description:
     "Review occupancy, visitor, pet, arrival, service, and booking-safety expectations for Juwan’s Place.",
+  alternates: {
+    canonical: "/house-rules",
+  },
 };
 
 export default function HouseRulesPage() {

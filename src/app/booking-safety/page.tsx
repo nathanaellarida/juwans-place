@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Booking Safety",
   description:
     "How to complete a Juwan’s Place reservation safely through Airbnb.",
+  alternates: {
+    canonical: "/booking-safety",
+  },
 };
 
 export default function BookingSafetyPage() {

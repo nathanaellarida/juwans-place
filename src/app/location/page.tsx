@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Location",
   description:
     "Discover Juwan’s Place as a home base for Lapu-Lapu City, Mactan, and wider Cebu plans.",
+  alternates: {
+    canonical: "/location",
+  },
 };
 
 export default function LocationPage() {

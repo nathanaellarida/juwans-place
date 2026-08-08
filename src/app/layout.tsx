@@ -22,9 +22,6 @@ export const metadata: Metadata = {
     "Cebu vacation rental",
     "Airbnb Lapu-Lapu City",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "en_PH",

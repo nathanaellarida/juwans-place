@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Accessibility",
   description:
     "Accessibility approach and known limitations for the Juwan’s Place website.",
+  alternates: {
+    canonical: "/accessibility",
+  },
 };
 
 export default function AccessibilityPage() {

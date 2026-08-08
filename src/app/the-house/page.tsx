@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "The House",
   description:
     "Explore the bedrooms, shared spaces, amenities, and practical services at Juwan’s Place.",
+  alternates: {
+    canonical: "/the-house",
+  },
 };
 
 const facts = [
