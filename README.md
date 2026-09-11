@@ -42,7 +42,7 @@ It suits families who want everyone under one roof, groups who would rather not
 split across hotel rooms, and working travellers who need Wi-Fi, a table to work
 at, and a door that closes.
 
-> **4.75 ★ across 40 Airbnb reviews** · Hosted by Estrella Duran, a **Superhost**
+> **4.77 ★ across 43 Airbnb reviews** · Hosted by Estrella Duran, a **Superhost**
 
 ### What's in the house
 
