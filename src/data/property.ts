@@ -8,8 +8,8 @@ export const property = {
   bathrooms: 2,
   host: "Estrella Duran",
   hostStatus: "Superhost",
-  rating: 4.77,
-  reviewCount: 43,
+  rating: 4.78,
+  reviewCount: 45,
   factsLine: "Up to 6 guests · 3 bedrooms · 3 beds · 2 bathrooms",
   rooms: [
     {
